@@ -1,0 +1,284 @@
+# ╔═══════════════════════════════════════════════════════════════════╗
+# ║  🚀 ENHANCED ZSH CONFIGURATION - MINT-LIKE PRODUCTIVITY          ║
+# ║  Modern shell with Nord theme and productivity tools              ║
+# ╚═══════════════════════════════════════════════════════════════════╝
+
+# Enable Powerlevel10k instant prompt (if using)
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# ═══════════════════════════════════════════════════════════════════
+# 🎨 THEME & PROMPT CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════
+
+# Initialize Starship prompt
+eval "$(starship init zsh)"
+
+# ═══════════════════════════════════════════════════════════════════
+# 🔧 ZSH CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════
+
+# History configuration
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt HIST_VERIFY
+setopt SHARE_HISTORY
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_IGNORE_SPACE
+
+# Directory navigation
+setopt AUTO_CD
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_SILENT
+
+# Completion
+autoload -U compinit
+compinit
+setopt COMPLETE_ALIASES
+setopt COMPLETE_IN_WORD
+setopt ALWAYS_TO_END
+
+# ═══════════════════════════════════════════════════════════════════
+# 🚀 PRODUCTIVITY TOOLS INTEGRATION
+# ═══════════════════════════════════════════════════════════════════
+
+# FZF integration
+if command -v fzf >/dev/null 2>&1; then
+    source /usr/share/fzf/key-bindings.zsh
+    source /usr/share/fzf/completion.zsh
+    
+    # FZF Nord theme
+    export FZF_DEFAULT_OPTS="
+        --color=bg+:#3B4252,bg:#2E3440,spinner:#81A1C1,hl:#616E88
+        --color=fg:#D8DEE9,header:#616E88,info:#81A1C1,pointer:#81A1C1
+        --color=marker:#81A1C1,fg+:#D8DEE9,prompt:#81A1C1,hl+:#81A1C1
+        --height=50% --layout=reverse --border --margin=1 --padding=1"
+    
+    # Use ripgrep for FZF if available
+    if command -v rg >/dev/null 2>&1; then
+        export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+        export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    fi
+fi
+
+# ═══════════════════════════════════════════════════════════════════
+# 📁 ENVIRONMENT VARIABLES
+# ═══════════════════════════════════════════════════════════════════
+
+# Default programs
+export EDITOR="code"
+export BROWSER="librewolf"
+export TERMINAL="kitty"
+export FILE_MANAGER="thunar"
+
+# XDG directories
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+# Theme variables
+export GTK_THEME="Arc-Dark"
+export QT_QPA_PLATFORMTHEME="gtk3"
+
+# ═══════════════════════════════════════════════════════════════════
+# 🎯 ALIASES - MINT-LIKE CONVENIENCE
+# ═══════════════════════════════════════════════════════════════════
+
+# Modern replacements
+alias ls='ls --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias cat='bat'
+alias find='fd'
+alias grep='rg'
+alias ps='ps aux'
+alias top='btop'
+
+# System management
+alias update='yay -Syu'
+alias install='yay -S'
+alias remove='yay -Rns'
+alias search='yay -Ss'
+alias info='yay -Si'
+alias clean='yay -Sc && yay -Yc'
+
+# File operations
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+alias mkdir='mkdir -pv'
+alias chmod='chmod --preserve-root'
+alias chown='chown --preserve-root'
+
+# Directory navigation
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ~="cd ~"
+alias -- -="cd -"
+
+# Git shortcuts
+alias g='git'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git pull'
+alias gs='git status'
+alias gd='git diff'
+alias gb='git branch'
+alias gco='git checkout'
+
+# System information
+alias neofetch='fastfetch'
+alias disk='df -h'
+alias memory='free -h'
+alias cpu='lscpu'
+alias temp='sensors'
+
+# Dotfiles management
+alias dots='chezmoi'
+alias dotadd='chezmoi add'
+alias dotapply='chezmoi apply'
+alias dotedit='chezmoi edit'
+alias dotdiff='chezmoi diff'
+
+# Theme management
+alias theme-apply='~/.local/bin/apply-dark-theme'
+alias theme-check='~/.local/bin/theme-check'
+alias theme-gui='nwg-look'
+
+# File manager
+alias fm='thunar'
+alias fmd='~/.local/bin/thunar-dark'
+
+# Quick config edits
+alias hyprconf='code ~/.config/hypr/hyprland.conf'
+alias kittyconf='code ~/.config/kitty/kitty.conf'
+alias zshconf='code ~/.zshrc'
+alias starshipconf='code ~/.config/starship.toml'
+
+# ═══════════════════════════════════════════════════════════════════
+# 🔧 FUNCTIONS - ENHANCED PRODUCTIVITY
+# ═══════════════════════════════════════════════════════════════════
+
+# Create directory and cd into it
+mkcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+# Extract any archive
+extract() {
+    if [ -f "$1" ]; then
+        case "$1" in
+            *.tar.bz2)   tar xjf "$1"     ;;
+            *.tar.gz)    tar xzf "$1"     ;;
+            *.bz2)       bunzip2 "$1"     ;;
+            *.rar)       unrar x "$1"     ;;
+            *.gz)        gunzip "$1"      ;;
+            *.tar)       tar xf "$1"      ;;
+            *.tbz2)      tar xjf "$1"     ;;
+            *.tgz)       tar xzf "$1"     ;;
+            *.zip)       unzip "$1"       ;;
+            *.Z)         uncompress "$1"  ;;
+            *.7z)        7z x "$1"        ;;
+            *.deb)       ar x "$1"        ;;
+            *.tar.xz)    tar xf "$1"      ;;
+            *.tar.zst)   unzstd "$1"      ;;
+            *)           echo "'$1' cannot be extracted via extract()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+# Quick find files
+ff() {
+    fd -t f -H -I | fzf --preview 'bat --color=always --line-range :100 {}'
+}
+
+# Quick find directories
+fd_dirs() {
+    fd -t d -H -I | fzf --preview 'ls -la {}'
+}
+
+# Search in files
+rgs() {
+    rg --color=always --line-number --no-heading --smart-case "${*:-}" |
+        fzf --ansi \
+            --color "hl:-1:underline,hl+:-1:underline:reverse" \
+            --delimiter : \
+            --preview 'bat --color=always {1} --highlight-line {2}' \
+            --preview-window 'up,60%,border-bottom,+{2}+3/3,~3'
+}
+
+# System snapshot
+snapshot() {
+    echo "📸 Creating system snapshot..."
+    sudo timeshift --create --description "Manual snapshot $(date '+%Y-%m-%d %H:%M')"
+    echo "✅ Snapshot created successfully!"
+}
+
+# Quick system info
+sysinfo() {
+    echo "🖥️  System Information"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "🏗️  OS: $(lsb_release -d | cut -f2)"
+    echo "🖥️  Kernel: $(uname -r)"
+    echo "💾 Memory: $(free -h | awk '/^Mem:/ {print $3 "/" $2}')"
+    echo "💽 Disk: $(df -h / | awk 'NR==2 {print $3 "/" $2 " (" $5 ")"}')"
+    echo "🖥️  Display: $(xrandr | grep '*' | awk '{print $1}')"
+    echo "🎨 Theme: $GTK_THEME"
+}
+
+# Update system and clean
+full-update() {
+    echo "🔄 Full System Update & Cleanup"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    
+    echo "📦 Updating packages..."
+    yay -Syu
+    
+    echo "🧹 Cleaning package cache..."
+    yay -Sc --noconfirm
+    yay -Yc --noconfirm
+    
+    echo "🗂️  Applying dotfiles..."
+    chezmoi apply
+    
+    echo "📸 Creating post-update snapshot..."
+    sudo timeshift --create --description "Post-update snapshot $(date '+%Y-%m-%d')"
+    
+    echo "✅ System update complete!"
+}
+
+# ═══════════════════════════════════════════════════════════════════
+# 🎨 COMPLETION STYLING
+# ═══════════════════════════════════════════════════════════════════
+
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu select
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format '%F{blue}-- %d --%f'
+
+# ═══════════════════════════════════════════════════════════════════
+# 🚀 WELCOME MESSAGE
+# ═══════════════════════════════════════════════════════════════════
+
+# Show welcome message (only for interactive shells)
+if [[ $- == *i* ]]; then
+    echo "❄️  Nord-themed Arch Linux ready!"
+    echo "📁 Type 'fmd' for dark file manager"
+    echo "🎨 Type 'theme-check' to verify themes"
+    echo "🔍 Use Ctrl+T for file search, Ctrl+R for history"
+fi

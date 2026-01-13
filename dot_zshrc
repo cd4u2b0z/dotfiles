@@ -1,0 +1,1000 @@
+# ╔═══════════════════════════════════════════════════════════════════╗
+# ║  🚀 ENHANCED ZSH CONFIGURATION - MINT-LIKE PRODUCTIVITY          ║
+# ║  Modern shell with Nord theme and productivity tools              ║
+# ╚═══════════════════════════════════════════════════════════════════╝
+
+# Enable Powerlevel10k instant prompt (if using)
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# ═══════════════════════════════════════════════════════════════════
+# 🎨 THEME & PROMPT CONFIGURATION  
+# ═══════════════════════════════════════════════════════════════════
+
+# Oh My Zsh initialization
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="" # We use Starship instead
+
+# Oh My Zsh plugins for enhanced shell experience
+plugins=(
+  git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  colored-man-pages
+  command-not-found
+)
+
+# Load Oh My Zsh
+source $ZSH/oh-my-zsh.sh
+
+# Initialize Starship prompt (after Oh My Zsh)
+eval "$(starship init zsh)"
+
+# ═══════════════════════════════════════════════════════════════════
+# 🔧 ZSH CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════
+
+# History configuration - EXPANDED for better fuzzy search
+HISTFILE=~/.zsh_history
+HISTSIZE=1000000          # Keep 1 million commands in memory
+SAVEHIST=1000000          # Save 1 million commands to file
+setopt HIST_VERIFY
+setopt SHARE_HISTORY      # Share history between all sessions
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_IGNORE_SPACE
+setopt EXTENDED_HISTORY   # Save timestamps
+setopt HIST_EXPIRE_DUPS_FIRST  # Expire duplicates first when trimming history
+setopt HIST_FIND_NO_DUPS       # Don't display duplicates when searching
+
+# Directory navigation
+setopt AUTO_CD
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_SILENT
+
+# Completion
+autoload -U compinit
+compinit
+setopt COMPLETE_ALIASES
+setopt COMPLETE_IN_WORD
+setopt ALWAYS_TO_END
+
+# ═══════════════════════════════════════════════════════════════════
+# 🚀 PRODUCTIVITY TOOLS INTEGRATION
+# ═══════════════════════════════════════════════════════════════════
+
+# FZF integration
+if command -v fzf >/dev/null 2>&1; then
+    source /usr/share/fzf/key-bindings.zsh
+    source /usr/share/fzf/completion.zsh
+    
+    # FZF Nord theme
+    export FZF_DEFAULT_OPTS="
+        --color=bg+:#3B4252,bg:#2E3440,spinner:#81A1C1,hl:#616E88
+        --color=fg:#D8DEE9,header:#616E88,info:#81A1C1,pointer:#81A1C1
+        --color=marker:#81A1C1,fg+:#D8DEE9,prompt:#81A1C1,hl+:#81A1C1
+        --height=50% --layout=reverse --border --margin=1 --padding=1"
+    
+    # Use ripgrep for FZF if available
+    if command -v rg >/dev/null 2>&1; then
+        export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+        export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    fi
+fi
+
+# ═══════════════════════════════════════════════════════════════════
+# 📁 ENVIRONMENT VARIABLES
+# ═══════════════════════════════════════════════════════════════════
+
+# Default programs
+export EDITOR="code"
+export BROWSER="librewolf"
+export TERMINAL="kitty"
+export FILE_MANAGER="thunar"
+
+# XDG directories
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+# Theme variables
+export GTK_THEME="Arc-Dark"
+export QT_QPA_PLATFORMTHEME="gtk3"
+
+# ═══════════════════════════════════════════════════════════════════
+# 🎯 ALIASES - MINT-LIKE CONVENIENCE
+# ═══════════════════════════════════════════════════════════════════
+
+# Modern replacements
+alias ls='ls --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias cat='bat'
+alias find='fd'
+alias grep='rg'
+alias ps='ps aux'
+alias top='btop'
+
+# System management
+alias update='yay -Syu'
+alias install='yay -S'
+alias remove='yay -Rns'
+alias search='yay -Ss'
+alias info='yay -Si'
+alias clean='yay -Sc && yay -Yc'
+
+# File operations
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+alias mkdir='mkdir -pv'
+alias chmod='chmod --preserve-root'
+alias chown='chown --preserve-root'
+
+# Directory navigation
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ~="cd ~"
+alias -- -="cd -"
+
+# Git shortcuts
+alias g='git'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git pull'
+alias gs='git status'
+alias gd='git diff'
+alias gb='git branch'
+alias gco='git checkout'
+
+# System information
+alias neofetch='fastfetch'
+alias disk='df -h'
+alias memory='free -h'
+alias cpu='lscpu'
+alias temp='sensors'
+
+# Dotfiles management
+alias dots='chezmoi'
+alias dotadd='chezmoi add'
+alias dotapply='chezmoi apply'
+alias dotedit='chezmoi edit'
+alias dotdiff='chezmoi diff'
+
+# Theme management
+alias theme-apply='~/.local/bin/apply-dark-theme'
+alias theme-check='~/.local/bin/theme-check'
+alias theme-gui='nwg-look'
+alias wp="~/.local/bin/wallpaper-manager"
+# File manager
+alias fm='thunar'
+alias fmd='~/.local/bin/thunar-dark'
+
+# Quick config edits
+alias hyprconf='code ~/.config/hypr/hyprland.conf'
+alias kittyconf='code ~/.config/kitty/kitty.conf'
+alias zshconf='code ~/.zshrc'
+alias starshipconf='code ~/.config/starship.toml'
+
+# ═══════════════════════════════════════════════════════════════════
+# 🔧 FUNCTIONS - ENHANCED PRODUCTIVITY
+# ═══════════════════════════════════════════════════════════════════
+
+# Create directory and cd into it
+mkcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+# Extract any archive
+extract() {
+    if [ -f "$1" ]; then
+        case "$1" in
+            *.tar.bz2)   tar xjf "$1"     ;;
+            *.tar.gz)    tar xzf "$1"     ;;
+            *.bz2)       bunzip2 "$1"     ;;
+            *.rar)       unrar x "$1"     ;;
+            *.gz)        gunzip "$1"      ;;
+            *.tar)       tar xf "$1"      ;;
+            *.tbz2)      tar xjf "$1"     ;;
+            *.tgz)       tar xzf "$1"     ;;
+            *.zip)       unzip "$1"       ;;
+            *.Z)         uncompress "$1"  ;;
+            *.7z)        7z x "$1"        ;;
+            *.deb)       ar x "$1"        ;;
+            *.tar.xz)    tar xf "$1"      ;;
+            *.tar.zst)   unzstd "$1"      ;;
+            *)           echo "'$1' cannot be extracted via extract()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+# Quick find files
+ffind() {
+    fd -t f -H -I | fzf --preview 'bat --color=always --line-range :100 {}'
+}
+
+# Quick find directories
+fd_dirs() {
+    fd -t d -H -I | fzf --preview 'ls -la {}'
+}
+
+# Search in files
+rgs() {
+    rg --color=always --line-number --no-heading --smart-case "${*:-}" |
+        fzf --ansi \
+            --color "hl:-1:underline,hl+:-1:underline:reverse" \
+            --delimiter : \
+            --preview 'bat --color=always {1} --highlight-line {2}' \
+            --preview-window 'up,60%,border-bottom,+{2}+3/3,~3'
+}
+
+# System snapshot
+snapshot() {
+    echo "📸 Creating system snapshot..."
+    sudo timeshift --create --description "Manual snapshot $(date '+%Y-%m-%d %H:%M')"
+    echo "✅ Snapshot created successfully!"
+}
+
+# Quick system info
+sysinfo_detailed() {
+    echo "🖥️  System Information"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "🏗️  OS: $(lsb_release -d | cut -f2)"
+    echo "🖥️  Kernel: $(uname -r)"
+    echo "💾 Memory: $(free -h | awk '/^Mem:/ {print $3 "/" $2}')"
+    echo "💽 Disk: $(df -h / | awk 'NR==2 {print $3 "/" $2 " (" $5 ")"}')"
+    echo "🖥️  Display: $(xrandr | grep '*' | awk '{print $1}')"
+    echo "🎨 Theme: $GTK_THEME"
+}
+
+# Update system and clean
+full-update() {
+    echo "🔄 Full System Update & Cleanup"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    
+    echo "📦 Updating packages..."
+    yay -Syu
+    
+    echo "🧹 Cleaning package cache..."
+    yay -Sc --noconfirm
+    yay -Yc --noconfirm
+    
+    echo "🗂️  Applying dotfiles..."
+    chezmoi apply
+    
+    echo "📸 Creating post-update snapshot..."
+    sudo timeshift --create --description "Post-update snapshot $(date '+%Y-%m-%d')"
+    
+    echo "✅ System update complete!"
+}
+
+# ═══════════════════════════════════════════════════════════════════
+# 🎨 COMPLETION STYLING
+# ═══════════════════════════════════════════════════════════════════
+
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu select
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format '%F{blue}-- %d --%f'
+
+# ═══════════════════════════════════════════════════════════════════
+# 🚀 WELCOME MESSAGE
+# ═══════════════════════════════════════════════════════════════════
+
+# ═══════════════════════════════════════════════════════════════════
+# 🚀 CORE ALIASES - ARCH COMPATIBLE (FROM LINUX MINT)
+# ═══════════════════════════════════════════════════════════════════
+
+# Essential shortcuts
+alias zzz="systemctl poweroff"
+alias reboot="systemctl reboot"
+alias v='nvim'
+alias c='clear'
+alias q='exit'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+# Modern CLI replacements with fallbacks (Arch compatible)
+if command -v eza &>/dev/null; then
+    alias ls='eza --icons --group-directories-first'
+    alias l='eza --icons --group-directories-first'
+    alias ll='eza -lh --icons --group-directories-first'
+    alias la='eza -a --icons --group-directories-first'
+    alias lA='eza -lA --icons'
+    alias lt='eza -T --icons'
+    alias llt='eza -lT --icons --level=2'
+else
+    alias ls='ls --color=auto'
+    alias ll='ls -lh'
+    alias la='ls -a'
+fi
+
+# Bat handling (Arch compatible - no batcat)
+if command -v bat &>/dev/null; then
+    export BAT_THEME="Nord"
+else
+    alias bat='cat'
+fi
+
+# Modern replacements (Arch compatible)
+command -v fd &>/dev/null && alias find='fd'
+command -v rg &>/dev/null && alias grep='rg'
+
+# Enhanced helpers with fzf
+alias ftldr="tldr --list | fzf --preview 'tldr {} | head -20' | xargs tldr"
+alias fcheat="compgen -c | fzf --preview 'curl -s cheat.sh/{} | head -20' | xargs -I{} curl cheat.sh/{}"
+alias fh="fc -l 1 | fzf --tac --no-sort --height=50%"
+alias ffile="find . -type f | fzf --preview 'bat --color=always {}'"
+
+# Lazy load zoxide (from your Linux Mint gist)
+z() {
+    unfunction z 2>/dev/null
+    eval "$(zoxide init zsh)"
+    z "$@"
+}
+alias zi='z -i'  # Interactive selection
+
+# ═══════════════════════════════════════════════════════════════════
+# 📚 ENHANCED MAN PAGES (Batman with Arch compatibility)
+# ═══════════════════════════════════════════════════════════════════
+
+batman() {
+    # Use bat if available, otherwise fallback (Arch compatible)
+    if command -v bat &>/dev/null; then
+        command man "$@" 2>/dev/null | col -b | bat --language=man --paging=always --style=plain
+    else
+        command man "$@"
+    fi
+}
+
+# ═══════════════════════════════════════════════════════════════════
+# 🎮 GAMES & EMULATORS (ADAPTED FOR ARCH)
+# ═══════════════════════════════════════════════════════════════════
+
+# Emulators (update paths as needed for your Arch setup)
+alias ps3="$HOME/Emulators/RPCS3/rpcs3-v0.0.37-18014-27359d3d_linux64.AppImage"
+alias 3ds="$HOME/Emulators/Citra/citra-qt.AppImage"
+alias ds="$HOME/Emulators/melonds/melonDS-x86_64.AppImage"
+
+# Game launchers
+alias stardew='~/scripts/stardew-launcher.sh'
+alias skooma='~/scripts/skooma-launcher.sh'
+
+# Games collection management
+alias games-organize='~/Games/scripts/universal_game_organizer.sh'
+alias games-status='~/Games/scripts/universal_game_organizer.sh status'
+alias games-scan='~/Games/scripts/scan_inventory.py'
+alias games-audit='~/Games/scripts/audit_organization.sh'
+alias games-cleanup='~/Games/scripts/cleanup_loose_roms.sh'
+alias games-browse='launch-game'
+alias games-docs='bat ~/Games/docs/GAME_COLLECTION_README.md'
+alias games-readme='bat ~/Games/docs/GAME_COLLECTION_README.md'
+alias games-help='~/Games/scripts/universal_game_organizer.sh help'
+alias games-org='~/Games/scripts/universal_game_organizer.sh all'
+
+# Smart launcher
+alias launch-game='~/Games/scripts/smart_launcher.sh'
+alias play='launch-game'
+alias rom-health='~/Games/scripts/rom_health_check.sh'
+alias check-roms='~/Games/scripts/rom_health_check.sh'
+
+# Monitoring
+alias downloads-monitor='~/Games/scripts/downloads_monitor.sh'
+
+# Legacy support
+alias pokemon-organize='~/Games/scripts/auto_pokemon_organizer.sh'
+alias cleanup-roms='~/Games/scripts/cleanup_loose_roms.sh'
+alias fix-games='~/Games/scripts/fix_all_issues.sh'
+
+# ═══════════════════════════════════════════════════════════════════
+# 🛠️ UTILITY SCRIPTS
+# ═══════════════════════════════════════════════════════════════════
+
+# System utilities
+alias jam='~/scripts/spotify-jam.sh'
+alias keymap='~/scripts/keymap.sh'
+alias netscan='~/scripts/netscan.sh'
+alias cinema='~/scripts/cinema.sh'
+alias procmap='~/scripts/procmap.sh'
+alias brave='~/.local/bin/brave-wayland'
+
+# Special displays
+alias home_sky='astroterm --latitude 32.949420 --longitude -80.257284 --color --constellations --speed 50 --fps 64'
+alias gruvfetch='~/.config/fastfetch/gruvbox-quotes-optimized.sh'
+
+# Calculator (use available calculator on Arch)
+alias calc='gnome-calculator &> /dev/null & || kcalc &> /dev/null & || qalculate-gtk &> /dev/null &'
+alias calculator='calc'
+
+# ═══════════════════════════════════════════════════════════════════
+# 🖥️ TMUX POWER USER
+# ═══════════════════════════════════════════════════════════════════
+
+alias tm='~/scripts/tmux-launcher.sh'
+alias tls='tmux list-sessions'
+alias ta='tmux attach -t'
+alias tn='tmux new -s'
+alias tk='tmux kill-session -t'
+alias tmux-guide='bat ~/Documents/TMUX-Complete-Guide.md'
+
+# TMUX + Yazi integration
+alias tyg="~/.local/bin/ty --games"
+alias tyd="~/.local/bin/ty --downloads"
+alias tyc="~/.local/bin/ty --config"
+alias tys="~/.local/bin/ty --split ~/Games/scripts"
+alias tysv="~/.local/bin/ty --split-v ~/Games/scripts"
+
+# ═══════════════════════════════════════════════════════════════════
+# 🎮 STEAM MANAGEMENT
+# ═══════════════════════════════════════════════════════════════════
+
+alias steam='~/scripts/steam-launcher.sh'
+alias steam-quick='~/scripts/steam-launcher.sh --quick'
+alias steam-fix='~/scripts/steam-launcher.sh --fix'
+alias steam-check='~/scripts/steam-launcher.sh --check'
+alias steam-log='tail -f /tmp/steam-launcher-*.log | head -50'
+
+# ═══════════════════════════════════════════════════════════════════
+# 🔊 AUDIO CONTROL
+# ═══════════════════════════════════════════════════════════════════
+
+alias audio-gaming='~/scripts/audio-switcher.sh stereo'
+alias audio-movies='~/scripts/audio-switcher.sh surround'
+alias audio-status='~/scripts/audio-switcher.sh'
+
+# ═══════════════════════════════════════════════════════════════════
+# 📂 YAZI FILE MANAGER (Smart navigation)
+# ═══════════════════════════════════════════════════════════════════
+
+# Yazi with smart directory jumping
+y() {
+    local target="${1:-.}"
+    case "$target" in
+        g|games) yazi ~/Games ;;
+        d|downloads) yazi ~/Downloads ;;
+        c|config) yazi ~/.config ;;
+        s|scripts) yazi ~/scripts ;;
+        *) yazi "$target" ;;
+    esac
+}
+
+# Quick access aliases
+alias yg='y games'
+alias yd='y downloads'
+alias yc='y config'
+alias yz='y'
+
+# ═══════════════════════════════════════════════════════════════════
+# 🖥️ NVIDIA RTX CONTROLS (if you have NVIDIA)
+# ═══════════════════════════════════════════════════════════════════
+
+# Full Composition Pipeline (no tearing, slight input lag)
+alias nvon='nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"'
+
+# Partial Composition Pipeline (balanced)
+alias nvon-light='nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 {ForceCompositionPipeline=On}"'
+
+# Composition Pipeline OFF (max fps, possible tearing)
+alias nvoff='nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 {ForceFullCompositionPipeline=Off, ForceCompositionPipeline=Off}"'
+
+# Status check
+alias nvstatus='nvidia-settings -q CurrentMetaMode | grep -o "ForceFullCompositionPipeline=[A-Za-z]*"'
+alias nvcheck='nvstatus'
+
+
+# ═══════════════════════════════════════════════════════════════════
+# 🎮 REFRESH RATE ALIASES FOR GAMING (4K)
+# ═══════════════════════════════════════════════════════════════════
+
+alias 60hz="hyprctl keyword monitor 'DP-1,3840x2160@60,0x0,1'"
+alias 94hz="hyprctl keyword monitor 'DP-1,3840x2160@94,0x0,1'"
+alias 144hz="hyprctl keyword monitor 'DP-1,3840x2160@144,0x0,1'"
+
+# ═══════════════════════════════════════════════════════════════════
+# 🔥 FUZZY FINDER POWER FUNCTIONS (FROM LINUX MINT)
+# ═══════════════════════════════════════════════════════════════════
+
+# Kill process interactively
+fkill() {
+    local pids=$(ps -f -u $USER | sed 1d | fzf --multi --header='[KILL PROCESS]' | awk '{print $2}')
+    if [ -n "$pids" ]; then
+        echo "$pids" | xargs kill -${1:-9}
+        echo "✓ Killed process(es): $pids"
+    fi
+}
+
+# Interactive directory navigation (Arch compatible)
+fcd() {
+    local dir
+    dir=$(find ${1:-.} -path '*/\.*' -prune -o -type d -print 2> /dev/null | 
+          fzf --preview 'ls -la --color=always {}' +m) && cd "$dir"
+}
+
+# Git branch management
+fgb() {
+    local branches branch
+    branches=$(git branch -a) && 
+    branch=$(echo "$branches" | fzf +s +m -e --preview 'git log --oneline --graph --color=always {}') && 
+    git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
+# Service management
+fsvc() {
+    local service
+    service=$(systemctl list-units --type=service --all | 
+              fzf --header='[SERVICE MANAGER]' | awk '{print $1}')
+    if [ -n "$service" ]; then
+        echo "Selected: $service"
+        echo "Actions: [s]tart, [t]op, [r]estart, [e]nable, [d]isable, [status]"
+        read -r "action?Choose action: "
+        case $action in
+            s|start) sudo systemctl start "$service" ;;
+            t|stop) sudo systemctl stop "$service" ;;
+            r|restart) sudo systemctl restart "$service" ;;
+            e|enable) sudo systemctl enable "$service" ;;
+            d|disable) sudo systemctl disable "$service" ;;
+            *) systemctl status "$service" ;;
+        esac
+    fi
+}
+
+# Port investigation (Arch compatible)
+fport() {
+    local port
+    port=$(ss -tulpn 2>/dev/null | fzf --header='[PORT FINDER]' | awk '{print $5}' | cut -d: -f2)
+    if [ -n "$port" ]; then
+        echo "Port: $port"
+        lsof -i :$port 2>/dev/null || echo "Permission denied or port not in use"
+    fi
+}
+
+# Config file editor
+fconf() {
+    local file
+    file=$(find ~/.config -type f \( -name "*.conf" -o -name "*.config" -o -name "*.toml" -o -name "*.yaml" -o -name "*.yml" \) 2>/dev/null | 
+           fzf --preview 'bat --color=always {}') && $EDITOR "$file"
+}
+
+# Log viewer
+flog() {
+    local log
+    log=$(find /var/log -name "*.log" 2>/dev/null | 
+          fzf --preview 'tail -20 {}' --header='[LOG VIEWER]') && 
+          sudo tail -f "$log"
+}
+
+# Package manager (Arch compatible)
+fpac() {
+    local package
+    package=$(pacman -Ss . 2>/dev/null | 
+              fzf --preview 'pacman -Si {1} 2>/dev/null' | cut -d' ' -f1)
+    if [ -n "$package" ]; then
+        echo "Selected: $package"
+        read -r "confirm?Install $package? (y/N): "
+        [ "$confirm" = "y" ] && sudo pacman -S "$package"
+    fi
+}
+
+# Docker container manager
+fdocker() {
+    local container action
+    container=$(docker ps -a --format "table {{.Names}}\t{{.Status}}\t{{.Image}}" | 
+                fzf --header-lines=1 --header='[DOCKER MANAGER]' | awk '{print $1}')
+    if [ -n "$container" ]; then
+        echo "Selected: $container"
+        echo "Actions: [s]tart, [t]op, [r]estart, [l]ogs, [e]xec, [rm]"
+        read -r "action?Choose action: "
+        case $action in
+            s|start) docker start "$container" ;;
+            t|stop) docker stop "$container" ;;
+            r|restart) docker restart "$container" ;;
+            l|logs) docker logs -f "$container" ;;
+            e|exec) docker exec -it "$container" /bin/bash ;;
+            rm) docker rm "$container" ;;
+        esac
+    fi
+}
+
+# Environment variables browser
+fenv() {
+    env | fzf --preview 'echo {}'
+}
+
+# Man page browser
+fman() {
+    local cmd=$(compgen -c | sort -u | 
+                fzf --preview 'man {} 2>/dev/null | head -20' --preview-window=right:50% --header='[MAN PAGES]')
+    [ -n "$cmd" ] && man "$cmd"
+}
+
+# Game ROM finder
+fgame() {
+    local game_file
+    game_file=$(find ~/Games -type f \( -name "*.rom" -o -name "*.iso" -o -name "*.gba" -o -name "*.nds" -o -name "*.n64" -o -name "*.smc" \) 2>/dev/null | 
+                fzf --preview 'echo -e "📁 Directory: $(dirname {})\n📄 File: $(basename {})\n💾 Size: $(du -h {} | cut -f1)"' --header='[GAME SELECTOR]')
+    if [ -n "$game_file" ]; then
+        echo "🎮 Selected: $(basename "$game_file")"
+        cd "$(dirname "$game_file")" && ls -la --color=always
+    fi
+}
+
+# ═══════════════════════════════════════════════════════════════════
+# 🌟 COOL ADDITIONS - Extra Power Features
+# ═══════════════════════════════════════════════════════════════════
+
+# Quick benchmark
+alias benchmark='hyperfine'
+
+# System info at a glance (Arch compatible)
+alias sysinfo='fastfetch || neofetch || screenfetch'
+
+# Quick HTTP server
+alias serve='python3 -m http.server 8080'
+
+# Weather
+alias weather='curl wttr.in'
+
+# Public IP
+alias myip='curl -s https://ipinfo.io/ip'
+
+# Disk usage visualization
+alias duf='duf || df -h'
+
+# Process tree
+alias ptree='pstree -p'
+
+# Git status for all repos in home
+alias git-status-all='find ~ -name .git -type d -prune -exec sh -c "cd \"{}\"/../ && echo \"📁 {} \" && git status -s" \;'
+
+# Quick notes
+alias note='echo "$(date +"%Y-%m-%d %H:%M:%S"): $*" >> ~/.notes.txt'
+alias notes='bat ~/.notes.txt'
+
+# ═══════════════════════════════════════════════════════════════════
+# 📊 PERFORMANCE MONITORING (ARCH COMPATIBLE)
+# ═══════════════════════════════════════════════════════════════════
+
+# Quick system monitors
+alias cpu='htop || top'
+alias gpu='nvidia-smi -l 1'
+alias mem='free -h'
+alias disk='ncdu || du -h'
+
+# Network monitoring (Arch compatible)
+alias netmon='sudo nethogs || sudo iftop || sudo nload'
+alias ports='sudo ss -tulpn | grep LISTEN'
+
+# ═══════════════════════════════════════════════════════════════════
+# 🏗️ ARCH LINUX PACKAGE MANAGEMENT
+# ═══════════════════════════════════════════════════════════════════
+
+# Pacman shortcuts
+alias pac='sudo pacman -S'        # Install package
+alias pacs='pacman -Ss'           # Search packages
+alias pacu='sudo pacman -Syu'     # Update system
+alias pacr='sudo pacman -Rns'     # Remove package + deps
+alias paci='pacman -Si'           # Package info
+alias pacl='pacman -Q'            # List installed
+alias pacc='sudo pacman -Scc'     # Clean cache
+
+# AUR helper (paru)
+alias aur='paru -S'               # Install from AUR
+alias aurs='paru -Ss'             # Search AUR
+alias auru='paru -Syu'            # Update AUR packages
+
+# ═══════════════════════════════════════════════════════════════════
+# 🔧 HELPER FUNCTIONS
+# ═══════════════════════════════════════════════════════════════════
+
+# Create and enter directory
+mkcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+# Extract any archive
+extract() {
+    if [ -f "$1" ]; then
+        case "$1" in
+            *.tar.bz2) tar xjf "$1" ;;
+            *.tar.gz) tar xzf "$1" ;;
+            *.bz2) bunzip2 "$1" ;;
+            *.rar) unrar x "$1" ;;
+            *.gz) gunzip "$1" ;;
+            *.tar) tar xf "$1" ;;
+            *.tbz2) tar xjf "$1" ;;
+            *.tgz) tar xzf "$1" ;;
+            *.zip) unzip "$1" ;;
+            *.Z) uncompress "$1" ;;
+            *.7z) 7z x "$1" ;;
+            *) echo "Cannot extract '$1'" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+# Backup file with timestamp
+backup() {
+    cp "$1" "$1.backup.$(date +%Y%m%d_%H%M%S)"
+}
+
+# ═══════════════════════════════════════════════════════════════════
+# 🎉 FINISHING TOUCHES
+# ═══════════════════════════════════════════════════════════════════
+
+# Source modern CLI aliases (if exists)
+[ -f ~/Games/.modern_cli_aliases ] && source ~/Games/.modern_cli_aliases
+
+# Local overrides (create ~/.zshrc.local for machine-specific configs)
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+# ╔═══════════════════════════════════════════════════════════════════╗
+# ║  Configuration loaded! Type 'alias' to see all commands          ║
+# ║  Fuzzy functions: fkill, fcd, fgb, fsvc, fman, fgame, and more!  ║
+# ╚═══════════════════════════════════════════════════════════════════╝
+
+# Source system-installed zsh plugins (Arch packages)
+
+
+# ═══════════════════════════════════════════════════════════════════
+# 🔧 BAT-EXTRAS - ESSENTIAL ONLY
+# ═══════════════════════════════════════════════════════════════════
+
+# Keep original grep for compatibility (no conflicts)
+unalias grep 2>/dev/null
+alias grep='/usr/bin/grep --color=always'
+
+# Essential bat-extras (actually useful)
+alias bcat='bat'                    # Syntax highlighted file viewing
+# batman function already exists above
+
+# Optional: batgrep for when you want fancy search (use sparingly)
+# alias bgrep='batgrep --color=always'
+
+export HOSTNAME=$(cat /proc/sys/kernel/hostname 2>/dev/null || echo "localhost")
+
+# ═══════════════════════════════════════════════════════════════════
+# 💫 LAZY LOADING OPTIMIZATIONS
+# ═══════════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════════
+# 💫 MINIMAL LAZY LOADING SYSTEM (High-Value Only)
+# ═══════════════════════════════════════════════════════════════════
+
+# Generic lazy loader function
+lazy_load() {
+    local command="$1"
+    local init_command="$2"
+    local aliases=("${@:3}")
+    
+    eval "
+        $command() {
+            unfunction $command 2>/dev/null
+            $init_command
+            $command \"\$@\"
+        }
+    "
+    
+    for alias_cmd in $aliases; do
+        eval "alias $alias_cmd='$command'"
+    done
+}
+
+# ═══════════════════════════════════════════════════════════════════
+# 🚀 HIGH-VALUE LAZY LOADS ONLY
+# ═══════════════════════════════════════════════════════════════════
+
+# 1. Zoxide (you already have this - enhanced version)
+lazy_load "z" "eval \"\$(zoxide init zsh)\"" "zi"
+
+# 2. FZF (only if installed - saves ~100ms startup)
+if command -v fzf &> /dev/null; then
+    lazy_load "fzf" "eval \"\$(fzf --zsh)\"" 
+    
+    # Useful FZF shortcuts (lazy loaded)
+    fzf-file() { 
+        z  # Trigger zoxide lazy load
+        find . -type f | fzf --preview 'cat {}' | xargs -r $EDITOR
+    }
+fi
+
+# 3. Git completions (saves ~50ms startup)
+git() {
+    unfunction git 2>/dev/null
+    # Load git completions if available
+    if [[ -f /usr/share/git/completion/git-completion.zsh ]]; then
+        source /usr/share/git/completion/git-completion.zsh
+    fi
+    command git "$@"
+}
+
+# ═══════════════════════════════════════════════════════════════════
+# 🎵 MUSIC ALIASES (No lazy loading needed - already fast)
+# ═══════════════════════════════════════════════════════════════════
+
+alias music='ncspot'
+alias spotify='ncspot' 
+alias play='playerctl play-pause'
+alias next='playerctl next'
+alias prev='playerctl previous'
+alias stop='playerctl stop'
+
+# ═══════════════════════════════════════════════════════════════════
+# 📊 STARTUP TIME TESTING
+# ═══════════════════════════════════════════════════════════════════
+
+# Test your shell startup time
+timezsh() {
+    shell=${1-$SHELL}
+    echo "Testing $shell startup time (10 runs):"
+    for i in $(seq 1 10); do
+        time $shell -i -c exit
+    done
+}
+# ═══════════════════════════════════════════════════════════════════
+# 🎵 TMUX MUSIC INTERFACE
+# ═══════════════════════════════════════════════════════════════════
+
+# Add ~/.local/bin to PATH if not already there
+[[ ":$PATH:" != *":$HOME/.local/bin:"* ]] && export PATH="$HOME/.local/bin:$PATH"
+
+# Launch epic TMUX music interface
+music-interface() {
+    if tmux has-session -t music 2>/dev/null; then
+        echo "🎵 Attaching to existing music session..."
+        tmux attach-session -t music
+    else
+        echo "🎵 Creating new music interface..."
+        # Create new TMUX session with music setup
+        tmux new-session -d -s music -x 100 -y 30 \; \
+            send-keys 'echo "🎵 Welcome to your Music Interface!"' Enter \; \
+            send-keys 'echo "Windows: 1=welcome 2=ncspot 3=cava 4=ncmpcpp 5=controls"' Enter \; \
+            new-window -n "ncspot" \; \
+            send-keys 'spotify-safe' Enter \; \
+            new-window -n "cava" \; \
+            send-keys 'cava' Enter \; \
+            new-window -n "ncmpcpp" \; \
+            send-keys 'ncmpcpp' Enter \; \
+            new-window -n "controls" \; \
+            send-keys 'echo "Music Controls:"' Enter \; \
+            send-keys 'echo "playerctl play-pause  # Play/pause"' Enter \; \
+            send-keys 'echo "playerctl next        # Next track"' Enter \; \
+            send-keys 'echo "playerctl previous    # Previous track"' Enter \; \
+            send-keys 'echo ""' Enter \; \
+            send-keys 'echo "TMUX Navigation:"' Enter \; \
+            send-keys 'echo "Ctrl+B + [1-5]       # Switch windows"' Enter \; \
+            send-keys 'echo "Ctrl+B + d           # Detach session"' Enter \; \
+            select-window -t 2 \; \
+            attach-session
+    fi
+}
+
+# Quick TMUX music session (simple version)
+music-tmux() {
+    if tmux has-session -t music 2>/dev/null; then
+        echo "Attaching to existing music session..."
+        tmux attach-session -t music
+    else
+        echo "Creating new music session..."
+        music-interface
+    fi
+}
+
+# Split-screen music setup (ncspot + cava)
+music-split() {
+    tmux new-session -d -s music-split \; \
+        send-keys 'ncspot' Enter \; \
+        split-window -h \; \
+        send-keys 'cava' Enter \; \
+        select-pane -t 0 \; \
+        attach-session
+}
+
+# Triple music view (ncspot + cava + ncmpcpp)
+music-triple() {
+    tmux new-session -d -s music-triple \; \
+        send-keys 'ncspot' Enter \; \
+        split-window -v \; \
+        send-keys 'cava' Enter \; \
+        split-window -h \; \
+        send-keys 'ncmpcpp' Enter \; \
+        select-pane -t 0 \; \
+        attach-session
+}
+
+
+# ═══════════════════════════════════════════════════════════════════
+# 🛡️ SAFE MUSIC CONTROLS (Prevents background processes)
+# ═══════════════════════════════════════════════════════════════════
+
+# Override previous music aliases with safe versions
+alias spotify='spotify-safe'
+alias music='spotify-safe'
+
+# Kill any orphaned music processes
+music-cleanup() {
+    echo "�� Cleaning up background music processes..."
+    pkill -f ncspot 2>/dev/null && echo "✅ ncspot processes killed"
+    pkill -f spotify 2>/dev/null && echo "✅ spotify processes killed"
+    echo "🎵 Music cleanup complete!"
+}
+
+# Smart music launcher with cleanup
+music-safe() {
+    # Kill any existing instances first
+    pkill -f ncspot 2>/dev/null
+    echo "🎵 Launching ncspot safely..."
+    spotify-safe
+}
+
+
+# ═══════════════════════════════════════════════════════════════════
+# 🎛️ TMUX SESSION MANAGEMENT
+# ═══════════════════════════════════════════════════════════════════
+
+# Kill and restart music session
+music-restart() {
+    echo "🔄 Restarting music session..."
+    tmux kill-session -t music 2>/dev/null
+    tmux kill-session -t music-split 2>/dev/null  
+    tmux kill-session -t music-triple 2>/dev/null
+    music-cleanup
+    echo "✅ Sessions killed, launching fresh interface..."
+    music-interface
+}
+
+# List all music sessions
+music-sessions() {
+    echo "🎵 Music TMUX Sessions:"
+    tmux list-sessions 2>/dev/null | grep -E "(music|ncspot|cava)" || echo "No music sessions found"
+}
+
+# Kill all music sessions
+music-kill-sessions() {
+    echo "💀 Killing all music sessions..."
+    tmux kill-session -t music 2>/dev/null && echo "✅ music session killed"
+    tmux kill-session -t music-split 2>/dev/null && echo "✅ music-split session killed"
+    tmux kill-session -t music-triple 2>/dev/null && echo "✅ music-triple session killed"
+    music-cleanup
+    echo "🎵 All music sessions terminated!"
+}
+
+
+# ═══════════════════════════════════════════════════════════════════
+# 🏷️ HOSTNAME FIXES FOR TMUX
+# ═══════════════════════════════════════════════════════════════════
+
+# Fix TMUX hostname display
+tmux-fix-hostname() {
+    echo "🔄 Refreshing TMUX hostname..."
+    # Reload TMUX config
+    tmux source-file ~/.tmux.conf 2>/dev/null && echo "✅ TMUX config reloaded"
+    # Refresh all TMUX sessions
+    for session in $(tmux list-sessions -F '#{session_name}' 2>/dev/null); do
+        tmux refresh-client -t "$session" 2>/dev/null
+    done
+    echo "🏷️ Hostname should now show: $(echo $USER)@$(cat /etc/hostname)"
+}
+
+alias mesen2="cd ~/Emulators/Mesen2 && DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1 ./Mesen"
+
+# MelonDS Emulator Alias
+alias melonds="/home/craig/Emulators/MelonDS/launch-melonds.sh"
+
+# Weather animations (asciimatics-weather-toys)
+alias live_weather='cd ~/asciimatics-weather-toys && source .venv/bin/activate && python weather_live.py'
+alias weather_dashboard='cd ~/asciimatics-weather-toys && source .venv/bin/activate && python weather_dashboard.py'
+alias weather_pro='cd ~/asciimatics-weather-toys && source .venv/bin/activate && python weather_live_pro.py'
