@@ -1,6 +1,6 @@
 # 🏔️ Craig's Dotfiles
 
-Arch Linux + Hyprland configuration with dynamic theming via wallust.
+Arch Linux + Hyprland configuration with **dynamic theming via wallust** - colors sync across all apps.
 
 ## 📦 What's Included
 
@@ -8,31 +8,31 @@ Arch Linux + Hyprland configuration with dynamic theming via wallust.
 | Component | Config |
 |-----------|--------|
 | **Hyprland** | Window manager, hypridle, hyprlock |
-| **Waybar** | Status bar + 40+ custom scripts |
+| **Waybar** | Status bar with floating design, margin, rounded corners |
 | **Fuzzel** | Application launcher |
 | **Wofi** | Alternative launcher |
-| **Mako** | Notification daemon |
+| **Mako** | Notification daemon (dynamic colors) |
 
 ### Terminal & Shell
 | Component | Config |
 |-----------|--------|
 | **Kitty** | GPU-accelerated terminal |
-| **Zsh** | Shell + enhanced config |
+| **Zsh** | Shell + `wtheme` command for theme switching |
 | **Starship** | Cross-shell prompt |
-| **Tmux** | Terminal multiplexer |
+| **Tmux** | Terminal multiplexer (dynamic statusline colors) |
 
 ### Theming & Wallpapers
 | Component | Config |
 |-----------|--------|
-| **Wallust** | Dynamic color generation from wallpapers |
-| **GTK 3/4** | Arc-Dark theme settings |
+| **Wallust** | Dynamic color generation from wallpapers/themes |
+| **GTK 3/4** | Dark theme with libadwaita support |
 | **Fontconfig** | Font configuration |
-| **Themes** | Custom theme files |
+| **Themes** | Nord, Everforest, Gruvbox, Catppuccin, and more |
 
 ### Applications
 | Component | Config |
 |-----------|--------|
-| **Neovim** | Full Lua config + LSP + plugins |
+| **Neovim** | Full Lua config + LSP + dynamic lualine colors |
 | **Btop** | System monitor |
 | **Fastfetch** | System info |
 | **Cava** | Audio visualizer + shaders |
@@ -46,27 +46,52 @@ Arch Linux + Hyprland configuration with dynamic theming via wallust.
 | **Ncspot** | Spotify TUI |
 | **MPD** | Music daemon |
 
-### Custom Scripts (`~/.local/bin/`)
+## 🎨 Dynamic Theming System
+
+### What Syncs Automatically
+When you run `wtheme <theme-name>`, these update instantly:
+- **Waybar** - Bar colors + calendar tooltip
+- **Kitty** - Terminal colors
+- **Mako** - Notification colors
+- **Tmux** - Statusline colors
+- **Hyprland** - Border colors
+- **Fuzzel** - Launcher colors
+- **Starship** - Prompt colors
+- **GTK apps** - Via gtk.css
+- **Cava** - Visualizer colors
+
+**Neovim** uses wallust colors on startup (restart nvim after theme switch)
+
+### Available Themes
+```bash
+wtheme Nord
+wtheme Everforest-Dark-Medium
+wtheme Gruvbox-Dark
+wtheme Catppuccin-Mocha
+wtheme Dracula
+wtheme Tokyo-Night
+# ... and 400+ more (run: wallust theme --help)
+```
+
+### Wallust Templates
+Located in `~/.config/wallust/templates/`:
+| Template | Target |
+|----------|--------|
+| `kitty-colors.conf` | Kitty terminal |
+| `waybar-colors.css` | Waybar CSS variables |
+| `hyprland-colors.conf` | Hyprland borders |
+| `fuzzel-colors.ini` | Fuzzel launcher |
+| `starship.toml` | Starship prompt |
+| `gtk-colors.css` | GTK 3/4 apps |
+| `cava-colors` | Cava visualizer |
+| `tmux-colors.conf` | Tmux statusline |
+| `nvim-colors.lua` | Neovim colorscheme |
+| `mako-colors.conf` | Mako notifications |
+
+### Custom Scripts
 | Script | Purpose |
 |--------|---------|
-| `wallpaper-manager` | Main wallpaper + theming controller |
-| `theme-switcher` | Switch color themes |
-| `quick-wallpaper` | Fast wallpaper change |
-| `lock-and-sleep` | Screen lock + suspend |
-| `power-status` | Battery/power info |
-| `brave-wayland` | Launch Brave with Wayland flags |
-| `thunar-dark` | Launch Thunar with dark theme |
-
-## 🎨 Dynamic Theming
-
-Wallust generates colors from your wallpaper and applies them to:
-- Kitty terminal
-- Waybar
-- Hyprland borders
-- Fuzzel
-- Starship prompt
-- GTK apps
-- Cava visualizer
+| `~/.config/wallust/scripts/update-waybar-calendar.sh` | Updates waybar calendar colors |
 
 ## ⌨️ Key Bindings
 
@@ -80,6 +105,13 @@ Wallust generates colors from your wallpaper and applies them to:
 | `Super + 1-9` | Workspaces |
 | `Super + W` | Wallpaper manager |
 
+## 🖥️ Waybar Features
+
+- **Floating design** with 6px margin and 12px border-radius
+- **Dynamic calendar tooltip** - colors match current theme
+- **Custom modules**: weather, system stats, updates, app tray
+- **GTK_THEME fix** for pavucontrol dark mode
+
 ## 🚀 Installation
 
 ```bash
@@ -89,13 +121,16 @@ chezmoi init --apply <your-repo>
 # Or manually
 chezmoi init
 chezmoi apply
+
+# Generate initial colors
+wallust theme Nord
 ```
 
 ## 📊 Stats
 
-- **275 files** managed
-- **Last updated**: January 2026
-- **Display**: 4K @ 144Hz (1.33x scaling)
+- **280+ files** managed
+- **Last updated**: January 13, 2026
+- **Display**: 4K @ 144Hz (native, no scaling)
 - **Theme**: Dynamic via wallust
 
 ---

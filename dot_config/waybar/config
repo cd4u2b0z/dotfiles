@@ -5,7 +5,7 @@
   "exclusive": true,
   "passthrough": false,
   "gtk-layer-shell": true,
-  "margin": "0",
+  "margin": "6 8 0 8",
   "modules-left": [
     "hyprland/workspaces",
     "custom/app-tray"
@@ -53,11 +53,11 @@
       "weeks-pos": "left",
       "on-scroll": 1,
       "format": {
-        "months": "<span color='#ECEFF4' weight='bold'>{}</span>",
-        "days": "<span color='#D8DEE9'>{}</span>",
-        "weeks": "<span color='#4C566A'>W{}</span>",
-        "weekdays": "<span color='#81A1C1' weight='bold'>{}</span>",
-        "today": "<span background='#88C0D0' color='#2E3440' weight='bold'> {} </span>"
+        "months": "<span color='#EBDBB2' size='large' weight='bold'>{}</span>",
+        "days": "<span color='#EBDBB2'>{:>2}</span>",
+        "weeks": "<span color='#928374'>W{} </span>",
+        "weekdays": "<span color='#458588' weight='bold'>{:>2}</span>",
+        "today": "<span background='#98971A' color='#282828' weight='bold'> {:>2} </span>"
       }
     },
     "actions": {
@@ -105,7 +105,7 @@
       "default": ["󰕿", "󰖀", "󰕾"]
     },
     "scroll-step": 5,
-    "on-click": "pavucontrol",
+    "on-click": "env ADW_DEBUG_COLOR_SCHEME=prefer-dark GTK_THEME=Adwaita:dark pavucontrol",
     "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
   },
 

@@ -51,3 +51,25 @@ gtk.target = "~/.config/gtk-3.0/gtk.css"
 # Hyprland border colors
 hyprland.template = "hyprland-colors.conf"
 hyprland.target = "~/.config/hypr/wallust-colors.conf"
+
+# Tmux colors
+tmux.template = "tmux-colors.conf"
+tmux.target = "~/.config/tmux/wallust-colors.conf"
+
+# Neovim colors (lua module)
+nvim.template = "nvim-colors.lua"
+nvim.target = "~/.config/nvim/lua/wallust-colors.lua"
+
+# Mako notifications
+mako.template = "mako-colors.conf"
+mako.target = "~/.config/mako/config"
+
+# ═══════════════════════════════════════════════════════════════════
+# 🔄 POST-RUN HOOKS
+# ═══════════════════════════════════════════════════════════════════
+[scripts]
+run_after = ["~/.config/wallust/scripts/update-waybar-calendar.sh"]
+
+# Shell colors for scripts
+colors_sh.template = "colors.sh"
+colors_sh.target = "~/.cache/wallust/colors.sh"
