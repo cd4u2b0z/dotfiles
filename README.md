@@ -134,4 +134,4 @@ wallust theme Nord
 - **Theme**: Dynamic via wallust
 
 ---
-*Managed with [chezmoi](https://chezmoi.io)*
+**Dr. Baklava** · Managed with [chezmoi](https://chezmoi.io)
