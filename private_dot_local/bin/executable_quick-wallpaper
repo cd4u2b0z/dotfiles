@@ -1,0 +1,13 @@
+#!/bin/bash
+WALLPAPER=$(find ~/Pictures/Wallpapers -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.webp" \) | fuzzel --dmenu --prompt "Wallpaper: ")
+
+[[ -z "$WALLPAPER" ]] && exit 0
+
+# Set wallpaper with wave transition
+swww img "$WALLPAPER" --transition-type wave --transition-angle 45 --transition-duration 2
+
+# Sync hyprlock background
+HYPRLOCK_CONF="$HOME/.config/hypr/hyprlock.conf"
+if [[ -f "$HYPRLOCK_CONF" ]]; then
+    sed -i "/^background {/,/^}/ s|^\([[:space:]]*path = \).*|\1${WALLPAPER}|" "$HYPRLOCK_CONF"
+fi
