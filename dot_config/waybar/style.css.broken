@@ -1,0 +1,695 @@
+/* SLEEK NORD PROFESSIONAL THEME */
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font", "SF Pro Display", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  min-height: 0;
+  color: #E5E9F0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+window#waybar {
+    background-color: rgba(46, 52, 64, 0.95);
+    background: linear-gradient(135deg, 
+        rgba(46, 52, 64, 0.98) 0%,
+        rgba(59, 66, 82, 0.95) 25%,
+        rgba(67, 76, 94, 0.92) 50%,
+        rgba(76, 86, 106, 0.95) 75%,
+        rgba(59, 66, 82, 0.98) 100%);
+    color: #D8DEE9;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+    box-shadow: 
+        0 2px 10px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(216, 222, 233, 0.1),
+        inset 0 -1px 0 rgba(46, 52, 64, 0.8);
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/* 🌀 WILD AURORA ORBS - Pulsating Module Base */
+.modules-left > widget:first-child > #workspaces,
+.modules-center > widget > *,
+.modules-right > widget > * {
+    margin: 4px 3px;
+    padding: 6px 12px;
+    background: linear-gradient(135deg, 
+        rgba(129, 161, 193, 0.15) 0%,
+        rgba(136, 192, 208, 0.12) 25%,
+        rgba(143, 188, 187, 0.18) 50%,
+        rgba(163, 190, 140, 0.15) 75%,
+        rgba(191, 97, 106, 0.12) 100%);
+    border: 1px solid rgba(129, 161, 193, 0.25);
+    border-radius: 8px;
+    color: #ECEFF4;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+    box-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(236, 239, 244, 0.1),
+        0 0 10px rgba(129, 161, 193, 0.1);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* 🔥 FROST BURN HOVER - Intense Aurora Activation */
+.modules-left > widget > *:hover,
+.modules-center > widget > *:hover,
+.modules-right > widget > *:hover {
+    background: linear-gradient(135deg, 
+        rgba(129, 161, 193, 0.35) 0%,
+        rgba(136, 192, 208, 0.32) 20%,
+        rgba(143, 188, 187, 0.38) 40%,
+        rgba(163, 190, 140, 0.35) 60%,
+        rgba(191, 97, 106, 0.32) 80%,
+        rgba(180, 142, 173, 0.35) 100%);
+    border: 1px solid rgba(129, 161, 193, 0.6);
+    color: #FFFFFF;
+    text-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.8),
+        0 0 8px rgba(129, 161, 193, 0.4);
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.6),
+        inset 0 2px 4px rgba(236, 239, 244, 0.2),
+        0 0 20px rgba(129, 161, 193, 0.3),
+        0 0 30px rgba(136, 192, 208, 0.2);
+}
+
+/* ❄️ ARCTIC WORKSPACES */
+#workspaces {
+    background: linear-gradient(135deg, 
+        rgba(76, 86, 106, 0.4) 0%,
+        rgba(88, 91, 112, 0.3) 50%,
+        rgba(67, 76, 94, 0.4) 100%);
+    border: 1px solid rgba(129, 161, 193, 0.3);
+    border-radius: 12px;
+    padding: 2px;
+    margin-right: 8px;
+}
+
+#workspaces button {
+    padding: 6px 10px;
+    margin: 0 2px;
+    color: #81A1C1;
+    background: rgba(59, 66, 82, 0.6);
+    border: 1px solid rgba(76, 86, 106, 0.5);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+#workspaces button:hover {
+    background: linear-gradient(135deg, 
+        rgba(129, 161, 193, 0.4) 0%,
+        rgba(136, 192, 208, 0.3) 100%);
+    color: #ECEFF4;
+    border: 1px solid rgba(129, 161, 193, 0.7);
+    box-shadow: 
+        0 0 10px rgba(129, 161, 193, 0.4),
+        inset 0 1px 2px rgba(236, 239, 244, 0.2);
+}
+
+#workspaces button.active {
+    background: linear-gradient(135deg, 
+        rgba(136, 192, 208, 0.6) 0%,
+        rgba(129, 161, 193, 0.5) 50%,
+        rgba(143, 188, 187, 0.6) 100%);
+    color: #2E3440;
+    border: 1px solid rgba(136, 192, 208, 0.8);
+    box-shadow: 
+        0 0 15px rgba(136, 192, 208, 0.5),
+        inset 0 2px 4px rgba(236, 239, 244, 0.3);
+    font-weight: 900;
+}
+
+/* 🎵 WILD HARMONY - Music Module */
+#custom-music {
+    background: linear-gradient(135deg, 
+        rgba(163, 190, 140, 0.2) 0%,
+        rgba(143, 188, 187, 0.15) 100%);
+    border: 1px solid rgba(163, 190, 140, 0.4);
+    color: #A3BE8C;
+    font-style: italic;
+}
+
+/* 🪟 FROST WINDOW */
+#window {
+    background: linear-gradient(135deg, 
+        rgba(136, 192, 208, 0.15) 0%,
+        rgba(129, 161, 193, 0.12) 100%);
+    border: 1px solid rgba(136, 192, 208, 0.3);
+    color: #88C0D0;
+    font-weight: normal;
+}
+
+/* ⏰ TEMPORAL VORTEX - Clock Modules */
+#clock {
+    background: linear-gradient(135deg, 
+        rgba(180, 142, 173, 0.2) 0%,
+        rgba(191, 97, 106, 0.15) 100%);
+    border: 1px solid rgba(180, 142, 173, 0.4);
+    color: #B48EAD;
+    font-weight: 900;
+    text-shadow: 
+        0 1px 2px rgba(0, 0, 0, 0.7),
+        0 0 8px rgba(180, 142, 173, 0.3);
+}
+
+/* 🔧 SYSTEM CLUSTER - Hardware Monitoring */
+/* 🖥️ SYSTEM MONITORING - Enhanced with Hover Effects */
+#cpu, #memory, #temperature, #custom-gpu-temp {
+    background: linear-gradient(135deg, 
+        rgba(94, 129, 172, 0.3) 0%,
+        rgba(129, 161, 193, 0.25) 100%);
+    border: 1px solid rgba(129, 161, 193, 0.5);
+    color: #5E81AC;
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+#cpu:hover, #memory:hover, #temperature:hover, #custom-gpu-temp:hover {
+    background: linear-gradient(135deg, 
+        rgba(94, 129, 172, 0.5) 0%,
+        rgba(129, 161, 193, 0.4) 100%);
+    color: #81A1C1;
+    box-shadow: 
+        0 3px 8px rgba(0, 0, 0, 0.3),
+        0 0 12px rgba(129, 161, 193, 0.3);
+}
+
+#disk {
+    background: linear-gradient(135deg, 
+        rgba(143, 188, 187, 0.3) 0%,
+        rgba(136, 192, 208, 0.25) 100%);
+    border: 1px solid rgba(143, 188, 187, 0.5);
+    color: #8FBCBB;
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+#disk:hover {
+    background: linear-gradient(135deg, 
+        rgba(143, 188, 187, 0.5) 0%,
+        rgba(136, 192, 208, 0.4) 100%);
+    color: #88C0D0;
+    box-shadow: 
+        0 3px 8px rgba(0, 0, 0, 0.3),
+        0 0 12px rgba(143, 188, 187, 0.3);
+    
+}
+
+#custom-mouse-battery, #custom-keyboard-battery {
+    background: linear-gradient(135deg, 
+        rgba(163, 190, 140, 0.3) 0%,
+        rgba(191, 97, 106, 0.2) 100%);
+    border: 1px solid rgba(163, 190, 140, 0.5);
+    color: #A3BE8C;
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+#custom-mouse-battery:hover, #custom-keyboard-battery:hover {
+    background: linear-gradient(135deg, 
+        rgba(163, 190, 140, 0.5) 0%,
+        rgba(191, 97, 106, 0.3) 100%);
+    color: #A3BE8C;
+    box-shadow: 
+        0 3px 8px rgba(0, 0, 0, 0.3),
+        0 0 12px rgba(163, 190, 140, 0.3);
+    
+}
+
+/* 🔋 POWER ESSENCE - Battery Modules */
+#custom-mouse-battery, #custom-keyboard-battery {
+    background: linear-gradient(135deg, 
+        rgba(235, 203, 139, 0.2) 0%,
+        rgba(163, 190, 140, 0.15) 100%);
+    border: 1px solid rgba(235, 203, 139, 0.4);
+    color: #EBCB8B;
+}
+
+/* 🌐 CONNECTION NEXUS */
+#network, #bluetooth {
+    background: linear-gradient(135deg, 
+        rgba(129, 161, 193, 0.18) 0%,
+        rgba(136, 192, 208, 0.15) 100%);
+    border: 1px solid rgba(129, 161, 193, 0.4);
+    color: #81A1C1;
+}
+
+/* 🔊 SONIC RESONANCE */
+#pulseaudio {
+    background: linear-gradient(135deg, 
+        rgba(143, 188, 187, 0.2) 0%,
+        rgba(163, 190, 140, 0.15) 100%);
+    border: 1px solid rgba(143, 188, 187, 0.4);
+    color: #8FBCBB;
+}
+
+/* 📦 ARTIFACT CHAMBER */
+#custom-updates {
+    background: linear-gradient(135deg, 
+        rgba(191, 97, 106, 0.2) 0%,
+        rgba(208, 135, 112, 0.15) 100%);
+    border: 1px solid rgba(191, 97, 106, 0.4);
+    color: #BF616A;
+}
+
+/* 🌤️ ATMOSPHERIC ORACLE */
+#custom-weather {
+    background: linear-gradient(135deg, 
+        rgba(136, 192, 208, 0.2) 0%,
+        rgba(143, 188, 187, 0.18) 50%,
+        rgba(129, 161, 193, 0.15) 100%);
+    border: 1px solid rgba(136, 192, 208, 0.4);
+    color: #88C0D0;
+    font-style: italic;
+}
+
+/* ⚡ POWER NEXUS */
+#custom-power {
+    background: linear-gradient(135deg, 
+        rgba(191, 97, 106, 0.4) 0%,
+        rgba(208, 135, 112, 0.3) 100%);
+    border: 1px solid rgba(191, 97, 106, 0.6);
+    color: #BF616A;
+    font-weight: 900;
+    border-radius: 8px;
+    padding: 0 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+#custom-power:hover {
+    background: linear-gradient(135deg, 
+        rgba(191, 97, 106, 0.7) 0%,
+        rgba(208, 135, 112, 0.5) 100%);
+    color: #ECEFF4;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(191, 97, 106, 0.5);
+    
+}
+
+/* 📱 SYSTEM TRAY */
+#tray {
+    background: linear-gradient(135deg, 
+        rgba(67, 76, 94, 0.3) 0%,
+        rgba(76, 86, 106, 0.25) 100%);
+    border: 1px solid rgba(76, 86, 106, 0.5);
+}
+
+#tray > .passive {
+    opacity: 0.7;
+}
+
+#tray > .active {
+    opacity: 1;
+}
+
+#tray > .needs-attention {
+    color: #EBCB8B;
+    background: rgba(235, 203, 139, 0.2);
+}
+
+/* ⚙️ SEPARATORS - Runic Dividers */
+#custom-separator, #custom-separator-dot {
+    background: none;
+    border: none;
+    color: rgba(129, 161, 193, 0.6);
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    margin: 0 4px;
+    padding: 0 6px;
+}
+
+/* 🌟 WILD AURORA ANIMATIONS */
+
+
+
+
+/* 🏔️ CRITICAL STATES - Enhanced Aurora Warnings */
+#cpu.critical, #memory.critical, #temperature.critical {
+    background: linear-gradient(135deg, 
+        rgba(191, 97, 106, 0.6) 0%,
+        rgba(208, 135, 112, 0.5) 100%) !important;
+    color: #ECEFF4 !important;
+    border-color: rgba(191, 97, 106, 0.8) !important;
+    box-shadow: 
+        0 0 15px rgba(191, 97, 106, 0.6),
+        inset 0 1px 0 rgba(236, 239, 244, 0.2);
+    font-weight: 700;
+}
+
+#custom-mouse-battery.critical, #custom-keyboard-battery.critical {
+    background: linear-gradient(135deg, 
+        rgba(191, 97, 106, 0.6) 0%,
+        rgba(208, 135, 112, 0.5) 100%) !important;
+    color: #ECEFF4 !important;
+    border-color: rgba(191, 97, 106, 0.8) !important;
+    box-shadow: 
+        0 0 15px rgba(191, 97, 106, 0.6),
+        inset 0 1px 0 rgba(236, 239, 244, 0.2);
+    font-weight: 700;
+}
+
+
+/* 🌨️ TOOLTIP STYLING */
+tooltip {
+    background: linear-gradient(135deg, 
+        rgba(46, 52, 64, 0.98) 0%,
+        rgba(59, 66, 82, 0.95) 100%);
+    border: 1px solid rgba(129, 161, 193, 0.3);
+    border-radius: 8px;
+    color: #D8DEE9;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    padding: 8px 12px;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.6),
+        0 0 20px rgba(129, 161, 193, 0.2);
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* 🏔️ MAIN WINDOW - ARCTIC STORM FOUNDATION                          */
+/* ═══════════════════════════════════════════════════════════════════ */
+window#waybar {
+    background: linear-gradient(135deg, 
+        rgba(46, 52, 64, 0.92),
+        rgba(59, 66, 82, 0.88),
+        rgba(67, 76, 94, 0.85)
+    );
+    color: #d8dee9;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    font-weight: 600;
+    border: 2px solid rgba(136, 192, 208, 0.4);
+    border-radius: 20px;
+    margin: 12px;
+    padding: 0;
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(136, 192, 208, 0.1);
+    transition: all 0.5s ease;
+}
+
+window#waybar:hover {
+    border-color: rgba(136, 192, 208, 0.8);
+    box-shadow: 
+        0 16px 50px rgba(0, 0, 0, 0.6),
+        0 0 60px rgba(136, 192, 208, 0.3);
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* 🌌 WORKSPACES - WILD AURORA ORBS                                  */
+/* ═══════════════════════════════════════════════════════════════════ */
+#workspaces {
+    background: linear-gradient(135deg, 
+        rgba(59, 66, 82, 0.8),
+        rgba(67, 76, 94, 0.7)
+    );
+    border-radius: 24px;
+    padding: 6px 12px;
+    margin: 0 12px;
+    border: 2px solid rgba(136, 192, 208, 0.3);
+}
+
+#workspaces button {
+    all: unset;
+    min-width: 28px;
+    min-height: 28px;
+    border-radius: 50%;
+    color: transparent;
+    background: linear-gradient(135deg, 
+        rgba(76, 86, 106, 0.8),
+        rgba(88, 91, 112, 0.6)
+    );
+    margin: 2px 4px;
+    transition: all 0.6s ease;
+    border: 1px solid rgba(136, 192, 208, 0.2);
+}
+
+#workspaces button:hover {
+    background: linear-gradient(135deg, 
+        rgba(143, 188, 187, 0.9),
+        rgba(180, 142, 173, 0.7)
+    );
+    border-color: rgba(143, 188, 187, 0.6);
+    box-shadow: 0 6px 20px rgba(143, 188, 187, 0.4);
+}
+
+#workspaces button.active {
+    background: linear-gradient(135deg, 
+        rgba(180, 142, 173, 1),
+        rgba(163, 190, 140, 0.9),
+        rgba(136, 192, 208, 0.8)
+    );
+    border-color: rgba(180, 142, 173, 0.8);
+    box-shadow: 0 8px 25px rgba(180, 142, 173, 0.6);
+}
+
+#workspaces button.urgent {
+    background: linear-gradient(135deg, 
+        rgba(191, 97, 106, 1),
+        rgba(208, 135, 112, 0.8)
+    );
+    border-color: rgba(191, 97, 106, 0.8);
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* 🎵 MUSIC & WINDOW - WILD FROST MODULES                            */
+/* ═══════════════════════════════════════════════════════════════════ */
+#custom-music {
+    background: linear-gradient(135deg, 
+        rgba(67, 76, 94, 0.8),
+        rgba(143, 188, 187, 0.3)
+    );
+    color: #8fbcbb;
+    padding: 8px 16px;
+    margin: 0 8px;
+    border-radius: 16px;
+    border: 2px solid rgba(143, 188, 187, 0.4);
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(143, 188, 187, 0.5);
+    transition: all 0.6s ease;
+}
+
+#custom-music:hover {
+    background: linear-gradient(135deg, 
+        rgba(143, 188, 187, 0.4),
+        rgba(180, 142, 173, 0.3)
+    );
+    border-color: rgba(143, 188, 187, 0.8);
+    color: #eceff4;
+    text-shadow: 0 0 20px rgba(143, 188, 187, 1);
+    box-shadow: 0 8px 30px rgba(143, 188, 187, 0.4);
+}
+
+#window {
+    background: transparent;
+    color: rgba(216, 222, 233, 0.9);
+    padding: 8px 16px;
+    margin: 0 8px;
+    font-weight: 500;
+    font-size: 12px;
+    opacity: 0.8;
+    transition: all 0.4s ease;
+}
+
+#window:hover {
+    color: #eceff4;
+    opacity: 1;
+    text-shadow: 0 0 15px rgba(216, 222, 233, 0.8);
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* 🕐 CENTER - WILD AURORA TIME/WEATHER CORE                         */
+/* ═══════════════════════════════════════════════════════════════════ */
+#clock,
+#custom-weather {
+    background: linear-gradient(135deg, 
+        rgba(67, 76, 94, 0.8),
+        rgba(76, 86, 106, 0.7)
+    );
+    border: 2px solid rgba(136, 192, 208, 0.6);
+    border-radius: 0;
+    padding: 10px 18px;
+    margin: 0;
+    transition: all 0.6s ease;
+    font-weight: 700;
+}
+
+#clock {
+    color: #88c0d0;
+    font-size: 15px;
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    border-right: none;
+    text-shadow: 0 0 10px rgba(136, 192, 208, 0.5);
+}
+
+#custom-weather {
+    color: #8fbcbb;
+    font-size: 14px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-left: 1px solid rgba(136, 192, 208, 0.3);
+    text-shadow: 0 0 10px rgba(143, 188, 187, 0.5);
+}
+
+#clock:hover {
+    background: linear-gradient(135deg, 
+        rgba(136, 192, 208, 0.3),
+        rgba(163, 190, 140, 0.2)
+    );
+    border-color: rgba(136, 192, 208, 1);
+    color: #eceff4;
+    text-shadow: 0 0 20px rgba(136, 192, 208, 0.8);
+    box-shadow: 0 0 30px rgba(136, 192, 208, 0.4);
+}
+
+#custom-weather:hover {
+    background: linear-gradient(135deg, 
+        rgba(143, 188, 187, 0.3),
+        rgba(180, 142, 173, 0.2)
+    );
+    border-color: rgba(143, 188, 187, 1);
+    color: #eceff4;
+    text-shadow: 0 0 20px rgba(143, 188, 187, 0.8);
+    box-shadow: 0 0 30px rgba(143, 188, 187, 0.4);
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* 📊 RIGHT SIDE - WILD NORDIC SYSTEM CLUSTER                        */
+/* ═══════════════════════════════════════════════════════════════════ */
+#tray,
+#network,
+#bluetooth,
+#pulseaudio,
+#custom-updates {
+    background: linear-gradient(135deg, 
+        rgba(67, 76, 94, 0.8),
+        rgba(76, 86, 106, 0.7)
+    );
+    padding: 8px 14px;
+    margin: 0;
+    border: 1px solid rgba(136, 192, 208, 0.3);
+    border-right: none;
+    font-weight: 600;
+    font-size: 13px;
+    transition: all 0.6s ease;
+}
+
+#tray {
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    color: #d8dee9;
+    text-shadow: 0 0 8px rgba(216, 222, 233, 0.3);
+}
+
+#network {
+    color: #88c0d0;
+    text-shadow: 0 0 8px rgba(136, 192, 208, 0.4);
+}
+
+#bluetooth {
+    color: #8fbcbb;
+    text-shadow: 0 0 8px rgba(143, 188, 187, 0.4);
+}
+
+#pulseaudio {
+    color: #a3be8c;
+    text-shadow: 0 0 8px rgba(163, 190, 140, 0.4);
+}
+
+#custom-updates {
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-right: 1px solid rgba(136, 192, 208, 0.3);
+    color: #d08770;
+    text-shadow: 0 0 8px rgba(208, 135, 112, 0.4);
+}
+
+/* Hover Effects */
+#tray:hover {
+    background: linear-gradient(135deg, 
+        rgba(216, 222, 233, 0.2),
+        rgba(229, 233, 240, 0.15)
+    );
+    color: #eceff4;
+    text-shadow: 0 0 20px rgba(216, 222, 233, 0.8);
+    box-shadow: 0 0 30px rgba(216, 222, 233, 0.3);
+}
+
+#network:hover {
+    background: linear-gradient(135deg, 
+        rgba(136, 192, 208, 0.3),
+        rgba(163, 190, 140, 0.2)
+    );
+    color: #eceff4;
+    text-shadow: 0 0 25px rgba(136, 192, 208, 1);
+    box-shadow: 0 0 40px rgba(136, 192, 208, 0.5);
+}
+
+#bluetooth:hover {
+    background: linear-gradient(135deg, 
+        rgba(143, 188, 187, 0.3),
+        rgba(180, 142, 173, 0.2)
+    );
+    color: #eceff4;
+    text-shadow: 0 0 25px rgba(143, 188, 187, 1);
+    box-shadow: 0 0 40px rgba(143, 188, 187, 0.5);
+}
+
+#pulseaudio:hover {
+    background: linear-gradient(135deg, 
+        rgba(163, 190, 140, 0.3),
+        rgba(180, 142, 173, 0.2)
+    );
+    color: #eceff4;
+    text-shadow: 0 0 25px rgba(163, 190, 140, 1);
+    box-shadow: 0 0 40px rgba(163, 190, 140, 0.5);
+}
+
+#custom-updates:hover {
+    background: linear-gradient(135deg, 
+        rgba(208, 135, 112, 0.3),
+        rgba(235, 203, 139, 0.2)
+    );
+    color: #eceff4;
+    text-shadow: 0 0 25px rgba(208, 135, 112, 1);
+    box-shadow: 0 0 40px rgba(208, 135, 112, 0.5);
+}
+
+/* Special States */
+#network.disconnected {
+    color: #bf616a;
+    text-shadow: 0 0 10px rgba(191, 97, 106, 0.6);
+}
+
+#bluetooth.disabled,
+#bluetooth.off {
+    color: #4c566a;
+    opacity: 0.7;
+    text-shadow: none;
+}
+
+#pulseaudio.muted {
+    color: #bf616a;
+    text-shadow: 0 0 10px rgba(191, 97, 106, 0.6);
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* 💎 TOOLTIP - RUGGED FROST GLASS                                   */
+/* ═══════════════════════════════════════════════════════════════════ */
+tooltip {
+    background: linear-gradient(135deg, 
+        rgba(46, 52, 64, 0.98),
+        rgba(59, 66, 82, 0.95)
+    );
+    color: #eceff4;
+    border: 2px solid rgba(136, 192, 208, 0.4);
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}

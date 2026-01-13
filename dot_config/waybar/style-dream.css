@@ -1,0 +1,536 @@
+/* ═══════════════════════════════════════════════════════════════════
+   🌨️  WILD NORDIC WAYBAR - RUGGED AURORA EFFECTS
+   Arctic storm meets aurora borealis in the digital tundra
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* 🏔️ ARCTIC STORM FOUNDATION */
+* {
+    border: none;
+    border-radius: 0px;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-weight: bold;
+    font-size: 12px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: linear-gradient(135deg, 
+        rgba(46, 52, 64, 0.98) 0%,
+        rgba(59, 66, 82, 0.95) 25%,
+        rgba(67, 76, 94, 0.92) 50%,
+        rgba(76, 86, 106, 0.95) 75%,
+        rgba(59, 66, 82, 0.98) 100%);
+    color: #D8DEE9;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+    box-shadow: 
+        0 2px 10px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(216, 222, 233, 0.1),
+        inset 0 -1px 0 rgba(46, 52, 64, 0.8);
+    border: 2px solid rgba(136, 192, 208, 0.4);
+    border-radius: 20px;
+    margin: 12px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+window#waybar:hover {
+    border-color: rgba(136, 192, 208, 0.8);
+    box-shadow: 
+        0 16px 50px rgba(0, 0, 0, 0.6),
+        0 0 60px rgba(136, 192, 208, 0.3);
+}
+
+/* 🌀 WILD AURORA ORBS - Pulsating Module Base */
+.modules-left > widget:first-child > #workspaces,
+.modules-center > widget > *,
+.modules-right > widget > * {
+    margin: 4px 3px;
+    padding: 6px 12px;
+    background: linear-gradient(135deg, 
+        rgba(129, 161, 193, 0.15) 0%,
+        rgba(136, 192, 208, 0.12) 25%,
+        rgba(143, 188, 187, 0.18) 50%,
+        rgba(163, 190, 140, 0.15) 75%,
+        rgba(191, 97, 106, 0.12) 100%);
+    border: 1px solid rgba(129, 161, 193, 0.25);
+    border-radius: 8px;
+    color: #ECEFF4;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+    box-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(236, 239, 244, 0.1),
+        0 0 10px rgba(129, 161, 193, 0.1);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* 🔥 FROST BURN HOVER - Intense Aurora Activation */
+.modules-left > widget > *:hover,
+.modules-center > widget > *:hover,
+.modules-right > widget > *:hover {
+    background: linear-gradient(135deg, 
+        rgba(129, 161, 193, 0.35) 0%,
+        rgba(136, 192, 208, 0.32) 20%,
+        rgba(143, 188, 187, 0.38) 40%,
+        rgba(163, 190, 140, 0.35) 60%,
+        rgba(191, 97, 106, 0.32) 80%,
+        rgba(180, 142, 173, 0.35) 100%);
+    border: 1px solid rgba(129, 161, 193, 0.6);
+    color: #FFFFFF;
+    text-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.8),
+        0 0 8px rgba(129, 161, 193, 0.4);
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.6),
+        inset 0 2px 4px rgba(236, 239, 244, 0.2),
+        0 0 20px rgba(129, 161, 193, 0.3),
+        0 0 30px rgba(136, 192, 208, 0.2);
+}
+
+/* 🌌 WORKSPACES - WILD AURORA ORBS */
+#workspaces {
+    background: linear-gradient(135deg, 
+        rgba(59, 66, 82, 0.8),
+        rgba(67, 76, 94, 0.7)
+    );
+    border-radius: 24px;
+    padding: 6px 12px;
+    margin: 0 12px;
+    border: 2px solid rgba(136, 192, 208, 0.3);
+}
+
+#workspaces button {
+    all: unset;
+    min-width: 28px;
+    min-height: 28px;
+    border-radius: 50%;
+    color: transparent;
+    background: linear-gradient(135deg, 
+        rgba(76, 86, 106, 0.8),
+        rgba(88, 91, 112, 0.6)
+    );
+    margin: 2px 4px;
+    transition: all 0.6s ease;
+    border: 1px solid rgba(136, 192, 208, 0.2);
+}
+
+#workspaces button:hover {
+    background: linear-gradient(135deg, 
+        rgba(143, 188, 187, 0.9),
+        rgba(180, 142, 173, 0.7)
+    );
+    border-color: rgba(143, 188, 187, 0.6);
+    box-shadow: 0 6px 20px rgba(143, 188, 187, 0.4);
+}
+
+#workspaces button.active {
+    background: linear-gradient(135deg, 
+        rgba(180, 142, 173, 1),
+        rgba(163, 190, 140, 0.9),
+        rgba(136, 192, 208, 0.8)
+    );
+    border-color: rgba(180, 142, 173, 0.8);
+    box-shadow: 0 8px 25px rgba(180, 142, 173, 0.6);
+}
+
+#workspaces button.urgent {
+    background: linear-gradient(135deg, 
+        rgba(191, 97, 106, 1),
+        rgba(208, 135, 112, 0.8)
+    );
+    border-color: rgba(191, 97, 106, 0.8);
+}
+
+/* 🎵 WILD HARMONY - Music Module */
+#custom-music {
+    background: linear-gradient(135deg, 
+        rgba(67, 76, 94, 0.8),
+        rgba(143, 188, 187, 0.3)
+    );
+    color: #8FBCBB;
+    padding: 8px 16px;
+    margin: 0 8px;
+    border-radius: 16px;
+    border: 2px solid rgba(143, 188, 187, 0.4);
+    font-weight: 600;
+    font-style: italic;
+    text-shadow: 0 0 10px rgba(143, 188, 187, 0.5);
+    transition: all 0.6s ease;
+}
+
+#custom-music:hover {
+    background: linear-gradient(135deg, 
+        rgba(143, 188, 187, 0.4),
+        rgba(180, 142, 173, 0.3)
+    );
+    border-color: rgba(143, 188, 187, 0.8);
+    color: #ECEFF4;
+    text-shadow: 0 0 20px rgba(143, 188, 187, 1);
+    box-shadow: 0 8px 30px rgba(143, 188, 187, 0.4);
+}
+
+/* 🪟 FROST WINDOW */
+#window {
+    background: transparent;
+    color: rgba(216, 222, 233, 0.9);
+    padding: 8px 16px;
+    margin: 0 8px;
+    font-weight: 500;
+    font-size: 12px;
+    opacity: 0.8;
+    transition: all 0.4s ease;
+}
+
+#window:hover {
+    color: #ECEFF4;
+    opacity: 1;
+    text-shadow: 0 0 15px rgba(216, 222, 233, 0.8);
+}
+
+/* 🕐 CENTER - WILD AURORA TIME/WEATHER CORE */
+#clock,
+#custom-weather {
+    background: linear-gradient(135deg, 
+        rgba(67, 76, 94, 0.8),
+        rgba(76, 86, 106, 0.7)
+    );
+    border: 2px solid rgba(136, 192, 208, 0.6);
+    border-radius: 0;
+    padding: 10px 18px;
+    margin: 0;
+    transition: all 0.6s ease;
+    font-weight: 700;
+}
+
+#clock {
+    color: #88C0D0;
+    font-size: 15px;
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    border-right: none;
+    text-shadow: 0 0 10px rgba(136, 192, 208, 0.5);
+}
+
+#custom-weather {
+    color: #8FBCBB;
+    font-size: 14px;
+    font-style: italic;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-left: 1px solid rgba(136, 192, 208, 0.3);
+    text-shadow: 0 0 10px rgba(143, 188, 187, 0.5);
+}
+
+#clock:hover {
+    background: linear-gradient(135deg, 
+        rgba(136, 192, 208, 0.3),
+        rgba(163, 190, 140, 0.2)
+    );
+    border-color: rgba(136, 192, 208, 1);
+    color: #ECEFF4;
+    text-shadow: 0 0 20px rgba(136, 192, 208, 0.8);
+    box-shadow: 0 0 30px rgba(136, 192, 208, 0.4);
+}
+
+#custom-weather:hover {
+    background: linear-gradient(135deg, 
+        rgba(143, 188, 187, 0.3),
+        rgba(180, 142, 173, 0.2)
+    );
+    border-color: rgba(143, 188, 187, 1);
+    color: #ECEFF4;
+    text-shadow: 0 0 20px rgba(143, 188, 187, 0.8);
+    box-shadow: 0 0 30px rgba(143, 188, 187, 0.4);
+}
+
+/* 🖥️ SYSTEM MONITORING - Advanced Aurora Effects */
+#cpu, #memory, #temperature, #custom-gpu-temp {
+    background: linear-gradient(135deg, 
+        rgba(94, 129, 172, 0.3) 0%,
+        rgba(129, 161, 193, 0.25) 100%);
+    border: 1px solid rgba(129, 161, 193, 0.5);
+    color: #5E81AC;
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+#cpu:hover, #memory:hover, #temperature:hover, #custom-gpu-temp:hover {
+    background: linear-gradient(135deg, 
+        rgba(94, 129, 172, 0.5) 0%,
+        rgba(129, 161, 193, 0.4) 100%);
+    color: #81A1C1;
+    box-shadow: 
+        0 3px 8px rgba(0, 0, 0, 0.3),
+        0 0 12px rgba(129, 161, 193, 0.3);
+}
+
+#disk {
+    background: linear-gradient(135deg, 
+        rgba(143, 188, 187, 0.3) 0%,
+        rgba(136, 192, 208, 0.25) 100%);
+    border: 1px solid rgba(143, 188, 187, 0.5);
+    color: #8FBCBB;
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+#disk:hover {
+    background: linear-gradient(135deg, 
+        rgba(143, 188, 187, 0.5) 0%,
+        rgba(136, 192, 208, 0.4) 100%);
+    color: #88C0D0;
+    box-shadow: 
+        0 3px 8px rgba(0, 0, 0, 0.3),
+        0 0 12px rgba(143, 188, 187, 0.3);
+}
+
+/* 🔋 POWER ESSENCE - Battery Modules */
+#custom-mouse-battery, #custom-keyboard-battery {
+    background: linear-gradient(135deg, 
+        rgba(235, 203, 139, 0.2) 0%,
+        rgba(163, 190, 140, 0.15) 100%);
+    border: 1px solid rgba(235, 203, 139, 0.4);
+    color: #EBCB8B;
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+#custom-mouse-battery:hover, #custom-keyboard-battery:hover {
+    background: linear-gradient(135deg, 
+        rgba(235, 203, 139, 0.4) 0%,
+        rgba(163, 190, 140, 0.3) 100%);
+    box-shadow: 
+        0 3px 8px rgba(0, 0, 0, 0.3),
+        0 0 12px rgba(235, 203, 139, 0.3);
+}
+
+/* 🌐 CONNECTION NEXUS */
+#network, #bluetooth {
+    background: linear-gradient(135deg, 
+        rgba(129, 161, 193, 0.18) 0%,
+        rgba(136, 192, 208, 0.15) 100%);
+    border: 1px solid rgba(129, 161, 193, 0.4);
+    color: #81A1C1;
+    text-shadow: 0 0 8px rgba(136, 192, 208, 0.4);
+}
+
+#network:hover {
+    background: linear-gradient(135deg, 
+        rgba(136, 192, 208, 0.3),
+        rgba(163, 190, 140, 0.2)
+    );
+    color: #ECEFF4;
+    text-shadow: 0 0 25px rgba(136, 192, 208, 1);
+    box-shadow: 0 0 40px rgba(136, 192, 208, 0.5);
+}
+
+#bluetooth:hover {
+    background: linear-gradient(135deg, 
+        rgba(143, 188, 187, 0.3),
+        rgba(180, 142, 173, 0.2)
+    );
+    color: #ECEFF4;
+    text-shadow: 0 0 25px rgba(143, 188, 187, 1);
+    box-shadow: 0 0 40px rgba(143, 188, 187, 0.5);
+}
+
+#network.disconnected {
+    color: #BF616A;
+    background: linear-gradient(135deg,
+        rgba(191, 97, 106, 0.3) 0%,
+        rgba(208, 135, 112, 0.2) 100%);
+    text-shadow: 0 0 10px rgba(191, 97, 106, 0.6);
+}
+
+#bluetooth.disabled,
+#bluetooth.off {
+    color: #4C566A;
+    opacity: 0.7;
+    text-shadow: none;
+}
+
+/* 🔊 SONIC RESONANCE */
+#pulseaudio {
+    background: linear-gradient(135deg, 
+        rgba(143, 188, 187, 0.2) 0%,
+        rgba(163, 190, 140, 0.15) 100%);
+    border: 1px solid rgba(143, 188, 187, 0.4);
+    color: #8FBCBB;
+    text-shadow: 0 0 8px rgba(163, 190, 140, 0.4);
+}
+
+#pulseaudio:hover {
+    background: linear-gradient(135deg, 
+        rgba(163, 190, 140, 0.3),
+        rgba(180, 142, 173, 0.2)
+    );
+    color: #ECEFF4;
+    text-shadow: 0 0 25px rgba(163, 190, 140, 1);
+    box-shadow: 0 0 40px rgba(163, 190, 140, 0.5);
+}
+
+#pulseaudio.muted {
+    color: #BF616A;
+    opacity: 0.6;
+    background: rgba(76, 86, 106, 0.3);
+    text-shadow: 0 0 10px rgba(191, 97, 106, 0.6);
+}
+
+/* 📦 ARTIFACT CHAMBER - Updates */
+#custom-updates {
+    background: linear-gradient(135deg, 
+        rgba(191, 97, 106, 0.2) 0%,
+        rgba(208, 135, 112, 0.15) 100%);
+    border: 1px solid rgba(191, 97, 106, 0.4);
+    color: #BF616A;
+    text-shadow: 0 0 8px rgba(208, 135, 112, 0.4);
+}
+
+#custom-updates:hover {
+    background: linear-gradient(135deg, 
+        rgba(208, 135, 112, 0.3),
+        rgba(235, 203, 139, 0.2)
+    );
+    color: #ECEFF4;
+    text-shadow: 0 0 25px rgba(208, 135, 112, 1);
+    box-shadow: 0 0 40px rgba(208, 135, 112, 0.5);
+}
+
+#custom-updates.has-updates {
+    background: linear-gradient(135deg,
+        rgba(208, 135, 112, 0.4) 0%,
+        rgba(235, 203, 139, 0.3) 100%);
+    color: #EBCB8B;
+}
+
+/* ⚡ POWER NEXUS */
+#custom-power {
+    background: linear-gradient(135deg, 
+        rgba(191, 97, 106, 0.4) 0%,
+        rgba(208, 135, 112, 0.3) 100%);
+    border: 1px solid rgba(191, 97, 106, 0.6);
+    color: #BF616A;
+    font-weight: 900;
+    border-radius: 8px;
+    padding: 0 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+#custom-power:hover {
+    background: linear-gradient(135deg, 
+        rgba(191, 97, 106, 0.7) 0%,
+        rgba(208, 135, 112, 0.5) 100%);
+    color: #ECEFF4;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(191, 97, 106, 0.5);
+}
+
+/* 📱 SYSTEM TRAY */
+#tray {
+    background: linear-gradient(135deg, 
+        rgba(67, 76, 94, 0.3) 0%,
+        rgba(76, 86, 106, 0.25) 100%);
+    border: 1px solid rgba(76, 86, 106, 0.5);
+    padding: 4px 8px;
+    border-radius: 8px;
+    color: #D8DEE9;
+    text-shadow: 0 0 8px rgba(216, 222, 233, 0.3);
+}
+
+#tray:hover {
+    background: linear-gradient(135deg, 
+        rgba(216, 222, 233, 0.2),
+        rgba(229, 233, 240, 0.15)
+    );
+    color: #ECEFF4;
+    text-shadow: 0 0 20px rgba(216, 222, 233, 0.8);
+    box-shadow: 0 0 30px rgba(216, 222, 233, 0.3);
+}
+
+#tray > .passive {
+    opacity: 0.7;
+}
+
+#tray > .active {
+    opacity: 1;
+}
+
+#tray > .needs-attention {
+    color: #EBCB8B;
+    background: rgba(235, 203, 139, 0.2);
+}
+
+/* ⚙️ SEPARATORS - Runic Dividers */
+#custom-separator, #custom-separator-dot {
+    background: none;
+    border: none;
+    color: rgba(129, 161, 193, 0.6);
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    margin: 0 4px;
+    padding: 0 6px;
+}
+
+/* 🏔️ CRITICAL STATES - Enhanced Aurora Warnings */
+#cpu.critical, #memory.critical, #temperature.critical, #custom-gpu-temp.critical {
+    background: linear-gradient(135deg, 
+        rgba(191, 97, 106, 0.6) 0%,
+        rgba(208, 135, 112, 0.5) 100%) !important;
+    color: #ECEFF4 !important;
+    border-color: rgba(191, 97, 106, 0.8) !important;
+    box-shadow: 
+        0 0 15px rgba(191, 97, 106, 0.6),
+        inset 0 1px 0 rgba(236, 239, 244, 0.2);
+    font-weight: 700;
+}
+
+#custom-mouse-battery.critical, #custom-mouse-battery.low, #custom-keyboard-battery.critical, #custom-keyboard-battery.low {
+    background: linear-gradient(135deg, 
+        rgba(191, 97, 106, 0.6) 0%,
+        rgba(208, 135, 112, 0.5) 100%) !important;
+    color: #ECEFF4 !important;
+    border-color: rgba(191, 97, 106, 0.8) !important;
+}
+
+/* 🏔️ SPECIAL MODULE STATES */
+#custom-arch {
+    background: linear-gradient(135deg,
+        rgba(129, 161, 193, 0.4) 0%,
+        rgba(136, 192, 208, 0.3) 100%);
+    color: #88C0D0;
+    font-size: 16px;
+    padding: 0 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(136, 192, 208, 0.5);
+    margin-right: 4px;
+}
+
+#custom-arch:hover {
+    background: linear-gradient(135deg,
+        rgba(136, 192, 208, 0.6) 0%,
+        rgba(143, 188, 187, 0.5) 100%);
+    color: #ECEFF4;
+    box-shadow: 0 0 20px rgba(136, 192, 208, 0.5);
+}
+
+/* 🌨️ TOOLTIP STYLING */
+tooltip {
+    background: linear-gradient(135deg, 
+        rgba(46, 52, 64, 0.98) 0%,
+        rgba(59, 66, 82, 0.95) 100%);
+    border: 2px solid rgba(129, 161, 193, 0.4);
+    border-radius: 12px;
+    color: #D8DEE9;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    padding: 10px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(129, 161, 193, 0.2);
+}
+
+tooltip label {
+    color: #ECEFF4;
+}

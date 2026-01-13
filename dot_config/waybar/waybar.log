@@ -1,0 +1,8 @@
+[2025-09-25 07:35:28.525] [info] Using configuration file config
+[2025-09-25 07:35:28.526] [info] Unable to receive desktop appearance: GDBus.Error:org.freedesktop.DBus.Error.UnknownMethod: No such interface “org.freedesktop.portal.Settings” on object at path /org/freedesktop/portal/desktop
+[2025-09-25 07:35:28.526] [info] Using CSS file style-test.css
+[2025-09-25 07:35:28.528] [info] Hyprland IPC starting
+[2025-09-25 07:35:28.529] [info] Loading persistent workspaces from Hyprland workspace rules
+[2025-09-25 07:35:28.529] [warning] 'swap-icon-label' must be a bool.
+[2025-09-25 07:35:28.656] [info] Bar configured (width: 3072, height: 48) for output: DP-1
+sh: line 1: rofi: command not found

@@ -1,0 +1,352 @@
+/* REFINED NORD PROFESSIONAL THEME - 10/10 Edition */
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font", "SF Pro Display", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 12px; /* Reduced from 13px for tighter appearance */
+  min-height: 0;
+  color: #E5E9F0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+window#waybar {
+  background: linear-gradient(135deg,
+    rgba(46, 52, 64, 0.85) 0%,
+    rgba(59, 66, 82, 0.75) 50%,
+    rgba(67, 76, 94, 0.85) 100%);
+  border: 1px solid rgba(136, 192, 208, 0.25);
+  border-radius: 14px; /* Slightly reduced from 16px */
+  margin: 6px; /* Reduced from 8px */
+  padding: 0;
+  box-shadow:
+    0 6px 24px rgba(0, 0, 0, 0.4), /* Reduced shadow intensity */
+    0 0 0 1px rgba(216, 222, 233, 0.05),
+    inset 0 1px 0 rgba(236, 239, 244, 0.1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+window#waybar:hover {
+  background: linear-gradient(135deg,
+    rgba(46, 52, 64, 0.9) 0%,
+    rgba(59, 66, 82, 0.8) 50%,
+    rgba(67, 76, 94, 0.9) 100%);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(136, 192, 208, 0.15),
+    inset 0 1px 0 rgba(236, 239, 244, 0.15);
+}
+
+/* UNIVERSAL MODULE STYLING - SEAMLESS DESIGN */
+.modules-left > widget > *,
+.modules-center > widget > *,
+.modules-right > widget > * {
+  margin: 0;
+  padding: 8px 14px;
+  background: linear-gradient(135deg,
+    rgba(76, 86, 106, 0.6) 0%,
+    rgba(67, 76, 94, 0.4) 100%);
+  border: none;
+  border-radius: 0;
+  color: #D8DEE9;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: inset 0 1px 0 rgba(236, 239, 244, 0.08);
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.modules-left > widget > *:hover,
+.modules-center > widget > *:hover,
+.modules-right > widget > *:hover {
+  background: linear-gradient(135deg,
+    rgba(136, 192, 208, 0.3) 0%,
+    rgba(129, 161, 193, 0.25) 50%,
+    rgba(143, 188, 187, 0.3) 100%);
+  border-color: rgba(136, 192, 208, 0.6);
+  color: #ECEFF4;
+  box-shadow: inset 0 1px 0 rgba(236, 239, 244, 0.15);
+}
+
+/* APP TRAY - Seamless connection with workspaces */
+#custom-app-tray {
+  background: linear-gradient(135deg,
+    rgba(76, 86, 106, 0.7) 0%,
+    rgba(67, 76, 94, 0.5) 100%);
+  border: 1px solid rgba(129, 161, 193, 0.3);
+  border-left: none; /* No left border to connect seamlessly with workspaces */
+  border-radius: 0 12px 12px 0; /* Rounded only on the right side */
+  padding: 8px 14px;
+  margin: 0; /* No margins for seamless connection */
+  color: #D8DEE9;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: inset 0 1px 0 rgba(236, 239, 244, 0.08);
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+#custom-app-tray:hover {
+  background: linear-gradient(135deg,
+    rgba(136, 192, 208, 0.3) 0%,
+    rgba(129, 161, 193, 0.25) 50%,
+    rgba(143, 188, 187, 0.3) 100%);
+  border-color: rgba(136, 192, 208, 0.6);
+  color: #ECEFF4;
+  box-shadow: inset 0 1px 0 rgba(236, 239, 244, 0.15);
+}
+
+/* WORKSPACES - Enhanced Indicators */
+#workspaces {
+  background: linear-gradient(135deg,
+    rgba(76, 86, 106, 0.7) 0%,
+    rgba(67, 76, 94, 0.5) 100%);
+  border: 1px solid rgba(129, 161, 193, 0.3);
+  border-radius: 12px 0 0 12px; /* Rounded only on the left side */
+  padding: 3px 5px;
+  margin: 0; /* Remove all margins for seamless connection */
+}
+
+#workspaces button {
+  padding: 5px 8px; /* Reduced from 6px 10px */
+  margin: 0 1px;
+  color: #4C566A; /* Darker for inactive - like dots */
+  background: rgba(59, 66, 82, 0.4); /* More transparent when inactive */
+  border: 1px solid rgba(76, 86, 106, 0.2);
+  border-radius: 8px;
+  font-weight: 500; /* Reduced from 700 */
+  font-size: 12px; /* Reduced from 14px */
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+#workspaces button:hover {
+  background: linear-gradient(135deg,
+    rgba(129, 161, 193, 0.3) 0%,
+    rgba(136, 192, 208, 0.2) 100%);
+  color: #81A1C1;
+  border-color: rgba(129, 161, 193, 0.4);
+}
+
+#workspaces button.active {
+  background: linear-gradient(135deg,
+    rgba(136, 192, 208, 0.9) 0%,
+    rgba(143, 188, 187, 0.8) 100%);
+  color: #2E3440;
+  border-color: rgba(136, 192, 208, 1.0);
+  font-weight: 700; /* Bold when active */
+  box-shadow: inset 0 1px 2px rgba(236, 239, 244, 0.3);
+}
+
+/* SYSTEM MONITORS - With Temperature Color Coding */
+#cpu, #memory {
+  background: linear-gradient(135deg,
+    rgba(94, 129, 172, 0.5) 0%,
+    rgba(76, 86, 106, 0.3) 100%);
+  border: 1px solid rgba(94, 129, 172, 0.4);
+  color: #5E81AC;
+  font-weight: 600;
+}
+
+#cpu:hover, #memory:hover {
+  background: linear-gradient(135deg,
+    rgba(94, 129, 172, 0.7) 0%,
+    rgba(129, 161, 193, 0.5) 100%);
+  color: #88C0D0;
+  border-color: rgba(94, 129, 172, 0.8);
+}
+
+/* TEMPERATURE - Dynamic Color Coding */
+#temperature {
+  background: linear-gradient(135deg,
+    rgba(163, 190, 140, 0.5) 0%, /* Default green base */
+    rgba(76, 86, 106, 0.3) 100%);
+  border: 1px solid rgba(163, 190, 140, 0.4);
+  color: #A3BE8C; /* Green for cool temps */
+  font-weight: 600;
+}
+
+#temperature:hover {
+  background: linear-gradient(135deg,
+    rgba(163, 190, 140, 0.7) 0%,
+    rgba(129, 161, 193, 0.5) 100%);
+  /* box-shadow removed */
+}
+
+/* Temperature Warning States */
+#temperature.warning {
+  background: linear-gradient(135deg,
+    rgba(235, 203, 139, 0.6) 0%, /* Yellow for warm */
+    rgba(76, 86, 106, 0.3) 100%);
+  border: 1px solid rgba(235, 203, 139, 0.5);
+  color: #EBCB8B;
+}
+
+#temperature.critical {
+  background: linear-gradient(135deg,
+    rgba(191, 97, 106, 0.7) 0%, /* Red for hot */
+    rgba(76, 86, 106, 0.3) 100%);
+  border: 1px solid rgba(191, 97, 106, 0.6);
+  color: #BF616A;
+  animation: pulse-warning 2s infinite;
+}
+
+
+/* CLOCK - Enhanced with Day Display */
+#clock {
+  background: linear-gradient(135deg,
+    rgba(136, 192, 208, 0.4) 0%,
+    rgba(143, 188, 187, 0.3) 100%);
+  border: 1px solid rgba(136, 192, 208, 0.5);
+  color: #88C0D0;
+  font-weight: 700;
+  font-size: 13px; /* Slightly larger for importance */
+  letter-spacing: 0.3px; /* Reduced from 0.5px */
+  padding: 6px 12px; /* Custom padding for clock */
+}
+
+#clock:hover {
+  background: linear-gradient(135deg,
+    rgba(136, 192, 208, 0.6) 0%,
+    rgba(143, 188, 187, 0.5) 100%);
+  color: #ECEFF4;
+  /* box-shadow removed */
+}
+
+/* WEATHER - Matches refined clock styling */
+#custom-weather {
+  background: linear-gradient(135deg,
+    rgba(136, 192, 208, 0.4) 0%,
+    rgba(143, 188, 187, 0.3) 100%);
+  border: 1px solid rgba(136, 192, 208, 0.5);
+  color: #88C0D0;
+  font-weight: 600; /* Slightly less than clock */
+  font-size: 12px;
+  letter-spacing: 0.2px;
+}
+
+#custom-weather:hover {
+  background: linear-gradient(135deg,
+    rgba(136, 192, 208, 0.6) 0%,
+    rgba(143, 188, 187, 0.5) 100%);
+  color: #ECEFF4;
+  /* box-shadow removed */
+}
+
+/* NETWORK & AUDIO - Consistent Communication Modules */
+#network, #pulseaudio, #bluetooth {
+  background: linear-gradient(135deg,
+    rgba(143, 188, 187, 0.4) 0%,
+    rgba(129, 161, 193, 0.3) 100%);
+  border: 1px solid rgba(143, 188, 187, 0.4);
+  color: #8FBCBB;
+  font-weight: 600;
+}
+
+#network:hover, #pulseaudio:hover, #bluetooth:hover {
+  background: linear-gradient(135deg,
+    rgba(143, 188, 187, 0.6) 0%,
+    rgba(129, 161, 193, 0.5) 100%);
+  color: #ECEFF4;
+  border-color: rgba(143, 188, 187, 0.7);
+  /* box-shadow removed */
+}
+
+/* STORAGE & SYSTEM MONITOR - Unified Styling */
+#disk, #custom-system-monitor {
+  background: linear-gradient(135deg,
+    rgba(235, 203, 139, 0.3) 0%,
+    rgba(208, 135, 112, 0.2) 100%);
+  border: 1px solid rgba(235, 203, 139, 0.4);
+  color: #EBCB8B;
+  font-weight: 600;
+}
+
+#disk:hover, #custom-system-monitor:hover {
+  background: linear-gradient(135deg,
+    rgba(235, 203, 139, 0.5) 0%,
+    rgba(208, 135, 112, 0.4) 100%);
+  color: #ECEFF4;
+  /* box-shadow removed */
+}
+
+/* TRAY - Refined Minimal */
+#tray {
+  background: rgba(67, 76, 94, 0.5); /* More transparent */
+  border: 1px solid rgba(76, 86, 106, 0.3); /* Lighter border */
+  padding: 4px 8px; /* Custom tray padding */
+}
+
+#tray:hover {
+  background: rgba(76, 86, 106, 0.7);
+  border-color: rgba(129, 161, 193, 0.4);
+  /* box-shadow removed */
+}
+
+/* SYSTEM-STATS BACKGROUND FIX - SEAMLESS */
+#custom-system-stats {
+  background: linear-gradient(135deg, rgba(76, 86, 106, 0.6) 0%, rgba(67, 76, 94, 0.4) 100%);
+  padding: 8px 14px;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+}
+
+/* SEAMLESS MODULES - No Background, White Icons/Text */
+#bluetooth,
+#network,
+#pulseaudio,
+#custom-weather,
+#clock,
+#custom-updates {
+  background: transparent;
+  color: #ECEFF4;
+  padding: 8px 14px;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  font-size: 16px;
+}
+
+#bluetooth:hover,
+#network:hover,
+#pulseaudio:hover,
+#custom-weather:hover,
+#clock:hover,
+#custom-updates:hover {
+  background: rgba(236, 239, 244, 0.1);
+  color: #FFFFFF;
+}
+
+/* LINUX MINT STYLE SHIELD STATES */
+#custom-updates.updated {
+  color: #A3BE8C; /* Nord Green - System Protected */
+}
+
+#custom-updates.pending {
+  color: #EBCB8B; /* Nord Yellow - Updates Available */
+  animation: pulse-pending 2s ease-in-out infinite;
+}
+
+#custom-updates.urgent {
+  color: #BF616A; /* Nord Red - Critical Updates */
+  animation: pulse-urgent 1s ease-in-out infinite;
+}
+
+#custom-updates.checking {
+  color: #81A1C1; /* Nord Blue - Checking */
+  animation: pulse-checking 1.5s ease-in-out infinite;
+}
+
+/* Shield animations */
+@keyframes pulse-pending {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes pulse-urgent {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes pulse-checking {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }

@@ -1,0 +1,336 @@
+/* WILD NORDIC WAYBAR – Forensics-Clean Build (no hidden chars, no duplicate blocks) */
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-weight: 600;
+  font-size: 12px;
+  min-height: 0;
+  color: #D8DEE9;
+}
+
+window#waybar {
+  background: linear-gradient(135deg,
+    rgba(46,52,64,0.97) 0%,
+    rgba(59,66,82,0.94) 40%,
+    rgba(67,76,94,0.92) 70%,
+    rgba(76,86,106,0.95) 100%);
+  border: 2px solid rgba(136,192,208,0.35);
+  border-radius: 18px;
+  margin: 10px;
+  padding: 0;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(236,239,244,0.05);
+  transition: background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+window#waybar.hidden { opacity: 0.25; }
+
+/* Universal module capsule baseline */
+.modules-left > widget:first-child > #workspaces,
+.modules-left > widget > *,
+.modules-center > widget > *,
+.modules-right > widget > * {
+  margin: 4px 4px;
+  padding: 6px 12px;
+  background: linear-gradient(135deg,
+    rgba(129,161,193,0.16) 0%,
+    rgba(136,192,208,0.14) 40%,
+    rgba(143,188,187,0.18) 80%);
+  border: 1px solid rgba(129,161,193,0.28);
+  border-radius: 9px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.65);
+  box-shadow:
+    0 2px 5px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(236,239,244,0.10);
+  transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.modules-left > widget > *:hover,
+.modules-center > widget > *:hover,
+.modules-right > widget > *:hover {
+  background: linear-gradient(135deg,
+    rgba(129,161,193,0.36) 0%,
+    rgba(136,192,208,0.32) 30%,
+    rgba(143,188,187,0.38) 65%,
+    rgba(163,190,140,0.34) 100%);
+  border-color: rgba(129,161,193,0.55);
+  color: #FFFFFF;
+  text-shadow:
+    0 1px 3px rgba(0,0,0,0.85),
+    0 0 6px rgba(129,161,193,0.45);
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.55),
+    0 0 16px rgba(129,161,193,0.30);
+}
+
+/* Workspaces */
+#workspaces {
+  background: linear-gradient(135deg,
+    rgba(76,86,106,0.48) 0%,
+    rgba(67,76,94,0.44) 100%);
+  border: 1px solid rgba(129,161,193,0.35);
+  border-radius: 14px;
+  padding: 3px 4px;
+  margin-right: 8px;
+}
+
+#workspaces button {
+  padding: 5px 9px;
+  margin: 0 2px;
+  color: #81A1C1;
+  background: rgba(59,66,82,0.60);
+  border: 1px solid rgba(76,86,106,0.55);
+  border-radius: 7px;
+  font-weight: 700;
+  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.65);
+}
+
+#workspaces button:hover {
+  background: linear-gradient(135deg,
+    rgba(129,161,193,0.42) 0%,
+    rgba(136,192,208,0.30) 100%);
+  color: #ECEFF4;
+  border-color: rgba(129,161,193,0.70);
+  box-shadow:
+    0 0 8px rgba(129,161,193,0.45),
+    inset 0 1px 2px rgba(236,239,244,0.18);
+}
+
+#workspaces button.active {
+  background: linear-gradient(135deg,
+    rgba(136,192,208,0.65) 0%,
+    rgba(129,161,193,0.55) 50%,
+    rgba(143,188,187,0.62) 100%);
+  color: #2E3440;
+  border: 1px solid rgba(136,192,208,0.82);
+  box-shadow:
+    0 0 14px rgba(136,192,208,0.55),
+    inset 0 2px 4px rgba(236,239,244,0.28);
+  font-weight: 900;
+}
+
+#workspaces button.urgent {
+  background: linear-gradient(135deg,
+    rgba(191,97,106,0.95) 0%,
+    rgba(208,135,112,0.80) 100%);
+  color: #ECEFF4;
+  border-color: rgba(191,97,106,0.85);
+  box-shadow: 0 0 10px rgba(191,97,106,0.6);
+}
+
+/* Music */
+#custom-music {
+  background: linear-gradient(135deg,
+    rgba(163,190,140,0.22) 0%,
+    rgba(143,188,187,0.17) 100%);
+  border: 1px solid rgba(163,190,140,0.45);
+  color: #A3BE8C;
+  font-style: italic;
+}
+
+#custom-music:hover {
+  background: linear-gradient(135deg,
+    rgba(163,190,140,0.38) 0%,
+    rgba(143,188,187,0.30) 100%);
+  color: #ECEFF4;
+  border-color: rgba(163,190,140,0.70);
+  text-shadow: 0 0 10px rgba(163,190,140,0.55);
+}
+
+/* Active window */
+#window {
+  background: linear-gradient(135deg,
+    rgba(136,192,208,0.16) 0%,
+    rgba(129,161,193,0.12) 100%);
+  border: 1px solid rgba(136,192,208,0.34);
+  color: #88C0D0;
+  font-weight: 500;
+}
+
+/* Clock / Weather */
+#clock {
+  background: linear-gradient(135deg,
+    rgba(180,142,173,0.24) 0%,
+    rgba(191,97,106,0.16) 100%);
+  border: 1px solid rgba(180,142,173,0.45);
+  color: #B48EAD;
+  font-weight: 800;
+  text-shadow:
+    0 1px 2px rgba(0,0,0,0.7),
+    0 0 7px rgba(180,142,173,0.30);
+}
+
+#custom-weather {
+  background: linear-gradient(135deg,
+    rgba(136,192,208,0.22) 0%,
+    rgba(143,188,187,0.18) 50%,
+    rgba(129,161,193,0.16) 100%);
+  border: 1px solid rgba(136,192,208,0.42);
+  color: #88C0D0;
+  font-style: italic;
+}
+
+/* System monitors */
+#cpu, #memory, #temperature, #custom-gpu-temp {
+  background: linear-gradient(135deg,
+    rgba(94,129,172,0.32) 0%,
+    rgba(129,161,193,0.26) 100%);
+  border: 1px solid rgba(129,161,193,0.50);
+  color: #5E81AC;
+}
+
+#cpu:hover, #memory:hover, #temperature:hover, #custom-gpu-temp:hover {
+  background: linear-gradient(135deg,
+    rgba(94,129,172,0.50) 0%,
+    rgba(129,161,193,0.42) 100%);
+  color: #81A1C1;
+  box-shadow:
+    0 3px 8px rgba(0,0,0,0.30),
+    0 0 10px rgba(129,161,193,0.28);
+}
+
+/* Disk */
+#disk {
+  background: linear-gradient(135deg,
+    rgba(143,188,187,0.30) 0%,
+    rgba(136,192,208,0.26) 100%);
+  border: 1px solid rgba(143,188,187,0.50);
+  color: #8FBCBB;
+}
+
+#disk:hover {
+  background: linear-gradient(135deg,
+    rgba(143,188,187,0.50) 0%,
+    rgba(136,192,208,0.40) 100%);
+  color: #88C0D0;
+}
+
+/* Peripheral batteries */
+#custom-mouse-battery, #custom-keyboard-battery {
+  background: linear-gradient(135deg,
+    rgba(235,203,139,0.22) 0%,
+    rgba(163,190,140,0.16) 100%);
+  border: 1px solid rgba(235,203,139,0.42);
+  color: #EBCB8B;
+}
+
+/* Connectivity */
+#network, #bluetooth {
+  background: linear-gradient(135deg,
+    rgba(129,161,193,0.20) 0%,
+    rgba(136,192,208,0.16) 100%);
+  border: 1px solid rgba(129,161,193,0.40);
+  color: #81A1C1;
+}
+
+#network.disconnected { color: #BF616A; text-shadow: 0 0 6px rgba(191,97,106,0.55); }
+#bluetooth.disabled, #bluetooth.off { color: #4C566A; opacity: 0.7; text-shadow: none; }
+
+/* Audio */
+#pulseaudio {
+  background: linear-gradient(135deg,
+    rgba(143,188,187,0.22) 0%,
+    rgba(163,190,140,0.16) 100%);
+  border: 1px solid rgba(143,188,187,0.40);
+  color: #8FBCBB;
+}
+
+#pulseaudio.muted { color: #BF616A; text-shadow: 0 0 6px rgba(191,97,106,0.55); }
+
+/* Updates */
+#custom-updates {
+  background: linear-gradient(135deg,
+    rgba(191,97,106,0.24) 0%,
+    rgba(208,135,112,0.18) 100%);
+  border: 1px solid rgba(191,97,106,0.42);
+  color: #BF616A;
+}
+
+/* Weather */
+#custom-weather:hover {
+  background: linear-gradient(135deg,
+    rgba(143,188,187,0.34) 0%,
+    rgba(180,142,173,0.24) 100%);
+  color: #ECEFF4;
+}
+
+/* Power button */
+#custom-power {
+  background: linear-gradient(135deg,
+    rgba(191,97,106,0.42) 0%,
+    rgba(208,135,112,0.32) 100%);
+  border: 1px solid rgba(191,97,106,0.60);
+  color: #BF616A;
+  font-weight: 800;
+  border-radius: 8px;
+  padding: 0 12px;
+}
+
+#custom-power:hover {
+  background: linear-gradient(135deg,
+    rgba(191,97,106,0.70) 0%,
+    rgba(208,135,112,0.52) 100%);
+  color: #ECEFF4;
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.40),
+    0 0 16px rgba(191,97,106,0.45);
+}
+
+/* Tray */
+#tray {
+  background: linear-gradient(135deg,
+    rgba(67,76,94,0.34) 0%,
+    rgba(76,86,106,0.28) 100%);
+  border: 1px solid rgba(76,86,106,0.50);
+}
+
+#tray > .passive { opacity: 0.70; }
+#tray > .active { opacity: 1; }
+#tray > .needs-attention {
+  color: #EBCB8B;
+  background: rgba(235,203,139,0.24);
+}
+
+/* Separators */
+#custom-separator, #custom-separator-dot {
+  background: none;
+  border: none;
+  color: rgba(129,161,193,0.60);
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.80);
+  margin: 0 4px;
+  padding: 0 6px;
+}
+
+/* Critical States */
+#cpu.critical, #memory.critical, #temperature.critical,
+#custom-mouse-battery.critical, #custom-keyboard-battery.critical {
+  background: linear-gradient(135deg,
+    rgba(191,97,106,0.64) 0%,
+    rgba(208,135,112,0.52) 100%) !important;
+  color: #ECEFF4 !important;
+  border-color: rgba(191,97,106,0.78) !important;
+  box-shadow:
+    0 0 12px rgba(191,97,106,0.60),
+    inset 0 1px 0 rgba(236,239,244,0.20);
+  font-weight: 700;
+}
+
+/* Tooltip */
+tooltip {
+  background: linear-gradient(135deg,
+    rgba(46,52,64,0.97) 0%,
+    rgba(59,66,82,0.94) 100%);
+  border: 1px solid rgba(129,161,193,0.32);
+  border-radius: 8px;
+  color: #D8DEE9;
+  padding: 8px 12px;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.70);
+  box-shadow:
+    0 6px 18px rgba(0,0,0,0.55),
+    0 0 14px rgba(129,161,193,0.22);
+}

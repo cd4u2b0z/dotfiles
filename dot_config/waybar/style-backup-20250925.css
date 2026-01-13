@@ -1,0 +1,329 @@
+/* ═══════════════════════════════════════════════════════════════════ */
+/* 🌨️ WILD NORDIC WAYBAR - RUGGED AURORA DESIGN                     */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* 🏔️ MAIN WINDOW - ARCTIC STORM FOUNDATION                          */
+/* ═══════════════════════════════════════════════════════════════════ */
+window#waybar {
+    background: linear-gradient(135deg, 
+        rgba(46, 52, 64, 0.92),
+        rgba(59, 66, 82, 0.88),
+        rgba(67, 76, 94, 0.85)
+    );
+    color: #d8dee9;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    font-weight: 600;
+    border: 2px solid rgba(136, 192, 208, 0.4);
+    border-radius: 20px;
+    margin: 12px;
+    padding: 0;
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(136, 192, 208, 0.1);
+    transition: all 0.5s ease;
+}
+
+window#waybar:hover {
+    border-color: rgba(136, 192, 208, 0.8);
+    box-shadow: 
+        0 16px 50px rgba(0, 0, 0, 0.6),
+        0 0 60px rgba(136, 192, 208, 0.3);
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* 🌌 WORKSPACES - WILD AURORA ORBS                                  */
+/* ═══════════════════════════════════════════════════════════════════ */
+#workspaces {
+    background: linear-gradient(135deg, 
+        rgba(59, 66, 82, 0.8),
+        rgba(67, 76, 94, 0.7)
+    );
+    border-radius: 24px;
+    padding: 6px 12px;
+    margin: 0 12px;
+    border: 2px solid rgba(136, 192, 208, 0.3);
+}
+
+#workspaces button {
+    all: unset;
+    min-width: 28px;
+    min-height: 28px;
+    border-radius: 50%;
+    color: transparent;
+    background: linear-gradient(135deg, 
+        rgba(76, 86, 106, 0.8),
+        rgba(88, 91, 112, 0.6)
+    );
+    margin: 2px 4px;
+    transition: all 0.6s ease;
+    border: 1px solid rgba(136, 192, 208, 0.2);
+}
+
+#workspaces button:hover {
+    background: linear-gradient(135deg, 
+        rgba(143, 188, 187, 0.9),
+        rgba(180, 142, 173, 0.7)
+    );
+    border-color: rgba(143, 188, 187, 0.6);
+    box-shadow: 0 6px 20px rgba(143, 188, 187, 0.4);
+}
+
+#workspaces button.active {
+    background: linear-gradient(135deg, 
+        rgba(180, 142, 173, 1),
+        rgba(163, 190, 140, 0.9),
+        rgba(136, 192, 208, 0.8)
+    );
+    border-color: rgba(180, 142, 173, 0.8);
+    box-shadow: 0 8px 25px rgba(180, 142, 173, 0.6);
+}
+
+#workspaces button.urgent {
+    background: linear-gradient(135deg, 
+        rgba(191, 97, 106, 1),
+        rgba(208, 135, 112, 0.8)
+    );
+    border-color: rgba(191, 97, 106, 0.8);
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* 🎵 MUSIC & WINDOW - WILD FROST MODULES                            */
+/* ═══════════════════════════════════════════════════════════════════ */
+#custom-music {
+    background: linear-gradient(135deg, 
+        rgba(67, 76, 94, 0.8),
+        rgba(143, 188, 187, 0.3)
+    );
+    color: #8fbcbb;
+    padding: 8px 16px;
+    margin: 0 8px;
+    border-radius: 16px;
+    border: 2px solid rgba(143, 188, 187, 0.4);
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(143, 188, 187, 0.5);
+    transition: all 0.6s ease;
+}
+
+#custom-music:hover {
+    background: linear-gradient(135deg, 
+        rgba(143, 188, 187, 0.4),
+        rgba(180, 142, 173, 0.3)
+    );
+    border-color: rgba(143, 188, 187, 0.8);
+    color: #eceff4;
+    text-shadow: 0 0 20px rgba(143, 188, 187, 1);
+    box-shadow: 0 8px 30px rgba(143, 188, 187, 0.4);
+}
+
+#window {
+    background: transparent;
+    color: rgba(216, 222, 233, 0.9);
+    padding: 8px 16px;
+    margin: 0 8px;
+    font-weight: 500;
+    font-size: 12px;
+    opacity: 0.8;
+    transition: all 0.4s ease;
+}
+
+#window:hover {
+    color: #eceff4;
+    opacity: 1;
+    text-shadow: 0 0 15px rgba(216, 222, 233, 0.8);
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* 🕐 CENTER - WILD AURORA TIME/WEATHER CORE                         */
+/* ═══════════════════════════════════════════════════════════════════ */
+#clock,
+#custom-weather {
+    background: linear-gradient(135deg, 
+        rgba(67, 76, 94, 0.8),
+        rgba(76, 86, 106, 0.7)
+    );
+    border: 2px solid rgba(136, 192, 208, 0.6);
+    border-radius: 0;
+    padding: 10px 18px;
+    margin: 0;
+    transition: all 0.6s ease;
+    font-weight: 700;
+}
+
+#clock {
+    color: #88c0d0;
+    font-size: 15px;
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    border-right: none;
+    text-shadow: 0 0 10px rgba(136, 192, 208, 0.5);
+}
+
+#custom-weather {
+    color: #8fbcbb;
+    font-size: 14px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-left: 1px solid rgba(136, 192, 208, 0.3);
+    text-shadow: 0 0 10px rgba(143, 188, 187, 0.5);
+}
+
+#clock:hover {
+    background: linear-gradient(135deg, 
+        rgba(136, 192, 208, 0.3),
+        rgba(163, 190, 140, 0.2)
+    );
+    border-color: rgba(136, 192, 208, 1);
+    color: #eceff4;
+    text-shadow: 0 0 20px rgba(136, 192, 208, 0.8);
+    box-shadow: 0 0 30px rgba(136, 192, 208, 0.4);
+}
+
+#custom-weather:hover {
+    background: linear-gradient(135deg, 
+        rgba(143, 188, 187, 0.3),
+        rgba(180, 142, 173, 0.2)
+    );
+    border-color: rgba(143, 188, 187, 1);
+    color: #eceff4;
+    text-shadow: 0 0 20px rgba(143, 188, 187, 0.8);
+    box-shadow: 0 0 30px rgba(143, 188, 187, 0.4);
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* 📊 RIGHT SIDE - WILD NORDIC SYSTEM CLUSTER                        */
+/* ═══════════════════════════════════════════════════════════════════ */
+#tray,
+#network,
+#bluetooth,
+#pulseaudio,
+#custom-updates {
+    background: linear-gradient(135deg, 
+        rgba(67, 76, 94, 0.8),
+        rgba(76, 86, 106, 0.7)
+    );
+    padding: 8px 14px;
+    margin: 0;
+    border: 1px solid rgba(136, 192, 208, 0.3);
+    border-right: none;
+    font-weight: 600;
+    font-size: 13px;
+    transition: all 0.6s ease;
+}
+
+#tray {
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    color: #d8dee9;
+    text-shadow: 0 0 8px rgba(216, 222, 233, 0.3);
+}
+
+#network {
+    color: #88c0d0;
+    text-shadow: 0 0 8px rgba(136, 192, 208, 0.4);
+}
+
+#bluetooth {
+    color: #8fbcbb;
+    text-shadow: 0 0 8px rgba(143, 188, 187, 0.4);
+}
+
+#pulseaudio {
+    color: #a3be8c;
+    text-shadow: 0 0 8px rgba(163, 190, 140, 0.4);
+}
+
+#custom-updates {
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-right: 1px solid rgba(136, 192, 208, 0.3);
+    color: #d08770;
+    text-shadow: 0 0 8px rgba(208, 135, 112, 0.4);
+}
+
+/* Hover Effects */
+#tray:hover {
+    background: linear-gradient(135deg, 
+        rgba(216, 222, 233, 0.2),
+        rgba(229, 233, 240, 0.15)
+    );
+    color: #eceff4;
+    text-shadow: 0 0 20px rgba(216, 222, 233, 0.8);
+    box-shadow: 0 0 30px rgba(216, 222, 233, 0.3);
+}
+
+#network:hover {
+    background: linear-gradient(135deg, 
+        rgba(136, 192, 208, 0.3),
+        rgba(163, 190, 140, 0.2)
+    );
+    color: #eceff4;
+    text-shadow: 0 0 25px rgba(136, 192, 208, 1);
+    box-shadow: 0 0 40px rgba(136, 192, 208, 0.5);
+}
+
+#bluetooth:hover {
+    background: linear-gradient(135deg, 
+        rgba(143, 188, 187, 0.3),
+        rgba(180, 142, 173, 0.2)
+    );
+    color: #eceff4;
+    text-shadow: 0 0 25px rgba(143, 188, 187, 1);
+    box-shadow: 0 0 40px rgba(143, 188, 187, 0.5);
+}
+
+#pulseaudio:hover {
+    background: linear-gradient(135deg, 
+        rgba(163, 190, 140, 0.3),
+        rgba(180, 142, 173, 0.2)
+    );
+    color: #eceff4;
+    text-shadow: 0 0 25px rgba(163, 190, 140, 1);
+    box-shadow: 0 0 40px rgba(163, 190, 140, 0.5);
+}
+
+#custom-updates:hover {
+    background: linear-gradient(135deg, 
+        rgba(208, 135, 112, 0.3),
+        rgba(235, 203, 139, 0.2)
+    );
+    color: #eceff4;
+    text-shadow: 0 0 25px rgba(208, 135, 112, 1);
+    box-shadow: 0 0 40px rgba(208, 135, 112, 0.5);
+}
+
+/* Special States */
+#network.disconnected {
+    color: #bf616a;
+    text-shadow: 0 0 10px rgba(191, 97, 106, 0.6);
+}
+
+#bluetooth.disabled,
+#bluetooth.off {
+    color: #4c566a;
+    opacity: 0.7;
+    text-shadow: none;
+}
+
+#pulseaudio.muted {
+    color: #bf616a;
+    text-shadow: 0 0 10px rgba(191, 97, 106, 0.6);
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* 💎 TOOLTIP - RUGGED FROST GLASS                                   */
+/* ═══════════════════════════════════════════════════════════════════ */
+tooltip {
+    background: linear-gradient(135deg, 
+        rgba(46, 52, 64, 0.98),
+        rgba(59, 66, 82, 0.95)
+    );
+    color: #eceff4;
+    border: 2px solid rgba(136, 192, 208, 0.4);
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}

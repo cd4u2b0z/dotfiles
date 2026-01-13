@@ -1,0 +1,231 @@
+#!/usr/bin/env bash
+# Don't use strict error handling for waybar scripts as it can cause premature exits
+set -u
+
+# Multi-App Dynamic Tray - Shows all running apps simultaneously
+# Designed for left-side placement with expandable layout
+# Enhanced with error handling, caching, and performance optimizations
+
+# Performance settings
+export LANG=C
+export LC_ALL=C
+
+# Cache for performance
+CACHE_FILE="/tmp/waybar_apps_${USER}_$$"
+CACHE_TIMEOUT=1
+
+# Cleanup function
+cleanup() {
+    [[ -f "$CACHE_FILE" ]] && rm -f "$CACHE_FILE" 2>/dev/null || true
+}
+trap cleanup EXIT INT TERM
+
+# Function to check if process is running (with timeout and error handling)
+is_running() {
+    local process="$1"
+    [[ -z "$process" ]] && return 1
+    
+    # Use exact process name matching only (no partial matching)
+    timeout 2s pgrep -x "$process" >/dev/null 2>&1 && return 0
+    return 1
+}
+
+# Function to check if flatpak app is running (with timeout and validation)
+is_flatpak_running() {
+    local app_id="$1"
+    [[ -z "$app_id" ]] && return 1
+    
+    # Check if flatpak is available and working
+    command -v flatpak >/dev/null 2>&1 || return 1
+    
+    # Use timeout to prevent hanging
+    timeout 3s flatpak ps --columns=application 2>/dev/null | grep -q "^$app_id$" && return 0
+    return 1
+}
+
+# Function to check if window exists (with timeout and validation)
+window_exists() {
+    local class_name="$1"
+    [[ -z "$class_name" ]] && return 1
+    
+    # Check if hyprctl is available and working
+    command -v hyprctl >/dev/null 2>&1 || return 1
+    
+    # Use timeout and validate JSON output
+    timeout 2s hyprctl clients -j 2>/dev/null | 
+        timeout 1s jq -r '.[].class // empty' 2>/dev/null | 
+        grep -q "^$class_name$" 2>/dev/null && return 0
+    return 1
+}
+
+# Enhanced detection functions with caching and error handling
+check_spotify() {
+    (is_flatpak_running "com.spotify.Client" ||
+     is_running "spotify" ||
+     is_running "ncspot" ||
+     (command -v hyprctl >/dev/null 2>&1 && timeout 2s hyprctl clients -j 2>/dev/null | 
+      timeout 1s jq -r '.[].class // empty' 2>/dev/null | grep -q "^Spotify$")) 2>/dev/null && return 0
+    return 1
+}
+
+check_steam() {
+    (is_flatpak_running "com.valvesoftware.Steam" ||
+     is_running "steam") 2>/dev/null && return 0
+    return 1
+}
+
+check_discord() {
+    (is_flatpak_running "com.discordapp.Discord" ||
+     is_running "discord") 2>/dev/null && return 0
+    return 1
+}
+
+check_obs() {
+    (is_running "obs" || is_running "obs-studio") 2>/dev/null && return 0
+    return 1
+}
+
+check_vscode() {
+    (is_running "code" || is_running "code-oss") 2>/dev/null && return 0
+    return 1
+}
+
+check_brave() {
+    (is_running "brave" || is_running "brave-browser") 2>/dev/null && return 0
+    return 1
+}
+
+check_librewolf() {
+    (is_running "librewolf") 2>/dev/null && return 0
+    return 1
+}
+
+check_steam() {
+    if is_flatpak_running "com.valvesoftware.Steam" ||
+       is_running "steam" ||
+       window_exists "steam" ||
+       window_exists "Steam"; then
+        return 0
+    fi
+    return 1
+}
+
+check_discord() {
+    if is_flatpak_running "com.discordapp.Discord" ||
+       is_running "discord" ||
+       is_running "Discord" ||
+       window_exists "discord" ||
+       window_exists "Discord"; then
+        return 0
+    fi
+    return 1
+}
+
+check_obs() {
+    if is_running "obs" ||
+       is_running "obs-studio" ||
+       window_exists "obs" ||
+       window_exists "com.obsproject.Studio"; then
+        return 0
+    fi
+    return 1
+}
+
+check_vscode() {
+    if is_running "code" ||
+       is_running "code-oss" ||
+       window_exists "code"; then
+        return 0
+    fi
+    return 1
+}
+
+check_brave() {
+    (is_running "brave" || is_running "brave-browser") 2>/dev/null && return 0
+    return 1
+}
+
+check_librewolf() {
+    (is_running "librewolf") 2>/dev/null && return 0
+    return 1
+}
+
+check_searxng() {
+    # Only show if SearXNG is actively open in a browser window
+    # Check for browser windows with SearXNG URL
+    if command -v hyprctl >/dev/null 2>&1; then
+        # Check if any browser window has SearXNG open
+        hyprctl clients -j 2>/dev/null | grep -q "127.0.0.1:8888" && return 0
+    fi
+    return 1
+}
+
+# Build the app icons array
+apps=()
+classes=()
+
+# Check each app and add if running
+if check_spotify; then
+    apps+=("󰓇")
+    classes+=("spotify")
+fi
+
+if check_obs; then
+    apps+=("󰑋")
+    classes+=("obs")
+fi
+
+if check_steam; then
+    apps+=("󰓓")
+    classes+=("steam")
+fi
+
+if check_discord; then
+    apps+=("󰙯")
+    classes+=("discord")
+fi
+
+if check_vscode; then
+    apps+=("󰨞")
+    classes+=("vscode")
+fi
+
+if check_brave; then
+    apps+=("󰊽")
+    classes+=("brave")
+fi
+
+if check_librewolf; then
+    apps+=("󰈹")
+    classes+=("librewolf")
+fi
+
+if check_searxng; then
+    apps+=("󰍉")
+    classes+=("searxng")
+fi
+
+# Generate output with failsafe JSON formatting
+if [ ${#apps[@]} -eq 0 ]; then
+    # No apps running - show minimal indicator
+    echo '{"text":"","tooltip":"No apps running","class":"empty"}'
+else
+    # Join all app icons with proper escaping
+    text=$(IFS=' '; printf '%s' "${apps[*]}")
+    
+    # Create combined class for styling (sanitized)
+    combined_classes=$(IFS=' '; printf '%s' "${classes[*]}" | tr -d '"\\')
+    
+    # Create tooltip with app count validation
+    app_count=${#apps[@]}
+    if [ "$app_count" -eq 1 ]; then
+        tooltip="1 app running"
+    else
+        tooltip="$app_count apps running"
+    fi
+    
+    # Output with JSON validation
+    printf '{"text":"%s","tooltip":"%s","class":"%s"}\n' \
+        "$text" "$tooltip" "$combined_classes" 2>/dev/null || \
+    echo '{"text":"󰀻","tooltip":"App tray error - please restart waybar","class":"error"}'
+fi
