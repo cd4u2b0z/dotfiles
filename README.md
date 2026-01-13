@@ -95,7 +95,7 @@ chezmoi apply
 
 - **275 files** managed
 - **Last updated**: January 2026
-- **Display**: 4K @ 144Hz (no scaling)
+- **Display**: 4K @ 144Hz (1.33x scaling)
 - **Theme**: Dynamic via wallust
 
 ---
