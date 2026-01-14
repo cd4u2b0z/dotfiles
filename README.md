@@ -79,14 +79,14 @@ source ~/.zshrc
 
 ### CachyOS (Hyprland Edition)
 
-If you're on CachyOS with Hyprland pre-installed, many packages are already there:
+CachyOS uses systemd just like Arch, so everything works the same. Many packages come pre-installed:
 
 ```bash
 # 1. Install chezmoi and apply
 sudo pacman -S chezmoi
 chezmoi init cd4u2b0z/dotfiles --apply
 
-# 2. CachyOS likely has these already - install what's missing
+# 2. Install what's missing (--needed skips existing)
 paru -S --needed zsh starship fzf fd bat eza zoxide ripgrep
 paru -S --needed wallust ncspot fastfetch
 
@@ -96,43 +96,16 @@ paru -S --needed ttf-jetbrains-mono-nerd ttf-inter
 # 4. Set zsh as default
 chsh -s $(which zsh)
 
-# 5. Apply theme
+# 5. Enable update timer (for Waybar updates module)
+systemctl --user daemon-reload
+systemctl --user enable --now update-cache.timer
+
+# 6. Apply theme
 wallust theme Everforest-Dark-Medium
 source ~/.zshrc
 ```
 
-#### Update Timer Options
-
-The `update-cache.timer` refreshes package update counts hourly for the Waybar update module. CachyOS has its own update notification, so choose one:
-
-**Option A: Use the systemd timer (same as Arch)**
-```bash
-systemctl --user daemon-reload
-systemctl --user enable --now update-cache.timer
-```
-
-**Option B: Use cronie instead**
-
-If you prefer cron or systemd user timers aren't working:
-```bash
-# Install cronie
-paru -S cronie
-sudo systemctl enable --now cronie
-
-# Add hourly job (edit with: crontab -e)
-crontab -e
-```
-
-Add this line:
-```
-0 * * * * ~/.config/waybar/scripts/refresh-update-cache.sh
-```
-
-This runs the update check every hour at :00.
-
-**Option C: Skip it**
-
-If you're using CachyOS's built-in update checker, you can skip this entirely. The Waybar updates module will still work, it just won't auto-refresh in the background.
+> **Note**: CachyOS may have its own update notification. You can skip step 5 if you prefer using that instead.
 
 ---
 
