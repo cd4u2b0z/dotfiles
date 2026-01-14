@@ -2,6 +2,17 @@
 
 Dynamic, themeable Arch Linux rice with Hyprland and modern CLI tools.
 
+## 📑 Table of Contents
+- [What's Included](#-whats-included)
+- [Deploy on New Machine](#-deploy-on-new-machine)
+- [Chezmoi Workflow](#-chezmoi-workflow)
+- [Wallust Theming](#-wallust-theming)
+- [Key Bindings](#-key-bindings)
+- [Structure](#-structure)
+- [Troubleshooting](#-troubleshooting)
+
+---
+
 ## 🎯 What's Included
 
 | Category | Components |
