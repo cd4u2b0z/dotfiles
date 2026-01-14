@@ -269,3 +269,5 @@ zi              # Interactive picker with fzf
 ---
 
 *Managed with chezmoi • Themed with wallust* 🌲
+
+**— Dr. Baklava**
