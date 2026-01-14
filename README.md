@@ -5,6 +5,7 @@ Dynamic, themeable Arch Linux rice with Hyprland and modern CLI tools.
 ## 📑 Table of Contents
 - [What's Included](#-whats-included)
 - [Deploy on New Machine](#-deploy-on-new-machine)
+  - [CachyOS (Hyprland Edition)](#cachyos-hyprland-edition)
 - [Chezmoi Workflow](#-chezmoi-workflow)
 - [Wallust Theming](#-wallust-theming)
 - [Key Bindings](#-key-bindings)
@@ -75,6 +76,36 @@ systemctl --user enable --now update-cache.timer
 wallust theme Everforest-Dark-Medium
 source ~/.zshrc
 ```
+
+### CachyOS (Hyprland Edition)
+
+If you're on CachyOS with Hyprland pre-installed, many packages are already there:
+
+```bash
+# 1. Install chezmoi and apply
+sudo pacman -S chezmoi
+chezmoi init cd4u2b0z/dotfiles --apply
+
+# 2. CachyOS likely has these already - install what's missing
+paru -S --needed zsh starship fzf fd bat eza zoxide ripgrep
+paru -S --needed wallust ncspot fastfetch
+
+# 3. Fonts (if not installed)
+paru -S --needed ttf-jetbrains-mono-nerd ttf-inter
+
+# 4. Set zsh as default
+chsh -s $(which zsh)
+
+# 5. Enable update timer
+systemctl --user daemon-reload
+systemctl --user enable --now update-cache.timer
+
+# 6. Apply theme
+wallust theme Everforest-Dark-Medium
+source ~/.zshrc
+```
+
+> **Note**: CachyOS uses GRUB, not systemd-boot. This doesn't affect these dotfiles since they're all userspace configs.
 
 ---
 
