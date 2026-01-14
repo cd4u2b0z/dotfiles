@@ -1,180 +1,172 @@
-# 🏔️ Craig's Nord-Themed Arch Setup
+# 🌲 Craig's Arch Linux + Hyprland Setup
 
-A beautiful, minimal, and productive Arch Linux configuration with a Nord color scheme, native 4K support, and Mint-like convenience.
+A dynamic, themeable Arch Linux rice with Hyprland, native 4K support, and modern CLI tools.
 
 ## 🎯 Overview
 
-This is a carefully crafted Arch Linux setup that combines:
-- **Speed**: Arch Linux base with optimized Hyprland
-- **Beauty**: Nord theme consistency across all applications
-- **Productivity**: Modern tools and keyboard-driven workflow
-- **Reliability**: Proper dotfiles management and system snapshots
+- **Speed**: Arch Linux with optimized Hyprland compositor
+- **Beauty**: Dynamic theming via Wallust (not locked to any single theme)
+- **Productivity**: Modern CLI tools and keyboard-driven workflow
+- **Reliability**: Chezmoi dotfiles management
 
 ## 🖥️ Desktop Environment
 
-- **Window Manager**: Hyprland (Wayland compositor)
-- **Terminal**: Kitty with Nord theme
-- **Shell**: Zsh with Starship prompt
-- **File Manager**: Thunar with dark Arc theme
-- **Application Launcher**: Wofi
-- **Status Bar**: Waybar (if configured)
+| Component | Choice |
+|-----------|--------|
+| **WM** | Hyprland (Wayland) |
+| **Terminal** | Kitty |
+| **Shell** | Zsh + Starship prompt |
+| **Bar** | Waybar |
+| **Launcher** | Fuzzel |
+| **Notifications** | Mako |
+| **File Manager** | Thunar |
 
-## 🎨 Theme & Visual
+## 🎨 Dynamic Theming (Wallust)
 
-- **GTK Theme**: Arc-Dark
-- **Icon Theme**: Papirus-Dark
-- **Font**: Inter 14pt (4K optimized)
-- **Color Scheme**: Nord
-- **Cursor**: Adwaita
-- **Native Resolution**: 4K (3840x2160@144Hz) with 1.0x scaling
+**No longer locked to Nord~/.local/share/chezmoi/README.md 2>&1 | head -200* The entire system theme updates dynamically:
 
-## 🚀 Key Features
+```bash
+# Switch themes instantly
+wallust theme Everforest-Dark-Medium
+wallust theme Nord
+wallust theme Catppuccin-Mocha
+wallust theme Dracula
 
-### Native 4K Support
-- No system scaling - applications use larger fonts individually
-- Crisp text and icons at 4K resolution
-- Optimized font sizes for readability
+# Or generate from wallpaper
+wallust run /path/to/image.jpg
+```
 
-### Nord Theme Consistency
-- Hyprland borders match Nord palette
-- Kitty terminal with Nord colors
-- Starship prompt with Nord styling
-- Arc-Dark GTK theme for consistent dark backgrounds
+### Apps that auto-update:
+- ✅ Kitty terminal
+- ✅ Waybar
+- ✅ Fuzzel launcher
+- ✅ Mako notifications
+- ✅ Hyprland borders/colors
+- ✅ fzf fuzzy finder
+- ✅ ncspot (Spotify TUI)
+- ✅ Starship prompt
+- ✅ tmux
+- ✅ Neovim
 
-### Productivity Tools
-- **chezmoi**: Dotfiles management
-- **fzf**: Fuzzy finder for files and commands
-- **ripgrep**: Fast text search
-- **fd**: Modern find replacement
-- **bat**: Better cat with syntax highlighting
+### Theme templates
+Located in `~/.config/wallust/templates/`
 
-### File Management
-- Thunar with plugins:
-  - Archive support (extract/compress)
-  - Media tags for music files
-- Full mounting support (USB, phones, network shares)
-- Dark theme integration
+## 🛠️ CLI Tools
+
+| Tool | Purpose | Key Binding |
+|------|---------|-------------|
+| **fzf** | Fuzzy finder | `Ctrl+T` (files), `Ctrl+G` (cd), `Ctrl+R` (history) |
+| **fd** | Modern `find` | Aliased to `find` |
+| **bat** | Better `cat` | Syntax highlighting |
+| **eza** | Modern `ls` | Aliased to `ls` |
+| **zoxide** | Smart `cd` | `z <partial-path>` |
+| **ripgrep** | Fast grep | `rg` |
 
 ## ⌨️ Key Bindings
 
 ### Window Management
-- `Super + Return`: Open terminal
-- `Super + Q`: Close window
-- `Super + R`: Application launcher
-- `Super + E`: File manager
-- `Super + 1-9`: Switch workspaces
+| Key | Action |
+|-----|--------|
+| `Super + Return` | Terminal |
+| `Super + Q` | Close window |
+| `Super + R` | App launcher (Fuzzel) |
+| `Super + E` | File manager |
+| `Super + 1-9` | Switch workspace |
 
 ### Applications
-- `Super + B`: LibreWolf browser
-- `Super + Shift + B`: Brave browser
-- `Super + C`: VS Code
-- `Super + G`: Steam
+| Key | Action |
+|-----|--------|
+| `Super + B` | Browser |
+| `Super + C` | VS Code |
+| `Super + G` | Steam |
 
-### Theme Management
-- `Super + T`: Apply dark theme
-- `Super + Shift + T`: Check theme status
-- `Super + Shift + E`: Modern theme manager
-- `Super + Ctrl + E`: Classic theme manager
+### FZF (in terminal)
+| Key | Action |
+|-----|--------|
+| `Ctrl+T` | Fuzzy find files |
+| `Ctrl+G` | Fuzzy cd |
+| `Ctrl+R` | Fuzzy history |
 
-## 📁 Directory Structure
+## 📦 System Features
+
+### Update Cache Timer
+Automatically refreshes package update counts every hour for Waybar display.
+
+```bash
+systemctl --user status update-cache.timer
+```
+
+### Startup Sound
+Custom startup sound plays when Hyprland launches.
+
+## 🚀 Quick Deploy
+
+### On a new Arch machine:
+```bash
+# 1. Install base packages
+sudo pacman -S git chezmoi zsh fzf fd bat eza zoxide hyprland waybar kitty
+
+# 2. Clone and apply dotfiles
+chezmoi init cd4u2b0z/dotfiles --apply
+
+# 3. Enable timers
+systemctl --user daemon-reload
+systemctl --user enable --now update-cache.timer
+
+# 4. Apply theme
+wallust theme Everforest-Dark-Medium
+source ~/.zshrc
+
+# 5. Set zsh as default
+chsh -s $(which zsh)
+```
+
+### Sync changes
+```bash
+# After making changes
+chezmoi re-add <files>
+chezmoi cd && git add -A && git commit -m "update" && git push
+
+# On another machine
+chezmoi update
+```
+
+## 📁 Structure
 
 ```
 ~/.config/
-├── hypr/hyprland.conf      # Window manager config
-├── kitty/kitty.conf        # Terminal config
-├── starship.toml           # Shell prompt config
-├── gtk-3.0/settings.ini    # GTK theme config
-└── gtk-4.0/settings.ini    # GTK4 theme config
+├── hypr/
+│   ├── hyprland.conf         # WM config
+│   └── scripts/startup-sound.sh
+├── kitty/kitty.conf
+├── waybar/
+│   ├── config
+│   ├── style.css
+│   └── scripts/
+├── wallust/
+│   ├── wallust.toml          # Theme config
+│   ├── templates/            # Color templates
+│   └── scripts/              # Post-theme hooks
+├── mako/config
+├── fuzzel/
+├── ncspot/config.toml
+└── starship.toml
 
-~/.local/bin/
-├── apply-dark-theme        # Theme switcher script
-├── thunar-dark            # Dark Thunar launcher
-├── librewolf-wayland      # Optimized browser launcher
-├── brave-wayland          # Optimized browser launcher
-└── theme-check            # Theme status checker
-
-~/.gtkrc-2.0               # GTK2 theme config
+~/.local/bin/                 # Custom scripts
+~/.cache/wallust/             # Generated theme files
 ```
 
-## 🛠️ Installation & Setup
+## 🖼️ Display
 
-### Quick Setup (with this dotfiles repo)
-```bash
-# Install chezmoi
-yay -S chezmoi
+- **Resolution**: 3840x2160 (4K)
+- **Scaling**: 1.33x
+- **Monitor**: 32" display
+- **GPU**: NVIDIA RTX 3090
 
-# Clone and apply dotfiles
-chezmoi init https://github.com/yourusername/dotfiles
-chezmoi apply
-```
+## 📋 See Also
 
-### Manual Setup
-See the detailed installation guide in `docs/installation.md`
-
-## 🔧 Customization
-
-### Changing Themes
-- Use `Super + Shift + E` to open the modern theme manager
-- Edit theme settings in the GTK config files
-- Restart applications for changes to take effect
-
-### Adding Applications
-- Edit `~/.config/hypr/hyprland.conf` to add keybindings
-- Create launcher scripts in `~/.local/bin/` for complex applications
-
-### Font Scaling
-- Edit font sizes in GTK config files for better 4K scaling
-- Adjust terminal font size in `~/.config/kitty/kitty.conf`
-
-## 🚑 Troubleshooting
-
-### Theme Issues
-```bash
-# Check theme status
-~/.local/bin/theme-check
-
-# Reapply themes
-~/.local/bin/apply-dark-theme
-
-# Open theme manager
-nwg-look
-```
-
-### Display Issues
-- Check Hyprland monitor configuration
-- Verify native 4K settings in config
-
-## 📦 Included Software
-
-### Core System
-- Hyprland (window manager)
-- Kitty (terminal)
-- Zsh + Starship (shell + prompt)
-- Thunar (file manager)
-
-### Productivity
-- chezmoi (dotfiles management)
-- fzf, ripgrep, fd, bat (CLI tools)
-- file-roller (archive manager)
-- timeshift (system snapshots)
-
-### System Tools
-- pavucontrol (audio control)
-- gnome-disk-utility (disk management)
-- gvfs (mounting support)
-
-## 🤝 Contributing
-
-Feel free to:
-- Fork this repository
-- Suggest improvements
-- Report issues
-- Share your customizations
-
-## 📄 License
-
-This configuration is open source and available under the MIT License.
+- [CHEATSHEET.md](CHEATSHEET.md) - Full CLI tools & chezmoi reference
 
 ---
 
-*Crafted with ❄️ for a productive and beautiful Arch Linux experience*
+*Dynamic theming with Wallust on Arch Linux + Hyprland* 🌲
