@@ -1,172 +1,202 @@
-# 🌲 Craig's Arch Linux + Hyprland Setup
+# 🌲 Craig's Arch Linux + Hyprland Dotfiles
 
-A dynamic, themeable Arch Linux rice with Hyprland, native 4K support, and modern CLI tools.
+Dynamic, themeable Arch Linux rice with Hyprland and modern CLI tools.
 
-## 🎯 Overview
+## 🎯 What's Included
 
-- **Speed**: Arch Linux with optimized Hyprland compositor
-- **Beauty**: Dynamic theming via Wallust (not locked to any single theme)
-- **Productivity**: Modern CLI tools and keyboard-driven workflow
-- **Reliability**: Chezmoi dotfiles management
-
-## 🖥️ Desktop Environment
-
-| Component | Choice |
-|-----------|--------|
+| Category | Components |
+|----------|------------|
 | **WM** | Hyprland (Wayland) |
-| **Terminal** | Kitty |
-| **Shell** | Zsh + Starship prompt |
+| **Terminal** | Kitty + Zsh + Starship |
 | **Bar** | Waybar |
 | **Launcher** | Fuzzel |
 | **Notifications** | Mako |
-| **File Manager** | Thunar |
+| **Theming** | Wallust (dynamic) |
+| **CLI Tools** | fzf, fd, bat, eza, zoxide, ripgrep |
 
-## 🎨 Dynamic Theming (Wallust)
+---
 
-**No longer locked to Nord~/.local/share/chezmoi/README.md 2>&1 | head -200* The entire system theme updates dynamically:
+## 🚀 Deploy on New Machine
 
+### 1. Install Prerequisites
 ```bash
-# Switch themes instantly
+# Base packages
+sudo pacman -S git chezmoi zsh
+
+# Install paru (AUR helper)
+git clone https://aur.archlinux.org/paru.git
+cd paru && makepkg -si
+```
+
+### 2. Apply Dotfiles
+```bash
+chezmoi init cd4u2b0z/dotfiles --apply
+```
+
+### 3. Install Packages
+```bash
+# Desktop
+paru -S hyprland waybar kitty mako fuzzel thunar
+
+# CLI tools
+paru -S fzf fd bat eza zoxide ripgrep starship
+
+# Apps
+paru -S ncspot fastfetch btop cava
+
+# Fonts
+paru -S ttf-jetbrains-mono-nerd ttf-inter
+
+# Theming
+paru -S wallust
+```
+
+### 4. Post-Setup
+```bash
+# Set zsh as default
+chsh -s $(which zsh)
+
+# Enable update timer
+systemctl --user daemon-reload
+systemctl --user enable --now update-cache.timer
+
+# Apply theme
+wallust theme Everforest-Dark-Medium
+source ~/.zshrc
+```
+
+---
+
+## 🔄 Chezmoi Workflow
+
+### After Making Changes
+```bash
+# Update single file
+chezmoi re-add ~/.zshrc
+
+# Update multiple files
+chezmoi re-add ~/.config/hypr/hyprland.conf ~/.config/waybar/style.css
+
+# Add new file to tracking
+chezmoi add ~/.config/newapp/config
+
+# Commit and push
+chezmoi cd && git add -A && git commit -m "description" && git push
+```
+
+### Quick One-Liner
+```bash
+chezmoi re-add ~/.zshrc && chezmoi cd && git add -A && git commit -m "update zshrc" && git push
+```
+
+### On Another Machine
+```bash
+chezmoi update
+```
+
+### Useful Commands
+```bash
+chezmoi status          # See what's changed
+chezmoi diff            # Show all differences
+chezmoi diff ~/.zshrc   # Diff single file
+chezmoi verify          # Check all files match
+chezmoi forget <file>   # Stop tracking file
+chezmoi merge <file>    # Interactive merge conflicts
+```
+
+---
+
+## 🎨 Wallust Theming
+
+Switch themes instantly - entire system updates:
+```bash
 wallust theme Everforest-Dark-Medium
 wallust theme Nord
 wallust theme Catppuccin-Mocha
 wallust theme Dracula
-
-# Or generate from wallpaper
-wallust run /path/to/image.jpg
+wallust theme list                # List all themes
+wallust run /path/to/image.jpg   # Generate from wallpaper
 ```
 
-### Apps that auto-update:
-- ✅ Kitty terminal
-- ✅ Waybar
-- ✅ Fuzzel launcher
-- ✅ Mako notifications
-- ✅ Hyprland borders/colors
-- ✅ fzf fuzzy finder
-- ✅ ncspot (Spotify TUI)
-- ✅ Starship prompt
-- ✅ tmux
-- ✅ Neovim
+**Apps that auto-update:** Kitty, Waybar, Fuzzel, Mako, Hyprland, fzf, ncspot, Starship, tmux, Neovim
 
-### Theme templates
-Located in `~/.config/wallust/templates/`
+### Manual Reload (if needed)
+```bash
+source ~/.zshrc         # Reload fzf colors
+pkill -USR2 waybar      # Reload waybar
+makoctl reload          # Reload mako
+```
 
-## 🛠️ CLI Tools
-
-| Tool | Purpose | Key Binding |
-|------|---------|-------------|
-| **fzf** | Fuzzy finder | `Ctrl+T` (files), `Ctrl+G` (cd), `Ctrl+R` (history) |
-| **fd** | Modern `find` | Aliased to `find` |
-| **bat** | Better `cat` | Syntax highlighting |
-| **eza** | Modern `ls` | Aliased to `ls` |
-| **zoxide** | Smart `cd` | `z <partial-path>` |
-| **ripgrep** | Fast grep | `rg` |
+---
 
 ## ⌨️ Key Bindings
 
-### Window Management
+### Hyprland
 | Key | Action |
 |-----|--------|
 | `Super + Return` | Terminal |
 | `Super + Q` | Close window |
-| `Super + R` | App launcher (Fuzzel) |
+| `Super + R` | App launcher |
 | `Super + E` | File manager |
-| `Super + 1-9` | Switch workspace |
-
-### Applications
-| Key | Action |
-|-----|--------|
+| `Super + 1-9` | Workspace |
 | `Super + B` | Browser |
 | `Super + C` | VS Code |
-| `Super + G` | Steam |
 
-### FZF (in terminal)
+### FZF (terminal)
 | Key | Action |
 |-----|--------|
 | `Ctrl+T` | Fuzzy find files |
 | `Ctrl+G` | Fuzzy cd |
 | `Ctrl+R` | Fuzzy history |
+| `**<Tab>` | Trigger completion |
 
-## 📦 System Features
-
-### Update Cache Timer
-Automatically refreshes package update counts every hour for Waybar display.
-
+### Zoxide
 ```bash
-systemctl --user status update-cache.timer
+z proj          # Jump to ~/Projects
+z dot conf      # Jump to dir matching both words
+zi              # Interactive picker with fzf
 ```
 
-### Startup Sound
-Custom startup sound plays when Hyprland launches.
-
-## 🚀 Quick Deploy
-
-### On a new Arch machine:
-```bash
-# 1. Install base packages
-sudo pacman -S git chezmoi zsh fzf fd bat eza zoxide hyprland waybar kitty
-
-# 2. Clone and apply dotfiles
-chezmoi init cd4u2b0z/dotfiles --apply
-
-# 3. Enable timers
-systemctl --user daemon-reload
-systemctl --user enable --now update-cache.timer
-
-# 4. Apply theme
-wallust theme Everforest-Dark-Medium
-source ~/.zshrc
-
-# 5. Set zsh as default
-chsh -s $(which zsh)
-```
-
-### Sync changes
-```bash
-# After making changes
-chezmoi re-add <files>
-chezmoi cd && git add -A && git commit -m "update" && git push
-
-# On another machine
-chezmoi update
-```
+---
 
 ## 📁 Structure
 
 ```
 ~/.config/
-├── hypr/
-│   ├── hyprland.conf         # WM config
-│   └── scripts/startup-sound.sh
-├── kitty/kitty.conf
-├── waybar/
-│   ├── config
-│   ├── style.css
-│   └── scripts/
-├── wallust/
-│   ├── wallust.toml          # Theme config
-│   ├── templates/            # Color templates
-│   └── scripts/              # Post-theme hooks
-├── mako/config
-├── fuzzel/
-├── ncspot/config.toml
-└── starship.toml
+├── hypr/           # Hyprland WM config
+├── kitty/          # Terminal
+├── waybar/         # Bar + scripts
+├── wallust/        # Theme engine
+│   ├── templates/  # Color templates
+│   └── scripts/    # Post-theme hooks
+├── mako/           # Notifications
+├── fuzzel/         # Launcher
+├── nvim/           # Neovim config
+└── starship.toml   # Prompt
 
-~/.local/bin/                 # Custom scripts
-~/.cache/wallust/             # Generated theme files
+~/.local/bin/       # Custom scripts
+~/.cache/wallust/   # Generated colors
 ```
-
-## 🖼️ Display
-
-- **Resolution**: 3840x2160 (4K)
-- **Scaling**: 1.33x
-- **Monitor**: 32" display
-- **GPU**: NVIDIA RTX 3090
-
-## 📋 See Also
-
-- [CHEATSHEET.md](CHEATSHEET.md) - Full CLI tools & chezmoi reference
 
 ---
 
-*Dynamic theming with Wallust on Arch Linux + Hyprland* 🌲
+## 🆘 Troubleshooting
+
+| Problem | Solution |
+|---------|----------|
+| fzf colors not updating | `source ~/.zshrc` |
+| Waybar not showing updates | `systemctl --user start update-cache.service` |
+| ncspot theme stuck | `~/.config/wallust/scripts/update-ncspot-theme.sh` then restart |
+| Chezmoi conflicts | `chezmoi diff <file>` then `chezmoi re-add <file>` |
+
+---
+
+## 🖼️ System
+
+- **Resolution**: 3840x2160 (4K @ 1.33x scale)
+- **GPU**: NVIDIA RTX 3090
+- **Current Theme**: Everforest-Dark-Medium
+
+---
+
+*Managed with chezmoi • Themed with wallust* 🌲
