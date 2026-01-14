@@ -101,12 +101,38 @@ wallust theme Everforest-Dark-Medium
 source ~/.zshrc
 ```
 
-> **Note about update timer**: CachyOS has its own update notification system. You can **skip** the `update-cache.timer` since it's designed for my vanilla Arch setup. If you want to use it anyway:
-> ```bash
-> systemctl --user daemon-reload
-> systemctl --user enable --now update-cache.timer
-> ```
-> But this may be redundant with CachyOS's built-in update checker.
+#### Update Timer Options
+
+The `update-cache.timer` refreshes package update counts hourly for the Waybar update module. CachyOS has its own update notification, so choose one:
+
+**Option A: Use the systemd timer (same as Arch)**
+```bash
+systemctl --user daemon-reload
+systemctl --user enable --now update-cache.timer
+```
+
+**Option B: Use cronie instead**
+
+If you prefer cron or systemd user timers aren't working:
+```bash
+# Install cronie
+paru -S cronie
+sudo systemctl enable --now cronie
+
+# Add hourly job (edit with: crontab -e)
+crontab -e
+```
+
+Add this line:
+```
+0 * * * * ~/.config/waybar/scripts/refresh-update-cache.sh
+```
+
+This runs the update check every hour at :00.
+
+**Option C: Skip it**
+
+If you're using CachyOS's built-in update checker, you can skip this entirely. The Waybar updates module will still work, it just won't auto-refresh in the background.
 
 ---
 
