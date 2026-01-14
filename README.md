@@ -1,4 +1,4 @@
-# 🌲 Craig's Arch Linux + Hyprland Dotfiles
+# 🌲 Cdubz's Arch Linux + Hyprland Dotfiles
 
 Dynamic, themeable Arch Linux rice with Hyprland and modern CLI tools.
 
