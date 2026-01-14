@@ -27,7 +27,7 @@ opt.shiftwidth = 2 -- size of an indent
 opt.shortmess:append({ W = true, I = true, c = true, C = true })
 opt.showmode = false -- dont show mode since we have a statusline
 opt.sidescrolloff = 8 -- columns of context
-opt.signcolumn = "yes" -- always show the signcolumn
+opt.signcolumn = "no" -- always show the signcolumn
 opt.smartcase = true -- don't ignore case with capitals
 opt.smartindent = true -- insert indents automatically
 opt.spelllang = { "en" }
@@ -44,7 +44,7 @@ opt.winminwidth = 5 -- minimum window width
 opt.wrap = false -- disable line wrap
 
 -- Folding
-opt.foldcolumn = "1"
+opt.foldcolumn = "0"
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.foldenable = true
@@ -53,3 +53,16 @@ opt.foldenable = true
 vim.g.nord_italic = true
 vim.g.nord_bold = true
 vim.g.nord_underline = true
+-- Force solid background on line numbers (remove frosted effect)
+vim.api.nvim_create_autocmd({"ColorScheme", "VimEnter"}, {
+  callback = function()
+    local bg = vim.api.nvim_get_hl(0, {name = "Normal"}).bg
+    if bg then
+      local hex = string.format("#%06x", bg)
+      vim.api.nvim_set_hl(0, "LineNr", { fg = vim.api.nvim_get_hl(0, {name = "LineNr"}).fg, bg = hex })
+      vim.api.nvim_set_hl(0, "CursorLineNr", { fg = vim.api.nvim_get_hl(0, {name = "CursorLineNr"}).fg, bg = hex, bold = true })
+      vim.api.nvim_set_hl(0, "SignColumn", { bg = hex })
+      vim.api.nvim_set_hl(0, "FoldColumn", { bg = hex })
+    end
+  end,
+})

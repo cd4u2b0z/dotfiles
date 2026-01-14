@@ -1,26 +1,27 @@
-# 🎵 Nord Theme ncspot Configuration
-# Generated: October 4, 2025
+# 🎵 ncspot Configuration
+# Theme is loaded from wallust-generated file
+
+# Include wallust theme (dynamic colors)
+# Note: ncspot doesn't support includes, so we source theme separately
+# The theme section below will be overwritten by wallust
 
 [theme]
-# Nord color scheme for ncspot
-background = "#2e3440"
-primary = "#e5e9f0"
-secondary = "#81a1c1"
-title = "#88c0d0"
-playing = "#a3be8c"
-playing_selected = "#8fbcbb"
-playing_bg = "#3b4252"
-highlight = "#5e81ac"
-highlight_bg = "#434c5e"
-error = "#bf616a"
-error_bg = "#2e3440"
-statusbar = "#3b4252"
-statusbar_progress = "#88c0d0"
-statusbar_bg = "#2e3440"
-cmdline = "#e5e9f0"
-cmdline_bg = "#2e3440"
-search_match = "#ebcb8b"
-
+background = "#2D353B"
+primary = "#D3C6AA"
+secondary = "#7FBBB3"
+title = "#83C092"
+playing = "#A7C080"
+playing_selected = "#35A77C"
+playing_bg = "#343F44"
+highlight = "#7FBBB3"
+highlight_bg = "#5C6A72"
+error = "#E67E80"
+error_bg = "#2D353B"
+statusbar = "#343F44"
+statusbar_progress = "#83C092"
+statusbar_bg = "#2D353B"
+cmdline = "#D3C6AA"
+cmdline_bg = "#2D353B"
 [audio]
 backend = "pulseaudio"
 

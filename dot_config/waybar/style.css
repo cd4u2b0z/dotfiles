@@ -23,7 +23,7 @@
 
 * {
   border: none;
-  border-radius: 0;
+  border-radius: 12px;
   font-family: "Inter", "JetBrainsMono Nerd Font", system-ui, sans-serif;
   font-weight: 500;
   font-size: 12px;
@@ -35,7 +35,7 @@
 window#waybar {
   background: alpha(@background, 0.6);
   border: none;
-  border-radius: 0;
+  border-radius: 12px;
   margin: 0;
   padding: 0;
   box-shadow: none;
@@ -98,7 +98,7 @@ tooltip box {
 #custom-app-tray {
   background: transparent;
   border: none;
-  border-radius: 0;
+  border-radius: 12px;
   padding: 6px 12px;
   margin: 0;
   color: @foreground;
@@ -135,7 +135,7 @@ tooltip box {
 #workspaces {
   background: transparent;
   border: none;
-  border-radius: 0;
+  border-radius: 12px;
   padding: 4px 8px;
   margin: 0;
 }
@@ -178,7 +178,7 @@ tooltip box {
   font-family: "Inter", sans-serif;
   letter-spacing: 0.3px;
   padding: 6px 12px;
-  border-radius: 0;
+  border-radius: 12px;
   text-shadow: none;
 }
 
@@ -196,7 +196,7 @@ tooltip box {
   font-family: "Inter", "JetBrainsMono Nerd Font", sans-serif;
   letter-spacing: 0.3px;
   padding: 6px 24px;
-  border-radius: 0;
+  border-radius: 12px;
   text-shadow: none;
 }
 
@@ -227,7 +227,7 @@ tooltip box {
   padding: 8px 14px;
   margin: 0;
   border: none;
-  border-radius: 0;
+  border-radius: 12px;
   font-size: 16px;
   font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
 }
@@ -267,7 +267,7 @@ tooltip box {
   background: transparent;
   color: @color15;
   border: none;
-  border-radius: 0;
+  border-radius: 12px;
 }
 
 #custom-system-stats:hover,
@@ -301,4 +301,61 @@ tooltip box {
 #custom-updates.checking {
   color: @color15;
   animation: pulse-checking 1.5s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   CALENDAR POPUP - Theme Aware
+   ═══════════════════════════════════════════════════════════════════ */
+calendar {
+  background-color: @background;
+  border: 2px solid @accent2;
+  border-radius: 12px;
+  padding: 12px;
+  color: @foreground;
+  font-family: "Inter", "JetBrainsMono Nerd Font", sans-serif;
+}
+
+calendar:selected {
+  background-color: @accent1;
+  color: @background;
+  border-radius: 6px;
+}
+
+calendar.header {
+  color: @accent1;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+calendar.button {
+  color: @color8;
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
+calendar.button:hover {
+  background-color: @accent1;
+  color: @background;
+}
+
+calendar.highlight {
+  color: @accent2;
+  font-weight: 600;
+}
+
+calendar:indeterminate {
+  color: @color8;
+}
+
+/* Force spacing on day cells via the view */
+calendar > grid > label {
+  min-width: 28px;
+  min-height: 28px;
+  margin: 2px;
+  padding: 4px;
+  border-radius: 6px;
+}
+
+calendar > grid > label:hover {
+  background-color: alpha(@accent1, 0.3);
 }

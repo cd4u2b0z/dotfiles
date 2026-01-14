@@ -64,11 +64,22 @@ nvim.target = "~/.config/nvim/lua/wallust-colors.lua"
 mako.template = "mako-colors.conf"
 mako.target = "~/.config/mako/config"
 
+# FZF fuzzy finder colors
+fzf.template = "fzf-colors.sh"
+fzf.target = "~/.cache/wallust/fzf-colors.sh"
+
+# ncspot Spotify client
+ncspot.template = "ncspot-colors.toml"
+ncspot.target = "~/.cache/wallust/ncspot-theme.toml"
+
 # ═══════════════════════════════════════════════════════════════════
 # 🔄 POST-RUN HOOKS
 # ═══════════════════════════════════════════════════════════════════
 [scripts]
-run_after = ["~/.config/wallust/scripts/update-waybar-calendar.sh"]
+run_after = [
+    "~/.config/wallust/scripts/update-waybar-calendar.sh",
+    "~/.config/wallust/scripts/update-ncspot-theme.sh"
+]
 
 # Shell colors for scripts
 colors_sh.template = "colors.sh"

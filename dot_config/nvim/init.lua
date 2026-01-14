@@ -52,4 +52,4 @@ require("lazy").setup({
 })
 
 -- Set colorscheme
-vim.cmd.colorscheme("nord")
+-- colorscheme set by wallust-theme.lua plugin

@@ -40,8 +40,14 @@
     },
     {
       "type": "kernel",
-      "key": "├ ⚙️ Kernel",
+      "key": "├ 󰒋 Kernel",
       "keyColor": "bright_cyan"
+    },
+    {
+      "type": "command",
+      "key": "├ 󰃭 Age",
+      "keyColor": "bright_yellow",
+      "text": "install_date=$(head -1 /var/log/pacman.log | grep -oP '\\d{4}-\\d{2}-\\d{2}'); total_days=$(( ($(date +%s) - $(date -d \"$install_date\" +%s)) / 86400 )); years=$((total_days / 365)); rem=$((total_days % 365)); months=$((rem / 30)); days=$((rem % 30)); if [ $years -gt 0 ]; then echo \"$years year(s), $months month(s)\"; elif [ $months -gt 0 ]; then echo \"$months month(s), $days day(s)\"; else echo \"$total_days days\"; fi"
     },
     {
       "type": "packages",
@@ -50,8 +56,13 @@
     },
     {
       "type": "shell",
-      "key": "└ 󱆃 Shell",
+      "key": "├ 󱆃 Shell",
       "keyColor": "green"
+    },
+    {
+      "type": "terminal",
+      "key": "└ 󰆍 Terminal",
+      "keyColor": "bright_green"
     },
     {
       "type": "break"

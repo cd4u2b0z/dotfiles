@@ -73,18 +73,25 @@ if command -v fzf >/dev/null 2>&1; then
     source /usr/share/fzf/key-bindings.zsh
     source /usr/share/fzf/completion.zsh
     
-    # FZF Nord theme
-    export FZF_DEFAULT_OPTS="
-        --color=bg+:#3B4252,bg:#2E3440,spinner:#81A1C1,hl:#616E88
-        --color=fg:#D8DEE9,header:#616E88,info:#81A1C1,pointer:#81A1C1
-        --color=marker:#81A1C1,fg+:#D8DEE9,prompt:#81A1C1,hl+:#81A1C1
-        --height=50% --layout=reverse --border --margin=1 --padding=1"
+    # FZF layout options
+    export FZF_DEFAULT_OPTS="--height=50% --layout=reverse --border --margin=1 --padding=1"
+
+    # Source wallust-generated colors (dynamic theme)
+    [[ -f ~/.cache/wallust/fzf-colors.sh ]] && source ~/.cache/wallust/fzf-colors.sh
     
     # Use ripgrep for FZF if available
     if command -v rg >/dev/null 2>&1; then
         export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
         export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     fi
+
+    # Live preview while searching (Ctrl+T shows file contents, Alt+C shows directory tree)
+    export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :200 {} 2>/dev/null || head -200 {}'"
+    export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+    export FZF_ALT_C_OPTS="--preview 'eza --tree --level=2 --color=always {} 2>/dev/null || ls -la {}'"
+
+    # Ctrl+G for fuzzy cd (Alt+C alternative since some terminals capture Alt)
+    bindkey '^g' fzf-cd-widget
 fi
 
 # ═══════════════════════════════════════════════════════════════════
@@ -998,3 +1005,15 @@ alias melonds="/home/craig/Emulators/MelonDS/launch-melonds.sh"
 alias live_weather='cd ~/asciimatics-weather-toys && source .venv/bin/activate && python weather_live.py'
 alias weather_dashboard='cd ~/asciimatics-weather-toys && source .venv/bin/activate && python weather_dashboard.py'
 alias weather_pro='cd ~/asciimatics-weather-toys && source .venv/bin/activate && python weather_live_pro.py'
+
+# Wallust theme switching with calendar update
+
+# Wallust theme switching with full app updates
+wtheme() {
+    wallust theme "$1" && \
+    ~/.config/wallust/scripts/update-waybar-calendar.sh && \
+    tmux source-file ~/.tmux.conf 2>/dev/null && \
+    makoctl reload 2>/dev/null
+    echo "Theme switched to $1"
+    echo "Note: Restart nvim to see statusline changes"
+}
