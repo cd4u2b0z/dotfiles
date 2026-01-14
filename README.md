@@ -96,16 +96,17 @@ paru -S --needed ttf-jetbrains-mono-nerd ttf-inter
 # 4. Set zsh as default
 chsh -s $(which zsh)
 
-# 5. Enable update timer
-systemctl --user daemon-reload
-systemctl --user enable --now update-cache.timer
-
-# 6. Apply theme
+# 5. Apply theme
 wallust theme Everforest-Dark-Medium
 source ~/.zshrc
 ```
 
-> **Note**: CachyOS uses GRUB, not systemd-boot. This doesn't affect these dotfiles since they're all userspace configs.
+> **Note about update timer**: CachyOS has its own update notification system. You can **skip** the `update-cache.timer` since it's designed for my vanilla Arch setup. If you want to use it anyway:
+> ```bash
+> systemctl --user daemon-reload
+> systemctl --user enable --now update-cache.timer
+> ```
+> But this may be redundant with CachyOS's built-in update checker.
 
 ---
 
