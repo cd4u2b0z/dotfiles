@@ -1,3 +1,0 @@
-#!/bin/bash
-# Override system wallpaper setter to use wallpaper-manager
-exec /home/craig/.local/bin/wallpaper-manager set "$1" fade
