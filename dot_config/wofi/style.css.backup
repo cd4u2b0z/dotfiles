@@ -1,2 +1,0 @@
-window { background-color: #2E3440; color: #ECEFF4; border: 2px solid #5E81AC; border-radius: 8px; }
-#entry:selected { background-color: #5E81AC; }
