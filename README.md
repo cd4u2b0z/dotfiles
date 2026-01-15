@@ -4,6 +4,7 @@ Dynamic, themeable Arch Linux rice with Hyprland and modern CLI tools.
 
 ## 📑 Table of Contents
 - [What's Included](#-whats-included)
+- [Hyprland Ecosystem](#-hyprland-ecosystem)
 - [Deploy on New Machine](#-deploy-on-new-machine)
   - [CachyOS (Hyprland Edition)](#cachyos-hyprland-edition)
 - [Chezmoi Workflow](#-chezmoi-workflow)
@@ -25,6 +26,61 @@ Dynamic, themeable Arch Linux rice with Hyprland and modern CLI tools.
 | **Notifications** | Mako |
 | **Theming** | Wallust (dynamic) |
 | **CLI Tools** | fzf, fd, bat, eza, zoxide, ripgrep |
+
+---
+
+## 🔷 Hyprland Ecosystem
+
+### Core Components (Required)
+| Package | Version | Description |
+|---------|---------|-------------|
+| `hyprland` | 0.53.1 | The Wayland compositor |
+| `hypridle` | 0.1.7 | Idle daemon (triggers lock/suspend after inactivity) |
+| `hyprlock` | 0.9.2 | GPU-accelerated lock screen |
+| `xdg-desktop-portal-hyprland` | 1.3.11 | Portal backend (screen sharing, file pickers) |
+
+### Supporting Libraries (Auto-installed as dependencies)
+| Package | Description |
+|---------|-------------|
+| `hyprcursor` | Cursor theme format and library |
+| `hyprgraphics` | Graphics resources and utilities |
+| `hyprlang` | Configuration language parser |
+| `hyprutils` | Shared utilities across Hypr ecosystem |
+| `hyprwayland-scanner` | Wayland protocol code generator |
+| `hyprtoolkit` | C++ Wayland-native GUI toolkit |
+| `hyprwire` | IPC wire protocol |
+
+### Optional Hypr Tools
+| Package | Description | Used? |
+|---------|-------------|-------|
+| `hyprpaper` | Static wallpaper daemon | ❌ Using swww instead |
+| `hyprland-qt-support` | QML styling for Hypr Qt apps | ✅ Installed |
+| `hyprland-guiutils` | GUI utilities | ✅ Installed |
+| `nwg-displays` | Monitor/display configuration GUI | ✅ Installed |
+
+### Plugins
+No Hyprland plugins currently loaded. Vanilla Hyprland setup.
+
+### What's Running
+```
+Hyprland          # Main compositor
+hypridle          # Monitors for idle → triggers lock/sleep
+xdg-desktop-portal-hyprland  # Handles screen sharing, file dialogs
+swww-daemon       # Wallpaper daemon (animated transitions)
+```
+
+### Install All Hypr Packages
+```bash
+# Core (required)
+paru -S hyprland hypridle hyprlock xdg-desktop-portal-hyprland
+
+# Optional tools
+paru -S nwg-displays hyprland-qt-support
+
+# Wallpaper (pick one)
+paru -S swww       # Animated transitions (recommended)
+# paru -S hyprpaper  # Static wallpapers only
+```
 
 ---
 
