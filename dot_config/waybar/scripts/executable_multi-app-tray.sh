@@ -2,7 +2,7 @@
 set -u
 export LANG=C LC_ALL=C
 
-# Dependency check - fail gracefully if tools missing
+# Dependency check
 if ! command -v hyprctl >/dev/null 2>&1; then
     printf '{"text":"󰀻","tooltip":"hyprctl not found","class":"error"}\n'
     exit 0
@@ -13,17 +13,17 @@ if ! command -v jq >/dev/null 2>&1; then
 fi
 
 # Only check for actual WINDOWS, not background processes
-# This prevents daemons (like thunar --daemon) from showing
 window_exists() { hyprctl clients -j 2>/dev/null | jq -r '.[].class // empty' | grep -qi "^$1$"; }
 
-# Apps that should show only when window is visible
+# App checks (case-insensitive)
 check_brave() { window_exists "brave-browser" || window_exists "Brave-browser"; }
 check_librewolf() { window_exists "librewolf" || window_exists "LibreWolf"; }
 check_firefox() { window_exists "firefox" || window_exists "Firefox"; }
 check_vscode() { window_exists "code" || window_exists "Code"; }
-check_kitty() { window_exists "kitty"; }
+check_kitty() { window_exists "kitty" || window_exists "Kitty"; }
 check_thunar() { window_exists "thunar" || window_exists "Thunar"; }
 check_spotify() { window_exists "Spotify" || window_exists "spotify"; }
+check_ncspot() { window_exists "ncspot"; }
 check_discord() { window_exists "discord" || window_exists "Discord"; }
 check_steam() { window_exists "steam" || window_exists "Steam"; }
 check_obs() { window_exists "obs" || window_exists "com.obsproject.Studio"; }
@@ -32,13 +32,15 @@ check_blender() { window_exists "blender" || window_exists "Blender"; }
 
 apps=() classes=() names=()
 
+# Build app list with nerd font icons
 check_brave && { apps+=("󰊽"); classes+=("brave"); names+=("Brave"); }
 check_librewolf && { apps+=("󰈹"); classes+=("librewolf"); names+=("LibreWolf"); }
 check_firefox && { apps+=("󰈹"); classes+=("firefox"); names+=("Firefox"); }
 check_vscode && { apps+=("󰨞"); classes+=("vscode"); names+=("VS Code"); }
-check_kitty && { apps+=(""); classes+=("kitty"); names+=("Kitty"); }
+check_kitty && { apps+=("󰄛"); classes+=("kitty"); names+=("Kitty"); }
 check_thunar && { apps+=("󰉋"); classes+=("thunar"); names+=("Thunar"); }
-check_spotify && { apps+=("󰓇"); classes+=("spotify"); names+=("Spotify"); }
+check_spotify && { apps+=(""); classes+=("spotify"); names+=("Spotify"); }
+check_ncspot && { apps+=("󰎆"); classes+=("ncspot"); names+=("ncspot"); }
 check_discord && { apps+=("󰙯"); classes+=("discord"); names+=("Discord"); }
 check_steam && { apps+=("󰓓"); classes+=("steam"); names+=("Steam"); }
 check_obs && { apps+=("󰑋"); classes+=("obs"); names+=("OBS"); }
