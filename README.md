@@ -385,19 +385,49 @@ zi              # Interactive picker with fzf
 
 ```
 ~/.config/
-├── hypr/           # Hyprland WM config
-├── kitty/          # Terminal
-├── waybar/         # Bar + scripts
-├── wallust/        # Theme engine
-│   ├── templates/  # Color templates
-│   └── scripts/    # Post-theme hooks
-├── mako/           # Notifications
-├── fuzzel/         # Launcher
-├── nvim/           # Neovim config
-└── starship.toml   # Prompt
+├── hypr/               # Hyprland WM
+│   ├── hyprland.conf   # Main config
+│   ├── hypridle.conf   # Idle daemon
+│   ├── hyprlock.conf   # Lock screen
+│   └── scripts/        # Keybind scripts
+├── waybar/             # Status bar
+│   ├── config          # Modules config
+│   ├── style.css       # Styling
+│   └── scripts/        # Bar scripts
+├── wallust/            # Theme engine
+│   ├── wallust.toml    # Config
+│   ├── templates/      # Color templates
+│   └── scripts/        # Post-theme hooks
+├── kitty/              # Terminal
+├── mako/               # Notifications
+├── fuzzel/             # Launcher
+├── nvim/               # Neovim (Lua config)
+├── btop/               # System monitor
+├── cava/               # Audio visualizer
+├── ncspot/             # Spotify TUI
+├── ncmpcpp/            # MPD client
+├── fastfetch/          # System info
+├── tmux/               # Terminal multiplexer
+├── starship.toml       # Shell prompt
+├── gtk-3.0/            # GTK3 settings
+├── gtk-4.0/            # GTK4 settings
+├── fontconfig/         # Font settings
+├── Thunar/             # File manager
+├── MangoHud/           # Game overlay
+├── nwg-displays/       # Monitor config
+├── systemd/user/       # User services & timers
+└── xfce4/              # Thunar settings
 
-~/.local/bin/       # Custom scripts
-~/.cache/wallust/   # Generated colors
+~/.local/bin/           # Custom scripts
+├── wallpaper-manager   # Wallpaper control
+├── theme-switcher      # Theme switching
+├── lock-and-sleep      # Lock/sleep/hibernate
+├── screenshots/        # Screenshot scripts
+└── ...                 # Various utilities
+
+~/.gtkrc-2.0            # GTK2 theme
+~/.zshrc                # Shell config
+~/.cache/wallust/       # Generated theme files
 ```
 
 ---
