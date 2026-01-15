@@ -35,9 +35,14 @@ Dynamic, themeable Arch Linux rice with Hyprland and modern CLI tools.
 # Base packages
 sudo pacman -S git chezmoi zsh
 
-# Install paru (AUR helper)
+# Install an AUR helper (pick one)
+# Option A: paru
 git clone https://aur.archlinux.org/paru.git
 cd paru && makepkg -si
+
+# Option B: yay
+git clone https://aur.archlinux.org/yay.git
+cd yay && makepkg -si
 ```
 
 ### 2. Apply Dotfiles
@@ -47,7 +52,7 @@ chezmoi init cd4u2b0z/dotfiles --apply
 
 ### 3. Install Packages
 ```bash
-# Desktop
+# Desktop (use paru or yay)
 paru -S hyprland waybar kitty mako fuzzel thunar
 
 # CLI tools
@@ -62,6 +67,8 @@ paru -S ttf-jetbrains-mono-nerd ttf-inter
 # Theming
 paru -S wallust
 ```
+
+> **Note**: Replace `paru` with `yay` if you installed yay instead.
 
 ### 4. Post-Setup
 ```bash
