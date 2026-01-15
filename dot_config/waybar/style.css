@@ -54,25 +54,22 @@ window#waybar:hover {
    ═══════════════════════════════════════════════════════════════════ */
 
 tooltip {
-  background-color: @background;
+  background: alpha(@background, 0.80);
   border: 2px solid @accent2;
   border-radius: 12px;
 }
 
 tooltip * {
-  background-color: transparent;
   color: @color15;
 }
 
 tooltip label {
   color: @color15;
-  background-color: transparent;
   font-family: "Inter", "JetBrainsMono Nerd Font", sans-serif;
   padding: 8px 12px;
 }
 
 tooltip box {
-  background-color: transparent;
 }
 
 #clock tooltip label {
