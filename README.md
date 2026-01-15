@@ -1,3 +1,5 @@
+<!-- Original work by Dr. Baklava • github.com/cd4u2b0z • 2026 -->
+
 # 󰌽 Cdubz's Arch Linux + Hyprland Dotfiles
 
 Dynamic, themeable Arch Linux rice with Hyprland and modern CLI tools.
