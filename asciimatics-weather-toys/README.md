@@ -7,6 +7,19 @@ The goal is to create small, expressive, physics-inspired ASCII/ANSI visuals (we
 
 **⚡ Powered by a professional-grade modular engine** with real physics, atmospheric simulation, and AI personality.
 
+## Table of Contents
+- [Features](#features)
+- [Requirements](#requirements)
+- [Quick Start](#quick-start)
+- [Setup (Virtual Environment)](#setup-virtual-environment)
+- [Project Structure](#project-structure)
+- [Configuration](#configuration)
+- [Controls](#controls)
+- [Testing](#testing)
+- [How It Works](#how-it-works)
+- [Engine Architecture](#engine-architecture)
+- [Philosophy](#philosophy)
+
 ## Features
 
 ### Core Features
