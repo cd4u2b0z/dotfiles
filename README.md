@@ -180,26 +180,125 @@ makoctl reload          # Reload mako
 
 ## ⌨️ Key Bindings
 
-### Hyprland
+> `Super` = Windows/Meta key
+
+### Essential
 | Key | Action |
 |-----|--------|
-| `Super + Return` | Terminal |
+| `Super + Return` | Terminal (Kitty) |
+| `Super + T` | Terminal (alternative) |
 | `Super + Q` | Close window |
-| `Super + R` | App launcher |
-| `Super + E` | File manager |
-| `Super + 1-9` | Workspace |
-| `Super + B` | Browser |
-| `Super + C` | VS Code |
+| `Super + M` | Exit Hyprland |
+| `Super + R` | App launcher (Fuzzel) |
+| `Super + E` | File manager (Thunar) |
+| `Super + V` | Toggle floating |
+| `Super + F` | Maximize window |
+| `Super + Shift + F` | True fullscreen |
 
-### FZF (terminal)
+### Applications
 | Key | Action |
 |-----|--------|
-| `Ctrl+T` | Fuzzy find files |
-| `Ctrl+G` | Fuzzy cd |
-| `Ctrl+R` | Fuzzy history |
-| `**<Tab>` | Trigger completion |
+| `Super + B` | Firefox |
+| `Super + Shift + B` | Brave |
+| `Super + Alt + B` | Brave (alternative) |
+| `Super + C` | VS Code |
+| `Super + Shift + C` | btop (system monitor) |
+| `Super + G` | Steam |
+| `Super + Shift + G` | Lutris |
+| `Super + .` | fastfetch |
+| `Super + ,` | btop |
 
-### Zoxide
+### Window Navigation
+| Key | Action |
+|-----|--------|
+| `Super + Arrow keys` | Move focus |
+| `Super + H/J/K/L` | Move focus (vim-style) |
+| `Super + Shift + Arrow` | Move window |
+| `Super + Shift + H/J/K/L` | Move window (vim-style) |
+| `Super + Ctrl + Arrow` | Resize window |
+| `Super + Ctrl + H/J/K/L` | Resize window (vim-style) |
+| `Super + U` | Center floating window |
+
+### Workspaces
+| Key | Action |
+|-----|--------|
+| `Super + 1-9` | Switch to workspace |
+| `Super + Shift + 1-9` | Move window to workspace |
+| `Super + Tab` | Next workspace |
+| `Super + Shift + Tab` | Previous workspace |
+| `Super + S` | Toggle scratchpad |
+| `Super + `` ` | Toggle games workspace |
+| `F12` | Dropdown terminal |
+
+### Screenshots
+| Key | Action |
+|-----|--------|
+| `Print` | Fullscreen screenshot |
+| `Super + Print` | Area selection |
+| `Super + Shift + Print` | Window screenshot |
+| `Ctrl + Print` | Fullscreen to clipboard |
+| `Super + Shift + S` | Area to file (grim+slurp) |
+
+### Volume & Media
+| Key | Action |
+|-----|--------|
+| `XF86Audio RaiseVolume` | Volume up |
+| `XF86Audio LowerVolume` | Volume down |
+| `XF86Audio Mute` | Toggle mute |
+| `Super + =/-` | Volume up/down |
+| `Super + 0` | Toggle mute |
+| `XF86Audio Play/Pause` | Play/pause media |
+| `XF86Audio Next/Prev` | Next/previous track |
+
+### Transparency
+| Key | Action |
+|-----|--------|
+| `Ctrl + =` | Increase opacity |
+| `Ctrl + -` | Decrease opacity |
+| `Super + Shift + T` | Toggle transparency |
+
+### Wallpaper & Themes
+| Key | Action |
+|-----|--------|
+| `Super + W` | Theme switcher menu |
+| `Super + Shift + W` | Quick wallpaper picker |
+| `Super + Alt + W` | Next wallpaper (slideshow) |
+| `Super + Ctrl + W` | Wallpaper status |
+
+### System
+| Key | Action |
+|-----|--------|
+| `Super + Ctrl + L` | Lock screen |
+| `Super + Ctrl + S` | Sleep |
+| `Super + Ctrl + H` | Hibernate |
+| `Super + Ctrl + D` | Display off |
+| `Super + Ctrl + P` | Power status |
+| `Super + Ctrl + Shift + S` | Shutdown |
+| `Super + Ctrl + Shift + R` | Reboot |
+| `Super + Shift + Q` | Exit Hyprland |
+| `Ctrl + Alt + Delete` | Exit Hyprland |
+
+### Reload
+| Key | Action |
+|-----|--------|
+| `Super + Shift + R` | Reload Hyprland |
+| `Super + Alt + R` | Restart Waybar |
+
+### Mouse
+| Action | Binding |
+|--------|---------|
+| `Super + Left Click` | Move window |
+| `Super + Right Click` | Resize window |
+
+### FZF (Terminal)
+| Key | Action |
+|-----|--------|
+| `Ctrl + T` | Fuzzy find files |
+| `Ctrl + G` | Fuzzy cd into directory |
+| `Ctrl + R` | Fuzzy command history |
+| `**<Tab>` | Trigger fzf completion |
+
+### Zoxide (Terminal)
 ```bash
 z proj          # Jump to ~/Projects
 z dot conf      # Jump to dir matching both words
