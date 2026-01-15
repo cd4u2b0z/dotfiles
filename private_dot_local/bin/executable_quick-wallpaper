@@ -1,7 +1,20 @@
 #!/bin/bash
-WALLPAPER=$(find ~/Pictures/Wallpapers -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.webp" \) | fuzzel --dmenu --prompt "Wallpaper: ")
+WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
 
-[[ -z "$WALLPAPER" ]] && exit 0
+# Build associative array: filename -> full path
+declare -A wallpapers
+while IFS= read -r path; do
+    name=$(basename "$path")
+    wallpapers["$name"]="$path"
+done < <(find "$WALLPAPER_DIR" -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.webp" \))
+
+# Show only filenames in fuzzel
+selected=$(printf '%s\n' "${!wallpapers[@]}" | sort | fuzzel --dmenu --prompt "Wallpaper: ")
+[[ -z "$selected" ]] && exit 0
+
+# Get full path from selection
+WALLPAPER="${wallpapers[$selected]}"
+[[ -z "$WALLPAPER" ]] && exit 1
 
 # Set wallpaper with wave transition
 swww img "$WALLPAPER" --transition-type wave --transition-angle 45 --transition-duration 2
