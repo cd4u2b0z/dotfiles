@@ -256,3 +256,43 @@ callback = engine.get_callback()
 - **Professional architecture** when complexity warrants it
 
 This repo is intentionally small and hackable, but the engine is production-quality.
+
+---
+
+## Setup (Virtual Environment)
+
+### General venv setup (any Python project)
+
+```bash
+# Create virtual environment
+python3 -m venv .venv
+
+# Activate it
+source .venv/bin/activate   # Linux/macOS
+# .venv\Scripts\activate    # Windows
+
+# Deactivate when done
+deactivate
+```
+
+### Setup for this project
+
+```bash
+cd asciimatics-weather-toys
+
+# Create and activate venv
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Install dependencies
+pip install asciimatics requests
+
+# Run the dashboard
+python weather_dashboard.py
+```
+
+### Note
+- The `.venv/` folder is NOT included in the repo - you must create it
+- Add `.venv/` to `.gitignore` to keep it out of version control
+- The dashboard uses all engine modules (`engine/physics`, `engine/rendering`, etc.)
+
