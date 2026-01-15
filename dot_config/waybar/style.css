@@ -369,16 +369,20 @@ calendar > grid > label:hover {
     padding: 0 10px;
     margin: 4px 2px;
     font-size: 11px;
-    transition: all 0.3s ease;
+    transition: all 0.1s ease;
 }
 
 #custom-music.playing {
-    color: @color2;
+    color: @color2;  /* Green when playing */
 }
 
 #custom-music.paused {
-    color: @color8;
+    color: @color8;  /* Grey when paused */
     font-style: italic;
+}
+
+#custom-music:hover {
+    color: @color1;  /* Red on hover */
 }
 
 #custom-music.hidden {
