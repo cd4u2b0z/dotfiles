@@ -40,21 +40,21 @@ if [[ -f /sys/class/thermal/thermal_zone0/temp ]]; then
 fi
 
 # Build tooltip with more sensible CPU info
-tooltip="🖥️ System Monitor\\n━━━━━━━━━━━━━━━━━━━━\\n🔥 CPU: ${cpu_usage}%"
+tooltip="󰍛 System Monitor\\n━━━━━━━━━━━━━━━━━━━━\\n󰻠 CPU: ${cpu_usage}%"
 if [[ "$cpu_temp" != "N/A" ]]; then
     tooltip+=" (${cpu_temp}°C)"
 fi
-tooltip+="\\n⚡ Load: ${load_avg}\\n💾 RAM: ${mem_usage}%\\n"
+tooltip+="\\n󰔏 Load: ${load_avg}\\n󰘚 RAM: ${mem_usage}%\\n"
 
 if [[ "$gpu_usage" != "N/A" ]]; then
-    tooltip+="🎮 GPU: ${gpu_usage}%"
+    tooltip+="󰢮 GPU: ${gpu_usage}%"
     if [[ "$gpu_temp" != "N/A" ]]; then
         tooltip+=" (${gpu_temp}°C)"
     fi
     tooltip+="\\n"
 fi
 
-tooltip+="💽 Disk: ${disk_usage}%\\n━━━━━━━━━━━━━━━━━━━━\\n👆 Click for btop"
+tooltip+="󰋊 Disk: ${disk_usage}%\\n━━━━━━━━━━━━━━━━━━━━\\n󰍽 Click for btop"
 
 # JSON output - show load average instead of crazy CPU percentage
 echo "{\"text\":\"${load_display}\",\"tooltip\":\"${tooltip}\"}"
