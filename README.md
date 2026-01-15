@@ -587,3 +587,51 @@ cat ~/.cache/wallust/<app>-colors.*
 *Managed with chezmoi • Themed with wallust* 󰌽
 
 **— Dr. Baklava**
+
+---
+
+## 󰒋 Related Repository
+
+This dotfiles repo works in tandem with my **Ansible system provisioning**:
+
+| Repository | Purpose |
+|------------|---------|
+| **[dotfiles](https://github.com/cd4u2b0z/dotfiles)** (this repo) | User configs, themes, keybinds |
+| **[ansible-system](https://github.com/cd4u2b0z/ansible-system)** | System packages, services, full rebuild |
+
+### How They Work Together
+
+```
+┌─────────────────────────────────────┐
+│         Fresh Arch Install          │
+└─────────────────────────────────────┘
+                  │
+                  ▼
+┌─────────────────────────────────────┐
+│  ansible-playbook -K playbook.yml   │
+│  ├─ Installs all packages           │
+│  ├─ Enables system services         │
+│  └─ Runs: chezmoi init --apply      │◄── Pulls this repo
+└─────────────────────────────────────┘
+                  │
+                  ▼
+┌─────────────────────────────────────┐
+│     Full Hyprland System Ready      │
+└─────────────────────────────────────┘
+```
+
+### Quick Deploy (Full System)
+
+```bash
+# From bare Arch install:
+sudo pacman -S ansible-core git
+git clone https://github.com/cd4u2b0z/ansible-system.git ~/ansible-system
+cd ~/ansible-system && ansible-playbook -K playbook.yml
+```
+
+### Quick Deploy (Dotfiles Only)
+
+```bash
+# If packages already installed:
+chezmoi init --apply cd4u2b0z
+```
