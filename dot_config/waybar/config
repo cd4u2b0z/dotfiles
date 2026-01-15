@@ -71,7 +71,7 @@
     "format": "{}",
     "interval": 3,
     "return-type": "json",
-    "exec": "~/.config/waybar/microchip-wrapper.sh",
+    "exec": "~/.config/waybar/scripts/microchip-wrapper.sh",
     "tooltip": true,
     "on-click": "kitty btop",
     "on-right-click": "kitty nvtop"
