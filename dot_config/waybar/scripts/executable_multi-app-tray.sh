@@ -23,7 +23,7 @@ check_vscode() { window_exists "code" || window_exists "Code"; }
 check_kitty() { window_exists "kitty" || window_exists "Kitty"; }
 check_thunar() { window_exists "thunar" || window_exists "Thunar"; }
 check_spotify() { window_exists "Spotify" || window_exists "spotify"; }
-check_ncspot() { window_exists "ncspot"; }
+check_ncspot() { pgrep -x ncspot >/dev/null 2>&1; }
 check_discord() { window_exists "discord" || window_exists "Discord"; }
 check_steam() { window_exists "steam" || window_exists "Steam"; }
 check_obs() { window_exists "obs" || window_exists "com.obsproject.Studio"; }
@@ -39,8 +39,8 @@ check_firefox && { apps+=("󰈹"); classes+=("firefox"); names+=("Firefox"); }
 check_vscode && { apps+=("󰨞"); classes+=("vscode"); names+=("VS Code"); }
 check_kitty && { apps+=("󰄛"); classes+=("kitty"); names+=("Kitty"); }
 check_thunar && { apps+=("󰉋"); classes+=("thunar"); names+=("Thunar"); }
-check_spotify && { apps+=(""); classes+=("spotify"); names+=("Spotify"); }
-check_ncspot && { apps+=("󰎆"); classes+=("ncspot"); names+=("ncspot"); }
+check_spotify && { apps+=(""); classes+=("spotify"); names+=("Spotify"); }
+check_ncspot && { apps+=(""); classes+=("ncspot"); names+=("ncspot"); }
 check_discord && { apps+=("󰙯"); classes+=("discord"); names+=("Discord"); }
 check_steam && { apps+=("󰓓"); classes+=("steam"); names+=("Steam"); }
 check_obs && { apps+=("󰑋"); classes+=("obs"); names+=("OBS"); }

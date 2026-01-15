@@ -227,6 +227,7 @@ set_folder_color() {
 reload_apps() {
     log "Reloading applications..."
     
+    
     # Merge cava config (base + colors)
     if [[ -f "$HOME/.config/cava/config-base" ]] && [[ -f "$HOME/.config/cava/wallust-colors" ]]; then
         cat "$HOME/.config/cava/config-base" "$HOME/.config/cava/wallust-colors" > "$HOME/.config/cava/config"
