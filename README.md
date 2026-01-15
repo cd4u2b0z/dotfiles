@@ -127,13 +127,13 @@ chezmoi init cd4u2b0z/dotfiles --apply
 ### 3. Install Packages
 ```bash
 # Desktop (use paru or yay)
-paru -S hyprland waybar kitty mako fuzzel thunar
+paru -S hyprland waybar kitty mako fuzzel thunar playerctl
 
 # CLI tools
 paru -S fzf fd bat eza zoxide ripgrep starship
 
 # Apps
-paru -S ncspot fastfetch btop cava
+paru -S ncspot fastfetch btop cava spotify-launcher
 
 # Fonts
 paru -S ttf-jetbrains-mono-nerd ttf-inter
@@ -323,6 +323,21 @@ makoctl reload          # Reload mako
 | `Super + 0` | Toggle mute |
 | `XF86Audio Play/Pause` | Play/pause media |
 | `XF86Audio Next/Prev` | Next/previous track |
+
+### Waybar Music Player
+Dynamic Spotify/ncspot module on the left side of waybar. Auto-hides when no music playing.
+
+| Action | Effect |
+|--------|--------|
+| **Click** | Play/Pause |
+| **Right-click** | Next track |
+| **Middle-click** | Previous track |
+| **Scroll up/down** | Volume up/down |
+
+**Visual states:**
+- 🟢 **Green** = Playing
+- ⚫ **Grey italic** = Paused
+- 🔴 **Red** = On hover
 
 ### Transparency
 | Key | Action |
