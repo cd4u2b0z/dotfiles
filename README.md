@@ -1,8 +1,8 @@
-# 🌲 Cdubz's Arch Linux + Hyprland Dotfiles
+# 󰌽 Cdubz's Arch Linux + Hyprland Dotfiles
 
 Dynamic, themeable Arch Linux rice with Hyprland and modern CLI tools.
 
-## 📑 Table of Contents
+## 󰧮 Table of Contents
 - [What's Included](#-whats-included)
 - [Hyprland Ecosystem](#-hyprland-ecosystem)
   - [Core Components](#core-components-required)
@@ -33,7 +33,7 @@ Dynamic, themeable Arch Linux rice with Hyprland and modern CLI tools.
 
 ---
 
-## 🎯 What's Included
+## 󰓾 What's Included
 
 | Category | Components |
 |----------|------------|
@@ -47,7 +47,7 @@ Dynamic, themeable Arch Linux rice with Hyprland and modern CLI tools.
 
 ---
 
-## 🔷 Hyprland Ecosystem
+## 󱂬 Hyprland Ecosystem
 
 ### Core Components (Required)
 | Package | Version | Description |
@@ -102,7 +102,7 @@ paru -S swww       # Animated transitions (recommended)
 
 ---
 
-## 🚀 Deploy on New Machine
+## 󰜎 Deploy on New Machine
 
 ### 1. Install Prerequisites
 ```bash
@@ -190,7 +190,7 @@ source ~/.zshrc
 
 ---
 
-## 🔄 Chezmoi Workflow
+## 󰑐 Chezmoi Workflow
 
 ### After Making Changes
 ```bash
@@ -229,7 +229,7 @@ chezmoi merge <file>    # Interactive merge conflicts
 
 ---
 
-## 🎨 Wallust Theming
+## 󰉼 Wallust Theming
 
 Switch themes instantly - entire system updates:
 ```bash
@@ -252,7 +252,7 @@ makoctl reload          # Reload mako
 
 ---
 
-## ⌨️ Key Bindings
+## 󰌌 Key Bindings
 
 > `Super` = Windows/Meta key
 
@@ -381,7 +381,7 @@ zi              # Interactive picker with fzf
 
 ---
 
-## 📁 Structure
+## 󰉋 Structure
 
 ```
 ~/.config/
@@ -432,7 +432,7 @@ zi              # Interactive picker with fzf
 
 ---
 
-## 🆘 Troubleshooting
+## 󰋼 Troubleshooting
 
 ### Quick Fixes
 | Problem | Solution |
@@ -559,7 +559,7 @@ cat ~/.cache/wallust/<app>-colors.*
 
 ---
 
-## 🖼️ System
+## 󰍹 System
 
 - **Resolution**: 3840x2160 (4K @ 1.33x scale)
 - **GPU**: NVIDIA RTX 3090
@@ -567,6 +567,6 @@ cat ~/.cache/wallust/<app>-colors.*
 
 ---
 
-*Managed with chezmoi • Themed with wallust* 🌲
+*Managed with chezmoi • Themed with wallust* 󰌽
 
 **— Dr. Baklava**
