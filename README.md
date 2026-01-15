@@ -330,12 +330,128 @@ zi              # Interactive picker with fzf
 
 ## 🆘 Troubleshooting
 
+### Quick Fixes
 | Problem | Solution |
 |---------|----------|
 | fzf colors not updating | `source ~/.zshrc` |
 | Waybar not showing updates | `systemctl --user start update-cache.service` |
 | ncspot theme stuck | `~/.config/wallust/scripts/update-ncspot-theme.sh` then restart |
 | Chezmoi conflicts | `chezmoi diff <file>` then `chezmoi re-add <file>` |
+
+### Reloading Services
+
+**Hyprland** - Reload config without restarting:
+```bash
+hyprctl reload
+```
+
+**Waybar** - Restart the bar:
+```bash
+killall waybar && waybar &
+# Or just:
+pkill -SIGUSR2 waybar    # Reload styles only
+```
+
+**Mako** - Reload notifications daemon:
+```bash
+makoctl reload
+```
+
+**Kitty** - Reload config (from within kitty):
+```bash
+# Press Ctrl+Shift+F5 inside kitty
+# Or close and reopen terminal
+```
+
+**Wallust** - Regenerate all theme files:
+```bash
+wallust theme Everforest-Dark-Medium  # Reapply current theme
+```
+
+### Why Use `&` (Background Process)
+
+When restarting a GUI app from terminal, use `&` to run it in the background:
+```bash
+waybar &          # Runs in background, terminal stays usable
+waybar            # Blocks terminal until waybar exits (bad)
+```
+
+For a clean restart pattern:
+```bash
+killall waybar && waybar &
+```
+- `killall waybar` - Stops the running instance
+- `&&` - Only continue if kill succeeded
+- `waybar &` - Start new instance in background
+
+### Kill Commands
+
+```bash
+# Kill by name
+killall waybar              # Kill all processes named "waybar"
+pkill waybar                # Same thing, pattern matching
+
+# Kill by PID
+kill 12345                  # Graceful kill (SIGTERM)
+kill -9 12345               # Force kill (SIGKILL) - use as last resort
+
+# Find what's running
+pgrep -a waybar             # Show PID and command
+ps aux | grep waybar        # Detailed process info
+```
+
+### Hyprctl Commands
+
+```bash
+# Reload
+hyprctl reload                          # Reload config
+
+# Window info
+hyprctl activewindow                    # Info about focused window
+hyprctl clients                         # List all windows
+
+# Workspaces
+hyprctl workspaces                      # List workspaces
+hyprctl dispatch workspace 3            # Switch to workspace 3
+
+# Debug
+hyprctl version                         # Hyprland version
+hyprctl monitors                        # Monitor info
+hyprctl layers                          # Layer info (useful for bar issues)
+
+# Live config changes
+hyprctl keyword general:gaps_in 10      # Change gaps temporarily
+hyprctl keyword decoration:active_opacity 0.9
+```
+
+### Common Issues
+
+**Waybar not appearing:**
+```bash
+hyprctl layers                          # Check if waybar layer exists
+killall waybar && waybar &              # Restart it
+```
+
+**Screen tearing / stuttering:**
+```bash
+# Check if VRR is enabled in hyprland.conf
+# For NVIDIA, ensure you have proper driver config
+```
+
+**Keybind not working:**
+```bash
+hyprctl binds | grep "your_key"         # Check if bind exists
+# Check if another app is capturing the key
+```
+
+**App not respecting theme:**
+```bash
+# Regenerate wallust theme
+wallust theme <current-theme>
+
+# Check if app config sources wallust colors
+cat ~/.cache/wallust/<app>-colors.*
+```
 
 ---
 
