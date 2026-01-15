@@ -359,3 +359,31 @@ calendar > grid > label {
 calendar > grid > label:hover {
   background-color: alpha(@accent1, 0.3);
 }
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   MUSIC PLAYER - Dynamic Spotify/ncspot
+   ═══════════════════════════════════════════════════════════════════ */
+#custom-music {
+    color: @foreground;
+    padding: 0 10px;
+    margin: 4px 2px;
+    font-size: 11px;
+    transition: all 0.3s ease;
+}
+
+#custom-music.playing {
+    color: @color2;
+}
+
+#custom-music.paused {
+    color: @color8;
+    font-style: italic;
+}
+
+#custom-music.hidden {
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+    font-size: 0;
+}
