@@ -4,6 +4,18 @@
 
 Dynamic, themeable Arch Linux rice with Hyprland and modern CLI tools.
 
+---
+
+## 󰠶 Philosophy: Two Tools, One System
+
+| Tool | Role | Strength |
+|------|------|----------|
+| **Chezmoi** | **Source of truth** for dotfiles | Daily config edits, templates, cross-machine sync |
+| **Ansible** | System provisioner + fallback | Packages, services, full rebuild, disaster recovery |
+
+> **This repo (chezmoi)** manages all user configs. Edit files here for daily use.
+> **ansible-system** handles packages/services and pulls from this repo during fresh installs.
+
 ## 󰧮 Table of Contents
 - [What's Included](#-whats-included)
 - [Hyprland Ecosystem](#-hyprland-ecosystem)
