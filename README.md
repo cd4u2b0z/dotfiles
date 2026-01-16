@@ -16,6 +16,22 @@ Dynamic, themeable Arch Linux rice with Hyprland and modern CLI tools.
 > **This repo (chezmoi)** manages all user configs. Edit files here for daily use.
 > **ansible-system** handles packages/services and pulls from this repo during fresh installs.
 
+
+### 󰒃 Secrets & Privacy
+
+This repo contains **no secrets**. Sensitive data is handled separately:
+- API keys → environment variables or `~/.secrets/` (not tracked)
+- SSH keys → manual backup, never in dotfiles
+- GPG keys → exported separately, encrypted backup
+
+### 󰈔 .chezmoiignore
+
+Machine-specific files are excluded from sync:
+- Systemd symlinks (recreated by `systemctl enable`)
+- App state files (`userstate.cbor`, `lazy-lock.json`)
+- Backup files (`*.backup*`, `*.bak*`)
+- Cache/generated files (`__pycache__/`, `*.pyc`)
+
 ## 󰧮 Table of Contents
 - [What's Included](#-whats-included)
 - [Hyprland Ecosystem](#-hyprland-ecosystem)
