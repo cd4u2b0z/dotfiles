@@ -4,6 +4,9 @@
 
 Dynamic, themeable Arch Linux rice with Hyprland and modern CLI tools.
 
+![Desktop Screenshot](assets/screenshot.png)
+
+
 ---
 
 ## 󰠶 Philosophy: Two Tools, One System
