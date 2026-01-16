@@ -671,10 +671,8 @@ chezmoi init --apply cd4u2b0z
 
 ## 󰈙 License
 
-**Personal Use** - Feel free to fork and adapt for your own rice.
+MIT License - See [LICENSE](LICENSE) for details.
 
-These dotfiles are provided as-is for educational and personal use.
-No warranty implied. Your mileage may vary.
 
 ---
 
