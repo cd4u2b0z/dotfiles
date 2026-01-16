@@ -666,3 +666,7 @@ cd ~/ansible-system && ansible-playbook -K playbook.yml
 # If packages already installed:
 chezmoi init --apply cd4u2b0z
 ```
+
+---
+
+<sub>Original work by **Dr. Baklava** • [github.com/cd4u2b0z](https://github.com/cd4u2b0z) • 2026</sub>
