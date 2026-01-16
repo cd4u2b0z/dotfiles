@@ -4,7 +4,12 @@
 
 Dynamic, themeable Arch Linux rice with Hyprland and modern CLI tools.
 
-![Desktop Screenshot](assets/screenshot.png)
+## 📸 Screenshots
+
+| | |
+|:---:|:---:|
+| ![Desktop](assets/screenshot.png) | ![Desktop 2](assets/screenshot2.png) |
+| ![Desktop 3](assets/screenshot3.png) | |
 
 
 ---
