@@ -669,4 +669,32 @@ chezmoi init --apply cd4u2b0z
 
 ---
 
+## 󰈙 License
+
+**Personal Use** - Feel free to fork and adapt for your own rice.
+
+These dotfiles are provided as-is for educational and personal use.
+No warranty implied. Your mileage may vary.
+
+---
+
+## 󱗗 Credits
+
+- **chezmoi** - Dotfile management made sane
+- **Hyprland** - The tiling compositor we deserve
+- **Waybar** - Status bar that actually works
+- **Kitty** - The terminal that purrs
+
+---
+
+<div align="center">
+
+**"Dotfiles are like snowflakes - no two setups are alike, and both melt under pressure."**
+
+</div>
+
+---
+
 <sub>Original work by **Dr. Baklava** • [github.com/cd4u2b0z](https://github.com/cd4u2b0z) • 2026</sub>
+
+<!-- ZHIuYmFrbGF2YQ== -->
