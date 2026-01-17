@@ -3,49 +3,30 @@ set -u
 export LANG=C LC_ALL=C
 
 # Dependency check
-if ! command -v hyprctl >/dev/null 2>&1; then
-    printf '{"text":"󰀻","tooltip":"hyprctl not found","class":"error"}\n'
-    exit 0
-fi
-if ! command -v jq >/dev/null 2>&1; then
-    printf '{"text":"󰀻","tooltip":"jq not found","class":"error"}\n'
-    exit 0
-fi
+command -v hyprctl >/dev/null 2>&1 || { printf '{"text":"󰀻","tooltip":"hyprctl not found","class":"error"}\n'; exit 0; }
+command -v jq >/dev/null 2>&1 || { printf '{"text":"󰀻","tooltip":"jq not found","class":"error"}\n'; exit 0; }
 
-# Only check for actual WINDOWS, not background processes
-window_exists() { hyprctl clients -j 2>/dev/null | jq -r '.[].class // empty' | grep -qi "^$1$"; }
+# Fetch window list ONCE (major optimization: 2 processes instead of ~30)
+WINDOWS=$(hyprctl clients -j 2>/dev/null | jq -r '.[].class // empty' | tr '[:upper:]' '[:lower:]')
 
-# App checks (case-insensitive)
-check_brave() { window_exists "brave-browser" || window_exists "Brave-browser"; }
-check_librewolf() { window_exists "librewolf" || window_exists "LibreWolf"; }
-check_firefox() { window_exists "firefox" || window_exists "Firefox"; }
-check_vscode() { window_exists "code" || window_exists "Code"; }
-check_kitty() { window_exists "kitty" || window_exists "Kitty"; }
-check_thunar() { window_exists "thunar" || window_exists "Thunar"; }
-check_spotify() { window_exists "Spotify" || window_exists "spotify"; }
-check_ncspot() { pgrep -x ncspot >/dev/null 2>&1; }
-check_discord() { window_exists "discord" || window_exists "Discord"; }
-check_steam() { window_exists "steam" || window_exists "Steam"; }
-check_obs() { window_exists "obs" || window_exists "com.obsproject.Studio"; }
-check_gimp() { window_exists "gimp" || window_exists "Gimp"; }
-check_blender() { window_exists "blender" || window_exists "Blender"; }
+has_window() { echo "$WINDOWS" | grep -qx "$1"; }
 
 apps=() classes=() names=()
 
-# Build app list with nerd font icons
-check_brave && { apps+=("󰊽"); classes+=("brave"); names+=("Brave"); }
-check_librewolf && { apps+=("󰈹"); classes+=("librewolf"); names+=("LibreWolf"); }
-check_firefox && { apps+=("󰈹"); classes+=("firefox"); names+=("Firefox"); }
-check_vscode && { apps+=("󰨞"); classes+=("vscode"); names+=("VS Code"); }
-check_kitty && { apps+=("󰄛"); classes+=("kitty"); names+=("Kitty"); }
-check_thunar && { apps+=("󰉋"); classes+=("thunar"); names+=("Thunar"); }
-check_spotify && { apps+=(""); classes+=("spotify"); names+=("Spotify"); }
-check_ncspot && { apps+=(""); classes+=("ncspot"); names+=("ncspot"); }
-check_discord && { apps+=("󰙯"); classes+=("discord"); names+=("Discord"); }
-check_steam && { apps+=("󰓓"); classes+=("steam"); names+=("Steam"); }
-check_obs && { apps+=("󰑋"); classes+=("obs"); names+=("OBS"); }
-check_gimp && { apps+=("󰏘"); classes+=("gimp"); names+=("GIMP"); }
-check_blender && { apps+=("󰂫"); classes+=("blender"); names+=("Blender"); }
+# All checks use the cached $WINDOWS variable - no additional subprocess spawns
+has_window "brave-browser" && { apps+=("󰊽"); classes+=("brave"); names+=("Brave"); }
+has_window "librewolf" && { apps+=("󰈹"); classes+=("librewolf"); names+=("LibreWolf"); }
+has_window "firefox" && { apps+=("󰈹"); classes+=("firefox"); names+=("Firefox"); }
+has_window "code" && { apps+=("󰨞"); classes+=("vscode"); names+=("VS Code"); }
+has_window "kitty" && { apps+=("󰄛"); classes+=("kitty"); names+=("Kitty"); }
+has_window "thunar" && { apps+=("󰉋"); classes+=("thunar"); names+=("Thunar"); }
+has_window "spotify" && { apps+=(""); classes+=("spotify"); names+=("Spotify"); }
+pgrep -x ncspot >/dev/null 2>&1 && { apps+=(""); classes+=("ncspot"); names+=("ncspot"); }
+has_window "discord" && { apps+=("󰙯"); classes+=("discord"); names+=("Discord"); }
+has_window "steam" && { apps+=("󰓓"); classes+=("steam"); names+=("Steam"); }
+(has_window "obs" || has_window "com.obsproject.studio") && { apps+=("󰑋"); classes+=("obs"); names+=("OBS"); }
+has_window "gimp" && { apps+=("󰏘"); classes+=("gimp"); names+=("GIMP"); }
+has_window "blender" && { apps+=("󰂫"); classes+=("blender"); names+=("Blender"); }
 
 if [ ${#apps[@]} -eq 0 ]; then
     printf '{"text":"󰀻","tooltip":"No apps running","class":"empty"}\n'

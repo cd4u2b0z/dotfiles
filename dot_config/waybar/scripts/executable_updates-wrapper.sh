@@ -4,7 +4,7 @@
 # Integrates with simple-update-manager-enhanced.sh for intelligent update descriptions
 
 CACHE_DIR="/tmp/update-manager"
-CACHE_DURATION=60 # 5 minutes (sync with enhanced script)
+CACHE_DURATION=60  # 1 minute (sync with enhanced script)
 PACMAN_CACHE="$CACHE_DIR/pacman.cache"
 AUR_CACHE="$CACHE_DIR/aur.cache"
 FLATPAK_CACHE="$CACHE_DIR/flatpak.cache"
