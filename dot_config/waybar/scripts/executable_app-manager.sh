@@ -26,7 +26,6 @@ kill_app() {
 
 # App definitions: key|name|icon|class|launch
 APPS="brave|Brave|󰊽|brave-browser|brave
-brave|Brave|󰊽|brave-browser|brave
 librewolf|LibreWolf|󰈹|librewolf|librewolf
 firefox|Firefox|󰈹|firefox|firefox
 vscode|VS Code|󰨞|code|code
