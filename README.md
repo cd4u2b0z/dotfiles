@@ -4,6 +4,12 @@
 
 Dynamic, themeable Arch Linux rice with Hyprland and modern CLI tools.
 
+![Arch Linux](https://img.shields.io/badge/Arch_Linux-1793D1?style=flat&logo=arch-linux&logoColor=white)
+![Hyprland](https://img.shields.io/badge/Hyprland-58E1FF?style=flat&logo=wayland&logoColor=black)
+![Chezmoi](https://img.shields.io/badge/Chezmoi-4285F4?style=flat&logo=git&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat)
+![Shell](https://img.shields.io/badge/Shell-Zsh-4EAA25?style=flat&logo=gnu-bash&logoColor=white)
+
 ![Desktop Screenshot](assets/screenshot.jpg)
 
 
