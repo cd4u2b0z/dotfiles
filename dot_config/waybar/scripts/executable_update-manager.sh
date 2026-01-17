@@ -164,10 +164,10 @@ main() {
         1) [[ $pacman_count -gt 0 ]] && { echo -e "\n${Y}  󰀦 Update $pacman_count package(s)?${N}"; read -rp "  [y/N]: " c; [[ "$c" =~ ^[Yy]$ ]] && sudo pacman -Syu && refresh_waybar; } || echo -e "\n${D}  No updates.${N}" ;;
         2) [[ $aur_count -gt 0 ]] && { echo -e "\n${Y}  󰀦 Update $aur_count package(s)?${N}"; read -rp "  [y/N]: " c; [[ "$c" =~ ^[Yy]$ ]] && yay -Sua && refresh_waybar; } || echo -e "\n${D}  No updates.${N}" ;;
         3) [[ $flatpak_count -gt 0 ]] && { echo -e "\n${Y}  󰀦 Update $flatpak_count app(s)?${N}"; read -rp "  [y/N]: " c; [[ "$c" =~ ^[Yy]$ ]] && flatpak update -y && refresh_waybar; } || echo -e "\n${D}  No updates.${N}" ;;
-        4) [[ $total -gt 0 ]] && { echo -e "\n${Y}  󰀦 Update ALL $total?${N}"; read -rp "  [y/N]: " c; [[ "$c" =~ ^[Yy]$ ]] && { [[ $((pacman_count+aur_count)) -gt 0 ]] && yay -Syu; [[ $flatpak_count -gt 0 ]] && flatpak update -y; refresh_waybar; }; } || echo -e "\n${G}  Up to date{N}" ;;
+        4) [[ $total -gt 0 ]] && { echo -e "\n${Y}  󰀦 Update ALL $total?${N}"; read -rp "  [y/N]: " c; [[ "$c" =~ ^[Yy]$ ]] && { [[ $((pacman_count+aur_count)) -gt 0 ]] && yay -Syu; [[ $flatpak_count -gt 0 ]] && flatpak update -y; refresh_waybar; }; } || echo -e "\n${G}  Up to date${N}" ;;
         5) read -rp "  Package: " p; [[ -n "$p" ]] && $(detect_browser) "https://archlinux.org/packages/?q=$p" &>/dev/null & ;;
         6) rm -f "$CACHE_DIR"/*.cache && exec "$0" ;;
-        q|Q) echo -e "\n${D}  󰗼 Bye{N}"; exit 0 ;;
+        q|Q) echo -e "\n${D}  󰗼 Bye${N}"; exit 0 ;;
         *) echo -e "\n${R}  Invalid${N}" ;;
     esac
     
