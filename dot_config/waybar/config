@@ -41,7 +41,7 @@
     "on-click-right": "kitty -e bash -c 'cd ~/asciimatics-weather-toys && source .venv/bin/activate && python weather_dashboard.py'"
   },
   "clock": {
-    "interval": 3,
+    "interval": 2,
     "format": "{:%H:%M}",
     "format-alt": "{:%A, %B %d %Y   %H:%M}",
     "tooltip-format": "{calendar}",
@@ -66,7 +66,7 @@
   },
   "custom/system-stats": {
     "format": "{}",
-    "interval": 3,
+    "interval": 2,
     "return-type": "json",
     "exec": "~/.config/waybar/scripts/microchip-wrapper.sh",
     "tooltip": true,
@@ -135,7 +135,7 @@
   },
   "custom/app-tray": {
     "exec": "~/.config/waybar/scripts/multi-app-tray.sh",
-    "interval": 3,
+    "interval": 2,
     "format": "{}",
     "return-type": "json",
     "on-click": "~/.config/waybar/scripts/app-manager.sh",
@@ -156,7 +156,7 @@
   "custom/music": {
     "exec": "~/.config/waybar/scripts/music-player.sh",
     "return-type": "json",
-    "interval": 3,
+    "interval": 2,
     "format": "{}",
     "tooltip": true,
     "on-click": "playerctl play-pause",
